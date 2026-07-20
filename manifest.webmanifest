@@ -1,0 +1,26 @@
+{
+  "name": "Magnifique seu Chamado",
+  "short_name": "Chamado",
+  "description": "Guia digital para entender e magnificar seu chamado na Ala.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f2f2f2",
+  "theme_color": "#9a9a9a",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='36' fill='%239a9a9a'/%3E%3Ctext x='96' y='128' font-size='104' text-anchor='middle' fill='%23fff' font-family='sans-serif'%3E%E2%9B%AA%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%239a9a9a'/%3E%3Ctext x='256' y='340' font-size='280' text-anchor='middle' fill='%23fff' font-family='sans-serif'%3E%E2%9B%AA%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+# Artefatos de deploy (regeneráveis)
+*.zip
+
+# Configuração local do Claude Code / servidor de preview
+.claude/
+
+# Arquivos de sistema
+Thumbs.db
+.DS_Store

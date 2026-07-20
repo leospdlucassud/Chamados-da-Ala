@@ -1,0 +1,1884 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#8B6B3D">
+<title>Magnifique seu Chamado</title>
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+  /* ================= DESIGN "ESTILO LIAHONA" ================= */
+  :root{
+    --page:#F1ECDD; --bg:#FDFCF8; --panel:#FFFFFF; --panel-2:#FBF8F0;
+    --line:#E7E0CF; --line-strong:#D8CEB4;
+    --ink:#2C2A24; --ink-soft:#7A7059;
+    --accent:#8B6B3D; --accent-soft:#B79A6A;
+    --shadow:0 1px 2px rgba(60,50,20,.05), 0 1px 8px rgba(60,50,20,.04);
+    --org:#8B6B3D;
+    --maxw:460px;
+  }
+  html[data-theme="escuro"]{
+    --page:#0E0C08; --bg:#16130E; --panel:#201C15; --panel-2:#1A1710;
+    --line:#352F23; --line-strong:#463E2C;
+    --ink:#ECE6D6; --ink-soft:#B0A487;
+    --accent:#C7A567; --accent-soft:#9B8354;
+    --shadow:0 1px 2px rgba(0,0,0,.3);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--page); color:var(--ink);
+    font-family:Georgia,"Times New Roman","Palatino Linotype",serif;
+    font-size:16px; line-height:1.55;
+    transition:background .2s,color .2s;
+  }
+  .app{
+    max-width:var(--maxw); margin:0 auto; min-height:100vh;
+    display:flex; flex-direction:column; background:var(--bg);
+  }
+  /* Telas grandes: coluna de leitura emoldurada (parece deliberada) */
+  @media (min-width:520px){
+    .app{
+      border-left:1px solid var(--line-strong); border-right:1px solid var(--line-strong);
+      box-shadow:0 0 50px rgba(60,45,15,.10);
+    }
+    html[data-theme="escuro"] .app{ box-shadow:0 0 60px rgba(0,0,0,.5); }
+  }
+
+  /* ---------- Cabeçalho ---------- */
+  header{
+    position:sticky; top:0; z-index:20; background:var(--panel);
+    border-bottom:1px solid var(--line-strong);
+    padding:calc(8px + env(safe-area-inset-top,0)) 12px 10px;
+    box-shadow:var(--shadow);
+  }
+  .h-row{display:flex; align-items:center; gap:8px; min-height:44px;}
+  .btn-back{
+    flex:0 0 auto; min-width:40px; height:40px; padding:0 11px;
+    border:1px solid var(--line-strong); background:var(--panel-2);
+    color:var(--ink); border-radius:8px; cursor:pointer;
+    font-family:inherit; font-size:15px; display:none; align-items:center; gap:3px;
+  }
+  .btn-back:active{background:var(--line);}
+  .btn-back .bk-ico{font-size:19px; line-height:1;}
+  /* Em telas estreitas o botão Voltar fica só com o chevron, liberando o título */
+  @media (max-width:379px){
+    .btn-back{padding:0; width:40px; justify-content:center;}
+    .btn-back .bk-txt{display:none;}
+    .h-tools{gap:4px;}
+    .tbtn{width:32px;}
+  }
+  .h-title{flex:1; min-width:0;}
+  .h-title .t{font-weight:700; font-size:18px; line-height:1.2; overflow:hidden;
+    text-overflow:ellipsis; white-space:nowrap; letter-spacing:.01em;}
+  .h-title .s{font-size:12.5px; color:var(--ink-soft); font-style:italic;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .h-tools{flex:0 0 auto; display:flex; gap:5px;}
+  .tbtn{
+    width:34px; height:34px; border-radius:8px; cursor:pointer;
+    border:1px solid var(--line-strong); background:var(--panel-2);
+    color:var(--ink); font-family:inherit; font-size:14px; font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .tbtn:active{background:var(--line);}
+  .search{
+    margin-top:9px; width:100%; height:42px; color:var(--ink);
+    border:1px solid var(--line-strong); border-radius:10px; background:var(--panel-2);
+    padding:0 14px; font-family:inherit; font-size:15px;
+  }
+  .search::placeholder{color:var(--ink-soft);}
+  .search:focus{outline:2px solid var(--accent-soft); outline-offset:1px;}
+
+  /* ---------- Conteúdo ---------- */
+  main{flex:1; padding:14px 14px 24px;}
+  .hint{font-size:13px; color:var(--ink-soft); font-style:italic; margin:2px 2px 14px;}
+
+  .list{display:flex; flex-direction:column; gap:10px;}
+  .card{
+    display:flex; align-items:center; gap:13px; width:100%;
+    min-height:58px; padding:13px 14px; text-align:left; cursor:pointer;
+    background:var(--panel); border:1px solid var(--line); border-radius:12px;
+    color:var(--ink); font-family:inherit; box-shadow:var(--shadow);
+    transition:transform .05s;
+  }
+  .card:active{transform:scale(.995); background:var(--panel-2);}
+  .card .ico{
+    flex:0 0 auto; width:40px; height:40px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center; font-size:20px;
+    background:color-mix(in srgb, var(--org) 12%, var(--panel));
+    border:1px solid color-mix(in srgb, var(--org) 30%, var(--line));
+  }
+  .card .txt{flex:1; min-width:0;}
+  .card .t{display:block; font-weight:700; font-size:16px; line-height:1.25;}
+  .card .s{display:block; font-size:12.5px; color:var(--ink-soft); margin-top:2px; font-style:italic;}
+  .card .chev{flex:0 0 auto; color:var(--accent-soft); font-size:20px;}
+
+  .subhead{
+    margin:20px 4px 9px; font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--org); font-weight:700; font-family:system-ui,sans-serif;
+    padding-left:9px; border-left:3px solid var(--org);
+  }
+  .subhead:first-child{margin-top:4px;}
+  .empty{padding:30px 10px; text-align:center; color:var(--ink-soft); font-style:italic;}
+
+  /* ---------- Tela de detalhe ---------- */
+  .detail{max-width:100%;}
+  .cover{
+    margin:-14px -14px 18px; padding:26px 20px 22px;
+    background:linear-gradient(160deg,
+      color-mix(in srgb, var(--org) 10%, var(--panel)),
+      var(--panel));
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .cover::after{content:""; position:absolute; left:20px; right:20px; bottom:14px; height:2px;
+    background:linear-gradient(90deg, var(--accent), transparent);}
+  .cover .org{font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--org); font-family:system-ui,sans-serif; font-weight:700;}
+  .cover h2{margin:6px 0 0; font-size:26px; line-height:1.2; font-weight:700;}
+  .cover .escr{margin:12px 0 6px; font-style:italic; color:var(--ink-soft); font-size:15px;
+    border-left:2px solid var(--accent-soft); padding-left:12px;}
+  .cover .escr .ref{display:block; font-size:12px; margin-top:3px; font-style:normal; letter-spacing:.03em;}
+  .cover.hasimg{padding:0; background:none;}
+  .cover.hasimg img{width:100%; height:200px; object-fit:cover; display:block;}
+  .cover.hasimg .capbar{padding:14px 18px 18px;
+    background:linear-gradient(160deg, color-mix(in srgb, var(--org) 10%, var(--panel)), var(--panel));}
+
+  .sec{margin:20px 0;}
+  .sec > h3{
+    margin:0 0 10px; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--org); font-weight:700; font-family:system-ui,sans-serif;
+    display:flex; align-items:center; gap:9px;
+  }
+  .sec > h3::after{content:""; flex:1; height:1px; background:var(--line);}
+  .sec p{margin:0 0 8px;}
+  .ref-tag{display:inline-block; margin-top:4px; font-size:11.5px; color:var(--ink-soft);
+    font-style:italic; font-family:system-ui,sans-serif;}
+  ul.resp{list-style:none; margin:0; padding:0;}
+  ul.resp li{position:relative; padding:5px 0 5px 20px;}
+  ul.resp li::before{content:""; position:absolute; left:3px; top:12px; width:6px; height:6px;
+    border-radius:50%; background:var(--accent);}
+
+  .area{
+    background:var(--panel); border:1px solid var(--line); border-radius:12px;
+    padding:13px 15px; margin:12px 0; box-shadow:var(--shadow);
+  }
+  .area .num{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:24px; height:24px; border-radius:50%; font-size:13px; font-weight:700;
+    background:color-mix(in srgb, var(--org) 16%, var(--panel));
+    color:var(--org); border:1px solid color-mix(in srgb, var(--org) 34%, var(--line));
+    font-family:system-ui,sans-serif; margin-right:9px; flex:0 0 auto;
+  }
+  .area .atit{display:flex; align-items:center; font-weight:700; font-size:16px; margin-bottom:8px;}
+  .area ul{list-style:none; margin:0; padding:0;}
+  .area li{position:relative; padding:4px 0 4px 18px; font-size:15px;}
+  .area li::before{content:"›"; position:absolute; left:2px; top:4px; color:var(--accent-soft); font-weight:700;}
+
+  .fecho{
+    margin-top:16px; padding:16px 18px; border-radius:12px;
+    background:var(--panel-2); border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+  }
+  .fecho p{margin:0; font-size:15.5px;}
+  .fecho .fonte{display:block; margin-top:9px; font-size:12px; color:var(--ink-soft);
+    font-style:italic; font-family:system-ui,sans-serif;}
+
+  .prep{
+    margin-top:22px; padding:22px 18px; text-align:center; border-radius:12px;
+    background:var(--panel-2); border:1px dashed var(--line-strong); color:var(--ink-soft);
+  }
+  .prep b{color:var(--ink);}
+
+  /* ---------- Rodapé ---------- */
+  footer{
+    padding:16px 14px calc(18px + env(safe-area-inset-bottom,0));
+    border-top:1px solid var(--line); text-align:center;
+    font-size:11px; color:var(--ink-soft); line-height:1.6;
+    font-family:system-ui,sans-serif;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="h-row">
+      <button class="btn-back" id="btnBack" aria-label="Voltar"><span class="bk-ico">‹</span><span class="bk-txt">Voltar</span></button>
+      <div class="h-title" id="hTitle">
+        <div class="t">Magnifique seu Chamado</div>
+        <div class="s">Guia de chamados da Ala</div>
+      </div>
+      <div class="h-tools">
+        <button class="tbtn" id="fMinus" aria-label="Diminuir fonte">A−</button>
+        <button class="tbtn" id="fPlus" aria-label="Aumentar fonte">A+</button>
+        <button class="tbtn" id="themeBtn" aria-label="Alternar tema">☾</button>
+      </div>
+    </div>
+    <input class="search" id="search" type="search" placeholder="Buscar chamado em todas as organizações…" autocomplete="off">
+  </header>
+
+  <main id="view"></main>
+
+  <footer id="footer"></footer>
+</div>
+
+<script>
+/* ==========================================================================
+   MAGNIFIQUE SEU CHAMADO — FASE 2
+   Design "estilo Liahona". Navegação SPA por estado em memória.
+   Estrutura de dados pronta para receber o conteúdo de TODOS os chamados.
+   Conteúdo fundamentado no Manual Geral (PT-BR). Nunca nominal (só o cargo).
+   ========================================================================== */
+
+const VERSAO = "1.3.0";
+const DATA_STR = "20/07/2026";
+
+const slug = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
+  .replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");
+
+/* Helpers de construção -------------------------------------------------- */
+// chamado só com título (estrutura pronta p/ receber conteúdo depois)
+const t = titulo => ({ titulo });
+// chamado com conteúdo completo
+const full = (titulo, c) => ({ titulo, c });
+
+/* ---- CONTEÚDO COMPLETO: BISPADO (amostra) ------------------------------ */
+const BISPADO = [
+  full("Bispo", {
+    escritura:{ t:"Apascentai o rebanho de Deus que está entre vós… servindo de exemplo ao rebanho.", r:"1 Pedro 5:2–3" },
+    proposito:"O bispo é o presidente da ala e o principal sumo sacerdote presidente. Recebe as chaves do sacerdócio para liderar o trabalho do Senhor na ala, preside o Sacerdócio Aarônico e o quórum de sacerdotes, e serve como juiz comum. Zela pelo bem-estar espiritual e temporal dos membros, com ênfase especial nos jovens e nas crianças.",
+    ref:"Manual Geral, 7.1",
+    resp:[
+      "Presidir a ala e liderar o trabalho de salvação e exaltação por meio do conselho da ala (7.1.4).",
+      "Presidir o Sacerdócio Aarônico e o quórum de sacerdotes, concentrando-se nos jovens (7.1.2).",
+      "Servir como juiz comum: entrevistas de dignidade, recomendações para o templo e ajuda no arrependimento (7.1.3).",
+      "Cuidar dos pobres e necessitados; administrar as ofertas de jejum e os recursos de bem-estar (7.1.4).",
+      "Supervisionar registros, finanças e recursos sagrados da ala; aprovar chamados e desobrigações (7.1.5).",
+      "Presidir a reunião sacramental, o conselho da ala e o comitê de jovens.",
+    ],
+    areas:[
+      { t:"Ministrar como pastor", i:[
+        "Reserve um tempo semanal fixo para entrevistas e para ministrar às pessoas.",
+        "Procure conhecer pelo nome as famílias, os jovens e as crianças da ala.",
+        "Assegure que ninguém fique sem ministros designados; acompanhe pelo conselho.",
+      ]},
+      { t:"Fortalecer os jovens", i:[
+        "Reúna-se com regularidade com as presidências de quórum e de classe e deixe-as liderar.",
+        "Participe das atividades dos jovens, do acampamento e do FSY sempre que possível.",
+        "Cumpra rigorosamente a norma dos dois adultos responsáveis em toda interação com menores.",
+      ]},
+      { t:"Presidir por meio de conselhos", i:[
+        "Prepare pautas centradas em pessoas — não apenas em programas e calendário.",
+        "Delegue responsabilidades aos conselheiros e líderes, e confie neles.",
+        "Busque revelação em conjunto, ouvindo com atenção cada membro do conselho.",
+      ]},
+      { t:"Cuidar do bem-estar", i:[
+        "Ensine a autossuficiência antes de oferecer assistência da Igreja.",
+        "Use as ofertas de jejum com oração e prudência, conforme a necessidade real.",
+        "Envolva o quórum de élderes e a Sociedade de Socorro no cuidado das famílias.",
+      ]},
+      { t:"Preservar o tempo e a própria família", i:[
+        "Delegue o máximo possível para proteger seu tempo pessoal e familiar.",
+        "Priorize sua própria família e a santidade do Dia do Senhor.",
+        "Renove-se espiritualmente cada dia pela oração e pelo estudo das escrituras.",
+      ]},
+    ],
+    fecho:{ t:"O bispo é chamado a ser um pai amoroso para a ala, apontando sempre para o Salvador. Ao servir com amor puro e confiar no Senhor, verá suas forças serem magnificadas muito além das próprias.", f:"Manual Geral, cap. 7" },
+  }),
+
+  full("Primeiro Conselheiro no Bispado", {
+    escritura:{ t:"E se um puder prevalecer contra outro, dois lhe resistirão.", r:"Eclesiastes 4:12" },
+    proposito:"Serve sob a direção do bispo, ajudando-o a presidir a ala e cumprindo as designações que recebe. Os conselheiros não detêm as chaves do bispo, mas recebem autoridade delegada para supervisionar organizações e áreas de trabalho específicas.",
+    ref:"Manual Geral, 7.1.1",
+    resp:[
+      "Auxiliar o bispo em suas responsabilidades e representá-lo quando designado.",
+      "Supervisionar as organizações e áreas atribuídas pelo bispo (frequentemente a Escola Dominical, a missão da ala e outras designações).",
+      "Participar do bispado, do conselho da ala e do comitê de jovens.",
+      "Ajudar a coordenar o trabalho de salvação e exaltação, sem exercer funções que exijam as chaves do bispo.",
+    ],
+    areas:[
+      { t:"Apoiar o bispo", i:[
+        "Conheça as prioridades do bispo e ajude a aliviar sua carga.",
+        "Mantenha comunicação frequente e leve a ele apenas o que exige as chaves.",
+        "Prepare-se para presidir reuniões quando o bispo estiver ausente.",
+      ]},
+      { t:"Supervisionar as organizações designadas", i:[
+        "Reúna-se com as presidências que supervisiona e conheça suas necessidades.",
+        "Ajude-as a planejar e a manter o foco nas pessoas.",
+        "Preste contas ao bispo sobre o andamento dessas organizações.",
+      ]},
+      { t:"Ministrar e cuidar", i:[
+        "Cumpra com diligência suas próprias designações ministeriais.",
+        "Participe dos assuntos de bem-estar conforme designado pelo bispo.",
+        "Observe a norma dos dois adultos responsáveis com menores.",
+      ]},
+      { t:"Preparar-se e capacitar-se", i:[
+        "Estude no Manual Geral os capítulos das áreas que supervisiona.",
+        "Aproveite os treinamentos oferecidos pela estaca.",
+        "Ajude a formar e apoiar os novos líderes das organizações.",
+      ]},
+      { t:"Guardar a unidade do bispado", i:[
+        "Apoie plenamente as decisões tomadas em conselho.",
+        "Fale a uma só voz com o bispo e o outro conselheiro.",
+        "Guarde com fidelidade toda informação confidencial.",
+      ]},
+    ],
+    fecho:{ t:"O conselheiro fiel multiplica a capacidade do bispado. Ao servir com lealdade e iniciativa, torna-se um verdadeiro sustentáculo no cuidado da ala.", f:"Manual Geral, cap. 7" },
+  }),
+
+  full("Segundo Conselheiro no Bispado", {
+    escritura:{ t:"Ajudai-vos… levando as cargas uns dos outros, para que sejam leves.", r:"Mosias 18:8–9" },
+    proposito:"Serve sob a direção do bispo, ajudando-o a presidir a ala e assumindo as designações que recebe. Como os demais conselheiros, apoia o bispo sem deter as chaves, supervisionando organizações e áreas específicas de trabalho.",
+    ref:"Manual Geral, 7.1.1",
+    resp:[
+      "Auxiliar o bispo e representá-lo quando designado.",
+      "Supervisionar as organizações atribuídas pelo bispo (frequentemente as Moças, a Primária ou os quóruns do Sacerdócio Aarônico).",
+      "Participar do bispado, do conselho da ala e do comitê de jovens.",
+      "Apoiar o trabalho de bem-estar e de salvação e exaltação conforme designado.",
+    ],
+    areas:[
+      { t:"Apoiar o bispo", i:[
+        "Assuma prontamente as designações recebidas, aliviando a carga do bispo.",
+        "Mantenha o bispo informado do que ocorre nas áreas que supervisiona.",
+        "Esteja preparado para servir sempre que for necessário.",
+      ]},
+      { t:"Zelar pelas crianças e jovens", i:[
+        "Se supervisiona a Primária ou os jovens, reúna-se com suas presidências.",
+        "Priorize a proteção das crianças e a norma dos dois adultos responsáveis.",
+        "Incentive experiências espirituais nas aulas e atividades.",
+      ]},
+      { t:"Supervisionar as organizações designadas", i:[
+        "Conheça as necessidades e os líderes de cada organização atribuída.",
+        "Ajude no planejamento e na obtenção de recursos.",
+        "Leve ao conselho da ala as necessidades que surgirem.",
+      ]},
+      { t:"Preparar-se", i:[
+        "Estude os capítulos do Manual Geral referentes às suas áreas.",
+        "Participe dos treinamentos de liderança.",
+        "Apoie a formação de novos líderes.",
+      ]},
+      { t:"Guardar a unidade do bispado", i:[
+        "Sustente as decisões do bispo e do bispado.",
+        "Mantenha a confidencialidade em todos os assuntos.",
+        "Cultive a harmonia e a confiança dentro do conselho.",
+      ]},
+    ],
+    fecho:{ t:"Ao carregar parte da obra com alegria e lealdade, o segundo conselheiro permite que o bispado sirva a ala inteira com o amor do Salvador.", f:"Manual Geral, cap. 7" },
+  }),
+
+  full("Secretário Executivo da Ala", {
+    escritura:{ t:"Que tudo seja feito com decência e ordem.", r:"1 Coríntios 14:40" },
+    proposito:"Ajuda o bispado a coordenar o trabalho de liderança da ala, especialmente as reuniões do bispado, do conselho da ala e do comitê de jovens. Cuida das pautas, da agenda e do acompanhamento das designações — mas não é responsável pelos registros de membros nem pelas finanças.",
+    ref:"Manual Geral, 7.3",
+    resp:[
+      "Ajudar o bispado a preparar as pautas e a agendar as reuniões de liderança.",
+      "Programar as entrevistas e as designações do bispado.",
+      "Acompanhar as atribuições feitas nos conselhos e lembrar os responsáveis.",
+      "Coordenar o calendário e o planejamento geral da ala.",
+      "Treinar e coordenar os secretários executivos adjuntos.",
+    ],
+    areas:[
+      { t:"Organizar reuniões produtivas", i:[
+        "Envie a pauta com antecedência e ajude a mantê-la centrada nas pessoas.",
+        "Ajude o bispado a começar e a terminar as reuniões no horário.",
+        "Garanta que os assuntos certos cheguem ao conselho certo.",
+      ]},
+      { t:"Gerir a agenda do bispado", i:[
+        "Proteja o tempo do bispo, evitando sobreposições de compromissos.",
+        "Confirme entrevistas e avise os membros com clareza e antecedência.",
+        "Mantenha uma agenda simples, atualizada e acessível ao bispado.",
+      ]},
+      { t:"Acompanhar as designações", i:[
+        "Registre quem ficou responsável por cada atribuição do conselho.",
+        "Dê seguimento com lembretes gentis antes da reunião seguinte.",
+        "Relate ao bispado o andamento das designações em aberto.",
+      ]},
+      { t:"Coordenar o calendário da ala", i:[
+        "Integre os calendários das organizações e evite conflitos de datas.",
+        "Ajude a planejar com antecedência as atividades e conferências.",
+        "Comunique as datas aprovadas a todos os líderes.",
+      ]},
+      { t:"Servir nos bastidores", i:[
+        "Antecipe as necessidades do bispado antes que sejam pedidas.",
+        "Guarde absoluta confidencialidade sobre o que ouve nas reuniões.",
+        "Prepare e capacite um adjunto para dar continuidade ao trabalho.",
+      ]},
+    ],
+    fecho:{ t:"Servindo com ordem e discrição, o secretário executivo libera o bispado para dedicar-se ao que mais importa: ministrar às pessoas.", f:"Manual Geral, cap. 7" },
+  }),
+
+  full("Secretário Executivo Assistente da Ala", {
+    proposito:"Apoia o secretário executivo da ala na coordenação das reuniões de liderança, na agenda do bispado e no acompanhamento das designações, substituindo-o quando necessário. Como o secretário executivo, não cuida de registros de membros nem de finanças.",
+    ref:"Manual Geral, 7.3",
+    resp:[
+      "Auxiliar na preparação de pautas e no agendamento das reuniões.",
+      "Ajudar a programar entrevistas e designações do bispado.",
+      "Dar seguimento às atribuições feitas nos conselhos.",
+      "Assumir as funções do secretário executivo em sua ausência.",
+    ],
+    areas:[
+      { t:"Dar apoio constante", i:[
+        "Combine com o secretário executivo a divisão das tarefas.",
+        "Esteja pronto para assumir quando ele estiver ausente.",
+        "Mantenha-se a par das reuniões e designações em andamento.",
+      ]},
+      { t:"Cuidar da agenda", i:[
+        "Ajude a confirmar entrevistas e a evitar conflitos de horário.",
+        "Mantenha os registros de agenda atualizados.",
+        "Comunique-se com clareza com o bispado e os membros.",
+      ]},
+      { t:"Acompanhar designações", i:[
+        "Ajude a registrar e a lembrar os responsáveis pelas atribuições.",
+        "Reúna as informações necessárias antes de cada reunião.",
+        "Relate pendências ao secretário executivo.",
+      ]},
+      { t:"Aprender o chamado", i:[
+        "Estude a seção 7.3 do Manual Geral.",
+        "Observe e aprenda os procedimentos com o secretário executivo.",
+        "Prepare-se para servir com autonomia quando preciso.",
+      ]},
+      { t:"Guardar confidências", i:[
+        "Trate como sagrada toda informação das reuniões.",
+        "Seja discreto ao lidar com assuntos pessoais.",
+        "Cultive a confiança do bispado pela fidelidade.",
+      ]},
+    ],
+    fecho:{ t:"Um bom assistente garante que o trabalho nunca pare. Sua prontidão e discrição são uma bênção silenciosa para toda a ala.", f:"Manual Geral, cap. 7" },
+  }),
+
+  full("Secretário da Ala", {
+    escritura:{ t:"Eis que serão registradas… porque isso é justo diante de mim.", r:"Doutrina e Convênios 128:9" },
+    proposito:"Cuida dos registros, dos relatórios e das finanças da ala sob a direção do bispado, mantendo exatidão e confidencialidade sobre os recursos sagrados. É um chamado de fidelidade nos detalhes que possibilita o bom funcionamento de toda a ala.",
+    ref:"Manual Geral, 7.4",
+    resp:[
+      "Manter atualizados os registros de membros, de ordenanças e os certificados no sistema da Igreja.",
+      "Preparar e enviar os relatórios estatísticos e de frequência.",
+      "Ajudar o bispado nas finanças: dízimos, ofertas, conciliações e autorizações de despesa.",
+      "Registrar as atas das reuniões do bispado e do conselho da ala quando designado.",
+      "Treinar e coordenar os secretários adjuntos da ala.",
+    ],
+    areas:[
+      { t:"Zelar pela exatidão dos registros", i:[
+        "Registre prontamente novos membros, mudanças e ordenanças.",
+        "Confira periodicamente os dados para corrigir inconsistências.",
+        "Ajude os líderes a acessar as informações de que precisam.",
+      ]},
+      { t:"Cuidar das finanças sagradas", i:[
+        "Conte os dízimos e ofertas sempre com duas pessoas presentes.",
+        "Concilie as contas com regularidade e no prazo.",
+        "Guarde sigilo absoluto sobre as contribuições dos membros.",
+      ]},
+      { t:"Enviar relatórios no prazo", i:[
+        "Envie os relatórios de frequência e estatística pontualmente.",
+        "Ajude os líderes a compreender os indicadores da ala.",
+        "Mantenha um calendário dos relatórios exigidos.",
+      ]},
+      { t:"Apoiar a liquidação de dízimos", i:[
+        "Ajude o bispado a organizar as entrevistas de fim de ano.",
+        "Prepare os registros de contribuição de cada família.",
+        "Assegure precisão e privacidade em todo o processo.",
+      ]},
+      { t:"Proteger a confidencialidade", i:[
+        "Trate os dados pessoais conforme as políticas de privacidade da Igreja.",
+        "Restrinja o acesso às informações a quem tem autorização.",
+        "Seja um exemplo de integridade e discrição.",
+      ]},
+    ],
+    fecho:{ t:"“Eis que serão registradas.” A fidelidade do secretário nos pequenos detalhes sustenta a ordem da casa do Senhor e abençoa cada membro da ala.", f:"Manual Geral, cap. 7" },
+  }),
+
+  full("Secretário Adjunto da Ala", {
+    proposito:"Auxilia o secretário da ala nos registros, nos relatórios e nas finanças, conforme designado pelo bispado. Compartilha a carga do trabalho de secretaria para que tudo seja feito com exatidão e no tempo certo.",
+    ref:"Manual Geral, 7.4",
+    resp:[
+      "Ajudar a manter registros e a preparar relatórios.",
+      "Apoiar as tarefas financeiras conforme designado, sempre com duas pessoas.",
+      "Auxiliar nas atas e no acompanhamento de dados.",
+      "Substituir o secretário da ala em tarefas específicas quando necessário.",
+    ],
+    areas:[
+      { t:"Compartilhar a carga", i:[
+        "Combine com o secretário da ala a divisão das responsabilidades.",
+        "Cumpra suas tarefas com pontualidade e cuidado.",
+        "Esteja disponível nos momentos de maior volume de trabalho.",
+      ]},
+      { t:"Cuidar dos registros", i:[
+        "Ajude a manter os dados de membros e ordenanças atualizados.",
+        "Confira as informações antes de enviá-las.",
+        "Organize os documentos com ordem e clareza.",
+      ]},
+      { t:"Apoiar as finanças", i:[
+        "Auxilie na contagem, sempre com outra pessoa presente.",
+        "Ajude na conciliação e nas autorizações de despesa.",
+        "Mantenha o sigilo sobre as contribuições.",
+      ]},
+      { t:"Aprender os procedimentos", i:[
+        "Estude a seção 7.4 do Manual Geral.",
+        "Aprenda o sistema da Igreja com o secretário da ala.",
+        "Prepare-se para assumir mais responsabilidades.",
+      ]},
+      { t:"Ser fiel e discreto", i:[
+        "Trate cada dado com respeito e confidencialidade.",
+        "Seja pontual no envio das informações.",
+        "Cultive a confiança do bispado.",
+      ]},
+    ],
+    fecho:{ t:"No serviço fiel dos detalhes há grande valor. Ao apoiar o secretário da ala, você ajuda a manter em ordem a obra do Senhor.", f:"Manual Geral, cap. 7" },
+  }),
+
+  full("Secretário Adjunto da Ala – Registro de Membros", {
+    proposito:"Adjunto do secretário da ala especialmente responsável pelos registros de membros: novos registros, transferências, mudanças de dados, ordenanças e certificados. Garante que os registros da ala reflitam com exatidão a vida espiritual de cada membro.",
+    ref:"Manual Geral, 7.4",
+    resp:[
+      "Processar novos registros, transferências e mudanças de endereço.",
+      "Registrar ordenanças e emitir os certificados correspondentes.",
+      "Manter os dados dos membros corretos e atualizados no sistema da Igreja.",
+      "Ajudar os líderes a localizar membros e famílias.",
+    ],
+    areas:[
+      { t:"Manter registros corretos", i:[
+        "Processe prontamente cada novo membro e transferência.",
+        "Verifique nomes, datas e dados com atenção aos detalhes.",
+        "Faça revisões periódicas para corrigir inconsistências.",
+      ]},
+      { t:"Registrar ordenanças", i:[
+        "Anote batismos, confirmações e ordenações logo após ocorrerem.",
+        "Emita e entregue os certificados aos membros.",
+        "Confirme que cada ordenança foi registrada corretamente.",
+      ]},
+      { t:"Acompanhar mudanças", i:[
+        "Atualize endereços e situação das famílias que se mudam.",
+        "Comunique ao bispado a chegada de novos membros.",
+        "Ajude a transferir registros de quem sai da ala.",
+      ]},
+      { t:"Apoiar a ministração", i:[
+        "Forneça aos líderes listas atualizadas para a ministração.",
+        "Ajude a identificar membros menos ativos ou recém-chegados.",
+        "Trabalhe com o secretário da ala e o conselho.",
+      ]},
+      { t:"Guardar a privacidade", i:[
+        "Trate os dados pessoais com estrito sigilo.",
+        "Siga as políticas de privacidade da Igreja.",
+        "Restrinja o acesso a quem tem autorização.",
+      ]},
+    ],
+    fecho:{ t:"Cada nome registrado com cuidado representa uma alma preciosa para o Senhor. Sua diligência ajuda a ala a não perder ninguém de vista.", f:"Manual Geral, cap. 7" },
+  }),
+
+  full("Secretário Adjunto Financeiro da Ala", {
+    escritura:{ t:"Requer-se dos despenseiros que cada um seja encontrado fiel.", r:"1 Coríntios 4:2" },
+    proposito:"Adjunto do secretário da ala especialmente responsável pelas finanças: ajudar a receber, contar e conciliar os dízimos e ofertas, preparar autorizações de despesa e apoiar a liquidação de dízimos — sempre com integridade e com duas pessoas presentes.",
+    ref:"Manual Geral, 7.4 (ver também cap. 34)",
+    resp:[
+      "Ajudar a contar e a registrar os dízimos e ofertas, sempre com duas pessoas.",
+      "Conciliar as contas da ala com regularidade.",
+      "Preparar as autorizações de despesa aprovadas pelo bispado.",
+      "Apoiar o processo de liquidação de dízimos.",
+    ],
+    areas:[
+      { t:"Contar com integridade", i:[
+        "Nunca conte ou manuseie recursos sozinho — sempre com outra pessoa.",
+        "Registre cada contribuição com exatidão no mesmo dia.",
+        "Guarde os recursos em segurança até o depósito.",
+      ]},
+      { t:"Conciliar as contas", i:[
+        "Faça a conciliação no prazo estabelecido pela Igreja.",
+        "Corrija prontamente qualquer divergência encontrada.",
+        "Mantenha os comprovantes organizados.",
+      ]},
+      { t:"Cuidar das despesas", i:[
+        "Prepare as autorizações somente com a aprovação do bispado.",
+        "Confira se cada despesa tem finalidade aprovada.",
+        "Mantenha registros claros de cada pagamento.",
+      ]},
+      { t:"Apoiar a liquidação de dízimos", i:[
+        "Prepare os relatórios de contribuição de cada família.",
+        "Ajude a agendar as entrevistas de fim de ano.",
+        "Assegure precisão e privacidade nos dados.",
+      ]},
+      { t:"Ser fiel e sigiloso", i:[
+        "Trate os recursos sagrados com absoluta honestidade.",
+        "Guarde total sigilo sobre as contribuições dos membros.",
+        "Siga sempre os procedimentos financeiros da Igreja.",
+      ]},
+    ],
+    fecho:{ t:"Os recursos da Igreja são sagrados porque são consagrados ao Senhor. Ao lidar com eles com fidelidade, você ajuda a levar bênçãos a muitos.", f:"Manual Geral, cap. 7 e 34" },
+  }),
+];
+
+/* ---- CONTEÚDO COMPLETO: QUÓRUM DE ÉLDERES ------------------------------ */
+const QUORUM_ELDERES = [
+  full("Presidente do Quórum de Élderes", {
+    escritura:{ t:"Socorre os fracos, levanta as mãos que pendem e fortalece os joelhos enfraquecidos.", r:"Doutrina e Convênios 81:5" },
+    proposito:"O presidente do quórum de élderes recebe as chaves do sacerdócio para presidir o quórum. Sob a direção do bispo e em conjunto com a presidência da Sociedade de Socorro, lidera o trabalho de salvação e exaltação na ala, cuidando de cada irmão e de sua família.",
+    ref:"Manual Geral, 8.3.3",
+    resp:[
+      "Presidir o quórum de élderes e servir como membro do conselho da ala (8.3.3).",
+      "Liderar as quatro áreas do trabalho de salvação e exaltação: viver o evangelho, cuidar dos necessitados, convidar todos a receber o evangelho e unir as famílias pelo templo e história da família (8.2).",
+      "Supervisionar a obra de ministração; realizar entrevistas de ministração ao menos trimestralmente (8.3.3.2).",
+      "Reunir-se com a presidência da Sociedade de Socorro pelo menos trimestralmente para coordenar o cuidado das famílias (8.3.3.2).",
+      "Reunir-se anualmente com cada membro do quórum; zelar pelos irmãos jovens adultos e recém-conversos.",
+      "Supervisionar, com o secretário, os registros, relatórios e finanças do quórum.",
+    ],
+    areas:[
+      { t:"Liderar por meio de conselhos", i:[
+        "Reúna a presidência com regularidade e delegue as quatro áreas da obra.",
+        "Busque revelação em conjunto, ouvindo cada conselheiro.",
+        "Concentre as reuniões nas pessoas, não apenas nas tarefas.",
+      ]},
+      { t:"Fortalecer a ministração", i:[
+        "Designe as duplas com oração e inspiração, conforme as necessidades.",
+        "Realize as entrevistas de ministração ao menos a cada trimestre.",
+        "Aja prontamente sobre as necessidades relatadas.",
+      ]},
+      { t:"Cuidar de cada irmão", i:[
+        "Reúna-se pessoalmente com cada membro do quórum ao menos uma vez ao ano.",
+        "Conheça os menos ativos e os recém-chegados pelo nome.",
+        "Ministre você mesmo, dando o exemplo ao quórum.",
+      ]},
+      { t:"Coordenar com a Sociedade de Socorro", i:[
+        "Planeje junto com a presidência da SS o cuidado das famílias.",
+        "Reúna-se com ela ao menos trimestralmente.",
+        "Evite duplicar esforços; unam-se em torno das mesmas necessidades.",
+      ]},
+      { t:"Edificar no domingo", i:[
+        "Assegure aulas centradas em Jesus Cristo, apoiando o professor.",
+        "Equilibre a instrução do evangelho e os assuntos do quórum.",
+        "Incentive a fraternidade e a participação de todos.",
+      ]},
+    ],
+    fecho:{ t:"Como presidente, você pastoreia irmãos que, unidos, fortalecem lares e toda a ala. Ao ministrar como o Salvador, ergue os que pendem e conduz o quórum à unidade.", f:"Manual Geral, cap. 8" },
+  }),
+
+  full("Primeiro Conselheiro no Quórum de Élderes", {
+    proposito:"Serve sob a direção do presidente do quórum, ajudando-o a liderar o quórum e assumindo as áreas do trabalho de salvação e exaltação que lhe forem designadas — frequentemente a obra missionária ou o trabalho de templo e história da família.",
+    ref:"Manual Geral, 8.3.3.1",
+    resp:[
+      "Auxiliar o presidente e representá-lo quando designado.",
+      "Supervisionar as áreas atribuídas (p.ex. obra missionária ou templo e história da família).",
+      "Participar da presidência do quórum e das reuniões de conselho conforme designado.",
+      "Ajudar a coordenar a obra de ministração.",
+    ],
+    areas:[
+      { t:"Apoiar o presidente", i:[
+        "Conheça as prioridades do quórum e ajude a aliviar a carga do presidente.",
+        "Prepare-se para presidir quando ele estiver ausente.",
+      ]},
+      { t:"Liderar a área designada", i:[
+        "Se lidera a obra missionária, trabalhe com os missionários e o líder da missão da ala.",
+        "Se lidera o templo e a história da família, incentive os irmãos a levarem nomes ao templo.",
+      ]},
+      { t:"Ministrar", i:[
+        "Cumpra com diligência suas próprias designações ministeriais.",
+        "Conheça os irmãos e suas famílias.",
+      ]},
+      { t:"Preparar-se", i:[
+        "Estude o capítulo 8 do Manual Geral e a área que supervisiona.",
+        "Aproveite os treinamentos oferecidos.",
+      ]},
+      { t:"Guardar a unidade da presidência", i:[
+        "Apoie plenamente as decisões tomadas em conselho.",
+        "Guarde com fidelidade as informações confidenciais.",
+      ]},
+    ],
+    fecho:{ t:"O conselheiro fiel multiplica o alcance do quórum. Ao assumir sua área com dedicação, torna-se um sustentáculo no cuidado dos irmãos.", f:"Manual Geral, cap. 8" },
+  }),
+
+  full("Segundo Conselheiro no Quórum de Élderes", {
+    proposito:"Serve sob a direção do presidente do quórum, ajudando-o a liderar o quórum e assumindo as áreas designadas — frequentemente o cuidado dos necessitados, o bem-estar e a autossuficiência.",
+    ref:"Manual Geral, 8.3.3.1",
+    resp:[
+      "Auxiliar o presidente e representá-lo quando designado.",
+      "Supervisionar as áreas atribuídas (p.ex. bem-estar, autossuficiência e cuidado dos necessitados).",
+      "Participar da presidência do quórum e das reuniões de conselho conforme designado.",
+      "Ajudar a coordenar a obra de ministração.",
+    ],
+    areas:[
+      { t:"Apoiar o presidente", i:[
+        "Assuma prontamente as designações, aliviando a carga do presidente.",
+        "Mantenha-o informado sobre a área que supervisiona.",
+      ]},
+      { t:"Cuidar dos necessitados", i:[
+        "Trabalhe com a Sociedade de Socorro e o bispado no cuidado das famílias.",
+        "Promova a autossuficiência antes da assistência.",
+      ]},
+      { t:"Coordenar o serviço", i:[
+        "Apoie o coordenador de serviço nos projetos do quórum.",
+        "Ajude a identificar necessidades reais na ala e na comunidade.",
+      ]},
+      { t:"Preparar-se", i:[
+        "Estude os princípios de bem-estar e autossuficiência do Manual Geral.",
+        "Participe dos treinamentos de liderança.",
+      ]},
+      { t:"Guardar a unidade da presidência", i:[
+        "Sustente as decisões do presidente e da presidência.",
+        "Mantenha a confidencialidade em todos os assuntos.",
+      ]},
+    ],
+    fecho:{ t:"Ao cuidar dos que passam por dificuldades, o segundo conselheiro ajuda o quórum a viver o segundo grande mandamento: amar o próximo como a si mesmo.", f:"Manual Geral, cap. 8" },
+  }),
+
+  full("Secretário do Quórum de Élderes", {
+    escritura:{ t:"Que tudo seja feito com decência e ordem.", r:"1 Coríntios 14:40" },
+    proposito:"Ajuda a presidência do quórum a manter a ordem no trabalho: prepara pautas, registra as designações, agenda as entrevistas de ministração e cuida dos relatórios e das finanças do quórum.",
+    ref:"Manual Geral, 8.3.4",
+    resp:[
+      "Preparar as pautas e fazer as anotações das reuniões da presidência.",
+      "Agendar as entrevistas de ministração.",
+      "Preparar os relatórios trimestrais de ministração e de frequência.",
+      "Manter os registros de designações e das despesas do quórum.",
+    ],
+    areas:[
+      { t:"Organizar as reuniões", i:[
+        "Prepare a pauta com antecedência e registre as designações feitas.",
+        "Dê seguimento às atribuições antes da reunião seguinte.",
+      ]},
+      { t:"Agendar a ministração", i:[
+        "Organize o calendário das entrevistas trimestrais.",
+        "Lembre a presidência e os companheiros das datas.",
+      ]},
+      { t:"Cuidar dos relatórios", i:[
+        "Reúna os dados de ministração e frequência.",
+        "Envie os relatórios com exatidão e no prazo.",
+      ]},
+      { t:"Registrar e prestar contas", i:[
+        "Controle as despesas aprovadas pela presidência.",
+        "Mantenha listas de membros atualizadas.",
+      ]},
+      { t:"Servir com discrição", i:[
+        "Guarde sigilo sobre os assuntos das reuniões.",
+        "Ajude a treinar o assistente secretário.",
+      ]},
+    ],
+    fecho:{ t:"A fidelidade nos detalhes libera a presidência para ministrar. O bom secretário é uma bênção silenciosa para todo o quórum.", f:"Manual Geral, cap. 8" },
+  }),
+
+  full("Assistente Secretário do Quórum de Élderes", {
+    proposito:"Apoia o secretário do quórum de élderes nas pautas, nos registros, no agendamento das entrevistas de ministração e nos relatórios, substituindo-o quando necessário.",
+    ref:"Manual Geral, 8.3.4",
+    resp:[
+      "Ajudar a preparar pautas e a registrar as reuniões.",
+      "Auxiliar no agendamento das entrevistas de ministração.",
+      "Ajudar a reunir dados para os relatórios.",
+      "Assumir as funções do secretário em sua ausência.",
+    ],
+    areas:[
+      { t:"Dar apoio constante", i:[
+        "Combine com o secretário a divisão das tarefas.",
+        "Esteja pronto para assumir quando necessário.",
+      ]},
+      { t:"Cuidar dos registros", i:[
+        "Ajude a manter as designações e listas atualizadas.",
+        "Confira os dados antes de enviá-los.",
+      ]},
+      { t:"Apoiar a ministração", i:[
+        "Ajude a agendar e a lembrar as entrevistas trimestrais.",
+        "Reúna informações para a presidência.",
+      ]},
+      { t:"Aprender o chamado", i:[
+        "Estude a seção 8.3.4 do Manual Geral.",
+        "Aprenda os procedimentos com o secretário.",
+      ]},
+      { t:"Guardar confidências", i:[
+        "Trate com sigilo tudo o que ouvir nas reuniões.",
+        "Seja fiel e pontual em cada tarefa.",
+      ]},
+    ],
+    fecho:{ t:"Um bom assistente garante que o trabalho nunca pare. Sua prontidão sustenta a ordem do quórum.", f:"Manual Geral, cap. 8" },
+  }),
+
+  full("Professor do Quórum de Élderes", {
+    escritura:{ t:"Ensinai-vos uns aos outros palavras de sabedoria… buscai aprendizado, sim, pelo estudo e também pela fé.", r:"Doutrina e Convênios 88:118" },
+    proposito:"Ensina nas reuniões dominicais do quórum, conforme a necessidade determinada pelo bispo e pela presidência, ajudando os irmãos a aprenderem e a viverem o evangelho de Jesus Cristo.",
+    ref:"Manual Geral, 8.3.5 (ver cap. 17)",
+    resp:[
+      "Preparar e ministrar as aulas a partir dos materiais aprovados (mensagens da conferência geral e recursos indicados).",
+      "Ensinar por meio do Espírito, convidando à participação e à conversão.",
+      "Coordenar com a presidência os tópicos e o calendário de ensino.",
+    ],
+    areas:[
+      { t:"Preparar-se espiritualmente", i:[
+        "Ore e estude o tema com antecedência, buscando o Espírito.",
+        "Pondere as necessidades dos irmãos ao preparar a aula.",
+      ]},
+      { t:"Ensinar por meio do Espírito", i:[
+        "Concentre cada aula em Jesus Cristo e Seu evangelho.",
+        "Testifique com sinceridade e convide à ação.",
+      ]},
+      { t:"Envolver os irmãos", i:[
+        "Faça boas perguntas e ouça com atenção.",
+        "Incentive a participação respeitosa de todos.",
+      ]},
+      { t:"Usar os materiais aprovados", i:[
+        "Baseie-se nas mensagens dos profetas e nos recursos indicados.",
+        "Evite fontes especulativas ou não oficiais.",
+      ]},
+      { t:"Conectar o evangelho à vida", i:[
+        "Ajude os irmãos a aplicarem os princípios no dia a dia.",
+        "Incentive-os a guardar e a lembrar seus convênios.",
+      ]},
+    ],
+    fecho:{ t:"Ensinar o evangelho é obra sagrada. Ao ensinar pelo Espírito, você ajuda cada irmão a achegar-se mais a Cristo.", f:"Manual Geral, cap. 8 e 17" },
+  }),
+
+  full("Secretário de Ministração do Quórum de Élderes", {
+    proposito:"Ajuda a presidência do quórum a coordenar a obra de ministração: mantém atualizadas as designações de companheirismo, organiza as entrevistas de ministração e reúne as informações sobre necessidades para que a presidência possa agir.",
+    ref:"Manual Geral, 8.3.3.2 e 8.3.4",
+    resp:[
+      "Manter atualizadas as duplas e as famílias designadas à ministração.",
+      "Ajudar a agendar e a registrar as entrevistas trimestrais.",
+      "Reunir informações sobre necessidades e levá-las à presidência.",
+      "Coordenar com a Sociedade de Socorro os registros de ministração.",
+    ],
+    areas:[
+      { t:"Manter as designações em dia", i:[
+        "Atualize as duplas e as famílias designadas conforme as decisões da presidência.",
+        "Registre as mudanças prontamente.",
+      ]},
+      { t:"Organizar as entrevistas", i:[
+        "Agende as entrevistas trimestrais e lembre os companheiros.",
+        "Anote o que for relatado para acompanhamento.",
+      ]},
+      { t:"Levar necessidades à presidência", i:[
+        "Comunique com prontidão os casos que exigem ação.",
+        "Ajude a presidência a priorizar o cuidado.",
+      ]},
+      { t:"Coordenar com a Sociedade de Socorro", i:[
+        "Alinhe os registros para evitar sobreposição.",
+        "Compartilhe apenas o necessário, com discrição.",
+      ]},
+      { t:"Guardar confidencialidade", i:[
+        "Trate as informações das famílias com respeito e sigilo.",
+        "Restrinja o acesso a quem tem responsabilidade.",
+      ]},
+    ],
+    fecho:{ t:"A ministração é o coração do quórum. Ao mantê-la organizada, você ajuda a garantir que nenhum irmão ou família fique sem cuidado.", f:"Manual Geral, cap. 8" },
+  }),
+
+  full("Coordenador de Atividades do Quórum de Élderes", {
+    proposito:"Ajuda a presidência a planejar e realizar as atividades do quórum que fortalecem a fraternidade e apoiam o trabalho de salvação e exaltação.",
+    ref:"Manual Geral, 8.3.5",
+    resp:[
+      "Planejar as atividades sob a direção da presidência.",
+      "Coordenar o comitê de atividades e os assistentes.",
+      "Cuidar de locais, recursos, orçamento aprovado e segurança.",
+    ],
+    areas:[
+      { t:"Planejar com propósito", i:[
+        "Escolha atividades que unam os irmãos e apoiem a obra.",
+        "Planeje com antecedência e em harmonia com o calendário da ala.",
+      ]},
+      { t:"Trabalhar com o comitê", i:[
+        "Delegue tarefas aos membros do comitê e aos assistentes.",
+        "Reúna-se para preparar cada atividade.",
+      ]},
+      { t:"Incluir a todos", i:[
+        "Lembre-se dos menos ativos, recém-chegados e jovens adultos.",
+        "Crie um ambiente acolhedor para todos.",
+      ]},
+      { t:"Cuidar da logística e segurança", i:[
+        "Providencie local, recursos e orçamento aprovado.",
+        "Observe as diretrizes de segurança da Igreja.",
+      ]},
+      { t:"Avaliar e melhorar", i:[
+        "Peça sugestões após cada atividade.",
+        "Ajuste o planejamento das próximas.",
+      ]},
+    ],
+    fecho:{ t:"Boas atividades constroem amizade e fé. Ao reunir os irmãos com propósito, você fortalece os laços que sustentam o quórum.", f:"Manual Geral, cap. 8" },
+  }),
+
+  full("Coordenador Assistente de Atividades do Quórum de Élderes", {
+    proposito:"Apoia o coordenador de atividades no planejamento e na realização das atividades do quórum, substituindo-o quando necessário.",
+    ref:"Manual Geral, 8.3.5",
+    resp:[
+      "Ajudar a planejar e a executar as atividades.",
+      "Coordenar tarefas com o comitê de atividades.",
+      "Assumir as funções do coordenador em sua ausência.",
+    ],
+    areas:[
+      { t:"Apoiar o coordenador", i:[
+        "Combine a divisão das tarefas do planejamento.",
+        "Esteja pronto para liderar quando necessário.",
+      ]},
+      { t:"Executar com excelência", i:[
+        "Cuide dos detalhes práticos de cada atividade.",
+        "Confirme recursos e local com antecedência.",
+      ]},
+      { t:"Trabalhar em equipe", i:[
+        "Colabore com o comitê e os assistentes.",
+        "Comunique-se com clareza.",
+      ]},
+      { t:"Incluir a todos", i:[
+        "Ajude a alcançar os menos ativos e novos membros.",
+        "Zele por um ambiente acolhedor.",
+      ]},
+      { t:"Cuidar da segurança", i:[
+        "Siga as diretrizes de segurança da Igreja.",
+        "Ajude a prevenir riscos nas atividades.",
+      ]},
+    ],
+    fecho:{ t:"O apoio fiel de um assistente garante que nada falte. Sua colaboração torna cada atividade um sucesso.", f:"Manual Geral, cap. 8" },
+  }),
+
+  full("Membro do Comitê de Atividades do Quórum de Élderes", {
+    proposito:"Ajuda o coordenador de atividades a planejar e a realizar as atividades do quórum, assumindo tarefas específicas em equipe.",
+    ref:"Manual Geral, 8.3.5",
+    resp:[
+      "Colaborar no planejamento das atividades.",
+      "Assumir tarefas designadas pelo coordenador.",
+      "Ajudar na preparação, execução e organização.",
+    ],
+    areas:[
+      { t:"Colaborar no planejamento", i:[
+        "Traga ideias que unam os irmãos.",
+        "Participe das reuniões de preparação.",
+      ]},
+      { t:"Assumir tarefas", i:[
+        "Cumpra com diligência o que lhe for designado.",
+        "Seja pontual e confiável.",
+      ]},
+      { t:"Trabalhar em equipe", i:[
+        "Coopere com o comitê e os coordenadores.",
+        "Comunique dificuldades cedo.",
+      ]},
+      { t:"Incluir a todos", i:[
+        "Ajude a acolher cada irmão nas atividades.",
+        "Lembre-se dos que costumam ficar de fora.",
+      ]},
+      { t:"Zelar pela segurança", i:[
+        "Ajude a manter um ambiente seguro.",
+        "Siga as orientações do coordenador.",
+      ]},
+    ],
+    fecho:{ t:"Muitas mãos tornam leve o trabalho. Sua ajuda no comitê fortalece a fraternidade do quórum.", f:"Manual Geral, cap. 8" },
+  }),
+
+  full("Coordenador de Serviço do Quórum de Élderes", {
+    escritura:{ t:"Quando estais a serviço de vosso próximo, estais somente a serviço de vosso Deus.", r:"Mosias 2:17" },
+    proposito:"Ajuda a presidência a planejar e realizar projetos de serviço para pessoas necessitadas, dentro e fora da Igreja, promovendo o amor cristão em ação.",
+    ref:"Manual Geral, 8.2.2 e 8.3.5",
+    resp:[
+      "Planejar projetos de serviço sob a direção da presidência.",
+      "Coordenar o comitê de serviço e os assistentes.",
+      "Identificar necessidades junto ao conselho da ala e à Sociedade de Socorro.",
+    ],
+    areas:[
+      { t:"Identificar necessidades reais", i:[
+        "Ouça a presidência, a Sociedade de Socorro e o bispado.",
+        "Considere membros e vizinhos que precisam de ajuda.",
+      ]},
+      { t:"Organizar o serviço", i:[
+        "Mobilize o quórum e defina tarefas claras.",
+        "Planeje com antecedência e com objetivos definidos.",
+      ]},
+      { t:"Servir dentro e fora da Igreja", i:[
+        "Inclua projetos na comunidade, como pelo JustServe.",
+        "Promova o serviço contínuo, não apenas eventual.",
+      ]},
+      { t:"Cuidar da logística e segurança", i:[
+        "Providencie ferramentas, transporte e recursos.",
+        "Mantenha dois adultos responsáveis quando houver menores.",
+      ]},
+      { t:"Ensinar pelo exemplo", i:[
+        "Ajude os irmãos a amarem o serviço ao próximo.",
+        "Reconheça e agradeça quem serve.",
+      ]},
+    ],
+    fecho:{ t:"“Quando estais a serviço de vosso próximo, estais somente a serviço de vosso Deus.” Ao liderar o serviço, você ajuda o quórum a amar como o Salvador amou.", f:"Manual Geral, cap. 8" },
+  }),
+
+  full("Coordenador Assistente de Serviço do Quórum de Élderes", {
+    proposito:"Apoia o coordenador de serviço no planejamento e na realização dos projetos de serviço do quórum, substituindo-o quando necessário.",
+    ref:"Manual Geral, 8.3.5",
+    resp:[
+      "Ajudar a planejar e a executar os projetos de serviço.",
+      "Coordenar tarefas com o comitê de serviço.",
+      "Assumir as funções do coordenador em sua ausência.",
+    ],
+    areas:[
+      { t:"Apoiar o coordenador", i:[
+        "Combine a divisão das tarefas de organização.",
+        "Esteja pronto para liderar quando necessário.",
+      ]},
+      { t:"Executar com cuidado", i:[
+        "Cuide dos detalhes práticos de cada projeto.",
+        "Confirme recursos e transporte com antecedência.",
+      ]},
+      { t:"Identificar necessidades", i:[
+        "Ajude a mapear quem precisa de ajuda.",
+        "Leve as informações ao coordenador.",
+      ]},
+      { t:"Zelar pela segurança", i:[
+        "Observe as diretrizes de segurança da Igreja.",
+        "Mantenha a norma dos dois adultos com menores.",
+      ]},
+      { t:"Servir com alegria", i:[
+        "Dê o exemplo de disposição para servir.",
+        "Incentive os irmãos a participarem.",
+      ]},
+    ],
+    fecho:{ t:"O serviço fiel nos bastidores torna possível abençoar muitos. Sua dedicação amplia o alcance do quórum.", f:"Manual Geral, cap. 8" },
+  }),
+
+  full("Membro do Comitê de Serviço do Quórum de Élderes", {
+    proposito:"Ajuda o coordenador de serviço a planejar e a realizar os projetos de serviço do quórum, assumindo tarefas específicas em equipe.",
+    ref:"Manual Geral, 8.3.5",
+    resp:[
+      "Colaborar no planejamento dos projetos de serviço.",
+      "Assumir tarefas designadas pelo coordenador.",
+      "Ajudar na preparação e na execução do serviço.",
+    ],
+    areas:[
+      { t:"Colaborar no planejamento", i:[
+        "Traga ideias de serviço úteis e viáveis.",
+        "Participe das reuniões de preparação.",
+      ]},
+      { t:"Assumir tarefas", i:[
+        "Cumpra com diligência o que lhe for designado.",
+        "Seja pontual e confiável.",
+      ]},
+      { t:"Servir com o coração", i:[
+        "Sirva com amor, sem esperar reconhecimento.",
+        "Trate cada pessoa ajudada com dignidade.",
+      ]},
+      { t:"Trabalhar em equipe", i:[
+        "Coopere com o comitê e os coordenadores.",
+        "Comunique dificuldades cedo.",
+      ]},
+      { t:"Zelar pela segurança", i:[
+        "Ajude a manter um ambiente seguro.",
+        "Siga as orientações do coordenador.",
+      ]},
+    ],
+    fecho:{ t:"Cada ato de serviço, por menor que seja, reflete o amor de Cristo. Sua ajuda no comitê abençoa vidas de forma real.", f:"Manual Geral, cap. 8" },
+  }),
+];
+
+/* ---- CONTEÚDO COMPLETO: SOCIEDADE DE SOCORRO --------------------------- */
+const SOCIEDADE_SOCORRO = [
+  full("Presidente da Sociedade de Socorro", {
+    escritura:{ t:"A caridade é o amor puro de Cristo, e dura para sempre.", r:"Morôni 7:47" },
+    proposito:"A presidente da Sociedade de Socorro é chamada e recebe autoridade delegada para liderar as mulheres da ala. Sob a direção do bispo e em conjunto com o presidente do quórum de élderes, lidera o trabalho de salvação e exaltação e zela pelo bem-estar espiritual e temporal das irmãs e das famílias.",
+    ref:"Manual Geral, 9.3.2",
+    resp:[
+      "Liderar a Sociedade de Socorro e servir como membro do conselho da ala (9.3.2.2).",
+      "Liderar, com o quórum de élderes e sob a direção do bispo, as quatro áreas do trabalho de salvação e exaltação (9.2).",
+      "Organizar e supervisionar a obra de ministração das irmãs; realizar entrevistas de ministração (9.3.2.2).",
+      "Ajudar o bispo na obra de bem-estar e no cuidado dos necessitados.",
+      "Reunir-se individualmente com as irmãs e conhecer suas necessidades.",
+      "Supervisionar as reuniões, o ensino e as atividades da Sociedade de Socorro.",
+    ],
+    areas:[
+      { t:"Liderar por meio de conselhos", i:[
+        "Reúna a presidência com regularidade e delegue as áreas da obra.",
+        "Busque revelação em conjunto, ouvindo cada conselheira.",
+        "Mantenha o foco nas irmãs e nas famílias, não apenas nos programas.",
+      ]},
+      { t:"Ministrar às irmãs", i:[
+        "Designe as duplas de ministração com oração e inspiração.",
+        "Realize as entrevistas de ministração periodicamente.",
+        "Aja prontamente sobre as necessidades relatadas.",
+      ]},
+      { t:"Cuidar do bem-estar", i:[
+        "Trabalhe de perto com o bispo no cuidado das famílias.",
+        "Ensine a autossuficiência antes de oferecer assistência.",
+        "Coordene com o quórum de élderes para unir esforços.",
+      ]},
+      { t:"Fortalecer a fé no domingo", i:[
+        "Assegure ensino centrado em Jesus Cristo nas Reuniões de Domingo.",
+        "Planeje os tópicos com base nas mensagens dos profetas.",
+        "Incentive a fraternidade entre as irmãs.",
+      ]},
+      { t:"Conhecer e amar cada irmã", i:[
+        "Reúna-se pessoalmente com as irmãs para conhecê-las.",
+        "Alcance as irmãs menos ativas e as recém-chegadas.",
+        "Ajude cada uma a sentir-se necessária e amada.",
+      ]},
+    ],
+    fecho:{ t:"A Sociedade de Socorro foi organizada segundo o padrão do sacerdócio para socorrer os necessitados e edificar a fé. Ao liderar com caridade, a presidente reflete o amor puro de Cristo em toda a ala.", f:"Manual Geral, cap. 9" },
+  }),
+
+  full("Primeira Conselheira da Sociedade de Socorro", {
+    proposito:"Serve sob a direção da presidente, ajudando-a a liderar a Sociedade de Socorro e assumindo as áreas do trabalho de salvação e exaltação que lhe forem designadas — frequentemente a obra missionária ou o trabalho de templo e história da família.",
+    ref:"Manual Geral, 9.3.2.1",
+    resp:[
+      "Auxiliar a presidente e representá-la quando designada.",
+      "Supervisionar as áreas atribuídas (p.ex. obra missionária ou templo e história da família).",
+      "Participar da presidência e das reuniões de conselho conforme designada.",
+      "Ajudar a coordenar a obra de ministração.",
+    ],
+    areas:[
+      { t:"Apoiar a presidente", i:[
+        "Conheça as prioridades e ajude a aliviar a carga da presidente.",
+        "Prepare-se para presidir quando ela estiver ausente.",
+      ]},
+      { t:"Liderar a área designada", i:[
+        "Se lidera a obra missionária, trabalhe com os missionários e o líder da missão da ala.",
+        "Se lidera o templo e a história da família, incentive as irmãs a levarem nomes ao templo.",
+      ]},
+      { t:"Ministrar", i:[
+        "Cumpra suas próprias designações ministeriais com diligência.",
+        "Conheça as irmãs e suas famílias.",
+      ]},
+      { t:"Preparar-se", i:[
+        "Estude o capítulo 9 do Manual Geral e a sua área.",
+        "Aproveite os treinamentos oferecidos.",
+      ]},
+      { t:"Guardar a unidade da presidência", i:[
+        "Apoie plenamente as decisões tomadas em conselho.",
+        "Guarde com fidelidade as informações confidenciais.",
+      ]},
+    ],
+    fecho:{ t:"A conselheira fiel amplia o alcance da Sociedade de Socorro. Ao assumir sua área com dedicação, torna-se um sustentáculo no cuidado das irmãs.", f:"Manual Geral, cap. 9" },
+  }),
+
+  full("Segunda Conselheira da Sociedade de Socorro", {
+    proposito:"Serve sob a direção da presidente, ajudando-a a liderar a Sociedade de Socorro e assumindo as áreas designadas — frequentemente o cuidado dos necessitados, o bem-estar e a autossuficiência.",
+    ref:"Manual Geral, 9.3.2.1",
+    resp:[
+      "Auxiliar a presidente e representá-la quando designada.",
+      "Supervisionar as áreas atribuídas (p.ex. bem-estar, autossuficiência e cuidado dos necessitados).",
+      "Participar da presidência e das reuniões de conselho conforme designada.",
+      "Ajudar a coordenar a obra de ministração.",
+    ],
+    areas:[
+      { t:"Apoiar a presidente", i:[
+        "Assuma prontamente as designações, aliviando a carga da presidente.",
+        "Mantenha-a informada sobre a área que supervisiona.",
+      ]},
+      { t:"Cuidar dos necessitados", i:[
+        "Trabalhe com o bispado e o quórum de élderes no cuidado das famílias.",
+        "Promova a autossuficiência antes da assistência.",
+      ]},
+      { t:"Coordenar o serviço", i:[
+        "Apoie a coordenadora de serviço nos projetos da Sociedade de Socorro.",
+        "Ajude a identificar necessidades reais na ala e na comunidade.",
+      ]},
+      { t:"Preparar-se", i:[
+        "Estude os princípios de bem-estar e autossuficiência do Manual Geral.",
+        "Participe dos treinamentos de liderança.",
+      ]},
+      { t:"Guardar a unidade da presidência", i:[
+        "Sustente as decisões da presidente e da presidência.",
+        "Mantenha a confidencialidade em todos os assuntos.",
+      ]},
+    ],
+    fecho:{ t:"Ao cuidar das que passam por dificuldades, a segunda conselheira ajuda a Sociedade de Socorro a viver seu lema: “A caridade nunca falha.”", f:"Manual Geral, cap. 9" },
+  }),
+
+  full("Secretária da Sociedade de Socorro", {
+    escritura:{ t:"Que tudo seja feito com decência e ordem.", r:"1 Coríntios 14:40" },
+    proposito:"Ajuda a presidência a manter a ordem no trabalho: prepara pautas e atas, agenda as entrevistas de ministração e cuida dos relatórios e do orçamento da Sociedade de Socorro.",
+    ref:"Manual Geral, 9.3.3",
+    resp:[
+      "Preparar as pautas e as atas das reuniões da presidência.",
+      "Agendar as entrevistas de ministração.",
+      "Preparar os relatórios trimestrais de frequência e de ministração.",
+      "Ajudar com o orçamento anual e o controle de despesas.",
+    ],
+    areas:[
+      { t:"Organizar as reuniões", i:[
+        "Prepare a pauta com antecedência e registre as designações.",
+        "Dê seguimento às atribuições antes da reunião seguinte.",
+      ]},
+      { t:"Agendar a ministração", i:[
+        "Organize o calendário das entrevistas de ministração.",
+        "Lembre a presidência e as ministradoras das datas.",
+      ]},
+      { t:"Cuidar dos relatórios", i:[
+        "Reúna os dados de frequência e ministração.",
+        "Envie os relatórios com exatidão e no prazo.",
+      ]},
+      { t:"Apoiar o orçamento", i:[
+        "Ajude a preparar o orçamento anual.",
+        "Controle as despesas aprovadas pela presidência.",
+      ]},
+      { t:"Servir com discrição", i:[
+        "Guarde sigilo sobre os assuntos das reuniões.",
+        "Ajude a treinar a secretária assistente.",
+      ]},
+    ],
+    fecho:{ t:"A fidelidade nos detalhes libera a presidência para ministrar. A boa secretária é uma bênção silenciosa para toda a Sociedade de Socorro.", f:"Manual Geral, cap. 9" },
+  }),
+
+  full("Secretária Assistente da Sociedade de Socorro", {
+    proposito:"Apoia a secretária nas pautas, nas atas, no agendamento das entrevistas de ministração e nos relatórios, substituindo-a quando necessário.",
+    ref:"Manual Geral, 9.3.3",
+    resp:[
+      "Ajudar a preparar pautas e atas.",
+      "Auxiliar no agendamento das entrevistas de ministração.",
+      "Ajudar a reunir dados para os relatórios.",
+      "Assumir as funções da secretária em sua ausência.",
+    ],
+    areas:[
+      { t:"Dar apoio constante", i:[
+        "Combine com a secretária a divisão das tarefas.",
+        "Esteja pronta para assumir quando necessário.",
+      ]},
+      { t:"Cuidar dos registros", i:[
+        "Ajude a manter as listas e designações atualizadas.",
+        "Confira os dados antes de enviá-los.",
+      ]},
+      { t:"Apoiar a ministração", i:[
+        "Ajude a agendar e a lembrar as entrevistas.",
+        "Reúna informações para a presidência.",
+      ]},
+      { t:"Aprender o chamado", i:[
+        "Estude a seção 9.3.3 do Manual Geral.",
+        "Aprenda os procedimentos com a secretária.",
+      ]},
+      { t:"Guardar confidências", i:[
+        "Trate com sigilo tudo o que ouvir nas reuniões.",
+        "Seja fiel e pontual em cada tarefa.",
+      ]},
+    ],
+    fecho:{ t:"Uma boa assistente garante que o trabalho nunca pare. Sua prontidão sustenta a ordem da Sociedade de Socorro.", f:"Manual Geral, cap. 9" },
+  }),
+
+  full("Professora da Sociedade de Socorro", {
+    escritura:{ t:"Buscai aprendizado, sim, pelo estudo e também pela fé.", r:"Doutrina e Convênios 88:118" },
+    proposito:"Ensina nas Reuniões de Domingo da Sociedade de Socorro, conforme o plano da presidência, ajudando as irmãs a aprenderem e a viverem o evangelho de Jesus Cristo. As reuniões de ensino ocorrem no segundo e no quarto domingos, geralmente com base nas mensagens da conferência geral mais recente.",
+    ref:"Manual Geral, 9.3.4 (ver cap. 17)",
+    resp:[
+      "Preparar e ministrar as aulas a partir dos materiais aprovados (mensagens da conferência geral e recursos indicados).",
+      "Ensinar por meio do Espírito, convidando à participação e à conversão.",
+      "Coordenar com a presidência os tópicos e o calendário de ensino.",
+    ],
+    areas:[
+      { t:"Preparar-se espiritualmente", i:[
+        "Ore e estude o tema com antecedência, buscando o Espírito.",
+        "Pondere as necessidades das irmãs ao preparar a aula.",
+      ]},
+      { t:"Ensinar por meio do Espírito", i:[
+        "Concentre cada aula em Jesus Cristo e Seu evangelho.",
+        "Testifique com sinceridade e convide à ação.",
+      ]},
+      { t:"Envolver as irmãs", i:[
+        "Faça boas perguntas e ouça com atenção.",
+        "Incentive a participação respeitosa de todas.",
+      ]},
+      { t:"Usar os materiais aprovados", i:[
+        "Baseie-se nas mensagens dos profetas e nos recursos indicados.",
+        "Evite fontes especulativas ou não oficiais.",
+      ]},
+      { t:"Conectar o evangelho à vida", i:[
+        "Ajude as irmãs a aplicarem os princípios no dia a dia.",
+        "Incentive-as a guardar e a lembrar seus convênios.",
+      ]},
+    ],
+    fecho:{ t:"Ensinar o evangelho é obra sagrada. Ao ensinar pelo Espírito, você ajuda cada irmã a achegar-se mais a Cristo.", f:"Manual Geral, cap. 9 e 17" },
+  }),
+
+  full("Secretária de Ministração da Sociedade de Socorro", {
+    proposito:"Ajuda a presidência a coordenar a obra de ministração: mantém atualizadas as designações de companheirismo, organiza as entrevistas de ministração e reúne as informações sobre necessidades para que a presidência possa agir.",
+    ref:"Manual Geral, 9.3.2.2 e 9.3.3",
+    resp:[
+      "Manter atualizadas as duplas e as irmãs e famílias designadas à ministração.",
+      "Ajudar a agendar e a registrar as entrevistas de ministração.",
+      "Reunir informações sobre necessidades e levá-las à presidência.",
+      "Coordenar com o quórum de élderes os registros de ministração.",
+    ],
+    areas:[
+      { t:"Manter as designações em dia", i:[
+        "Atualize as duplas e famílias designadas conforme as decisões da presidência.",
+        "Registre as mudanças prontamente.",
+      ]},
+      { t:"Organizar as entrevistas", i:[
+        "Agende as entrevistas de ministração e lembre as ministradoras.",
+        "Anote o que for relatado para acompanhamento.",
+      ]},
+      { t:"Levar necessidades à presidência", i:[
+        "Comunique com prontidão os casos que exigem ação.",
+        "Ajude a presidência a priorizar o cuidado.",
+      ]},
+      { t:"Coordenar com o quórum de élderes", i:[
+        "Alinhe os registros para evitar sobreposição.",
+        "Compartilhe apenas o necessário, com discrição.",
+      ]},
+      { t:"Guardar confidencialidade", i:[
+        "Trate as informações das famílias com respeito e sigilo.",
+        "Restrinja o acesso a quem tem responsabilidade.",
+      ]},
+    ],
+    fecho:{ t:"A ministração é o coração da Sociedade de Socorro. Ao mantê-la organizada, você ajuda a garantir que nenhuma irmã ou família fique sem cuidado.", f:"Manual Geral, cap. 9" },
+  }),
+
+  full("Coordenadora de Atividades da Sociedade de Socorro", {
+    proposito:"Ajuda a presidência a planejar e realizar as atividades da Sociedade de Socorro que fortalecem o desejo das irmãs de fazer e guardar convênios e que edificam a fraternidade.",
+    ref:"Manual Geral, 9.3.4 (ver 9.2.1.3)",
+    resp:[
+      "Planejar as atividades sob a direção da presidência.",
+      "Coordenar o comitê de atividades e as assistentes.",
+      "Cuidar de locais, recursos, orçamento aprovado e segurança.",
+    ],
+    areas:[
+      { t:"Planejar com propósito", i:[
+        "Escolha atividades que fortaleçam a fé e os convênios das irmãs.",
+        "Planeje com antecedência e em harmonia com o calendário da ala.",
+      ]},
+      { t:"Trabalhar com o comitê", i:[
+        "Delegue tarefas às integrantes do comitê e às assistentes.",
+        "Reúna-se para preparar cada atividade.",
+      ]},
+      { t:"Incluir a todas", i:[
+        "Lembre-se das irmãs menos ativas, recém-chegadas e jovens adultas.",
+        "Crie um ambiente acolhedor para todas.",
+      ]},
+      { t:"Cuidar da logística e segurança", i:[
+        "Providencie local, recursos e orçamento aprovado.",
+        "Observe as diretrizes de segurança da Igreja.",
+      ]},
+      { t:"Avaliar e melhorar", i:[
+        "Peça sugestões após cada atividade.",
+        "Ajuste o planejamento das próximas.",
+      ]},
+    ],
+    fecho:{ t:"Boas atividades fortalecem a fé e a amizade. Ao reunir as irmãs com propósito, você ajuda cada uma a permanecer firme em seus convênios.", f:"Manual Geral, cap. 9" },
+  }),
+
+  full("Coordenadora Assistente de Atividades da Sociedade de Socorro", {
+    proposito:"Apoia a coordenadora de atividades no planejamento e na realização das atividades da Sociedade de Socorro, substituindo-a quando necessário.",
+    ref:"Manual Geral, 9.3.4",
+    resp:[
+      "Ajudar a planejar e a executar as atividades.",
+      "Coordenar tarefas com o comitê de atividades.",
+      "Assumir as funções da coordenadora em sua ausência.",
+    ],
+    areas:[
+      { t:"Apoiar a coordenadora", i:[
+        "Combine a divisão das tarefas do planejamento.",
+        "Esteja pronta para liderar quando necessário.",
+      ]},
+      { t:"Executar com excelência", i:[
+        "Cuide dos detalhes práticos de cada atividade.",
+        "Confirme recursos e local com antecedência.",
+      ]},
+      { t:"Trabalhar em equipe", i:[
+        "Colabore com o comitê e as assistentes.",
+        "Comunique-se com clareza.",
+      ]},
+      { t:"Incluir a todas", i:[
+        "Ajude a alcançar as irmãs menos ativas e novas.",
+        "Zele por um ambiente acolhedor.",
+      ]},
+      { t:"Cuidar da segurança", i:[
+        "Siga as diretrizes de segurança da Igreja.",
+        "Ajude a prevenir riscos nas atividades.",
+      ]},
+    ],
+    fecho:{ t:"O apoio fiel de uma assistente garante que nada falte. Sua colaboração torna cada atividade um sucesso.", f:"Manual Geral, cap. 9" },
+  }),
+
+  full("Membro do Comitê de Atividades da Sociedade de Socorro", {
+    proposito:"Ajuda a coordenadora de atividades a planejar e a realizar as atividades da Sociedade de Socorro, assumindo tarefas específicas em equipe.",
+    ref:"Manual Geral, 9.3.4",
+    resp:[
+      "Colaborar no planejamento das atividades.",
+      "Assumir tarefas designadas pela coordenadora.",
+      "Ajudar na preparação, execução e organização.",
+    ],
+    areas:[
+      { t:"Colaborar no planejamento", i:[
+        "Traga ideias que fortaleçam a fé e unam as irmãs.",
+        "Participe das reuniões de preparação.",
+      ]},
+      { t:"Assumir tarefas", i:[
+        "Cumpra com diligência o que lhe for designado.",
+        "Seja pontual e confiável.",
+      ]},
+      { t:"Trabalhar em equipe", i:[
+        "Coopere com o comitê e as coordenadoras.",
+        "Comunique dificuldades cedo.",
+      ]},
+      { t:"Incluir a todas", i:[
+        "Ajude a acolher cada irmã nas atividades.",
+        "Lembre-se das que costumam ficar de fora.",
+      ]},
+      { t:"Zelar pela segurança", i:[
+        "Ajude a manter um ambiente seguro.",
+        "Siga as orientações da coordenadora.",
+      ]},
+    ],
+    fecho:{ t:"Muitas mãos tornam leve o trabalho. Sua ajuda no comitê fortalece a fraternidade da Sociedade de Socorro.", f:"Manual Geral, cap. 9" },
+  }),
+
+  full("Líder de Música da Sociedade de Socorro", {
+    escritura:{ t:"A canção dos justos é uma oração para mim, e será respondida com uma bênção.", r:"Doutrina e Convênios 25:12" },
+    proposito:"Dirige o canto dos hinos nas reuniões da Sociedade de Socorro, convidando o Espírito e ajudando as irmãs a adorarem por meio da música sagrada.",
+    ref:"Manual Geral, cap. 19",
+    resp:[
+      "Escolher hinos apropriados em harmonia com a presidência.",
+      "Reger o canto congregacional com clareza.",
+      "Ensinar novos hinos quando necessário.",
+      "Trabalhar em conjunto com a pianista.",
+    ],
+    areas:[
+      { t:"Escolher hinos que convidem o Espírito", i:[
+        "Selecione hinos que combinem com o tema da reunião.",
+        "Prefira os hinos do hinário oficial.",
+      ]},
+      { t:"Reger com preparo", i:[
+        "Pratique a marcação de compasso antes da reunião.",
+        "Conduza com naturalidade e reverência.",
+      ]},
+      { t:"Envolver as irmãs no canto", i:[
+        "Incentive todas a cantarem, pois o canto é uma forma de adoração.",
+        "Ensine hinos novos com paciência.",
+      ]},
+      { t:"Coordenar com a pianista", i:[
+        "Combine andamento e hinos com antecedência.",
+        "Cheguem cedo para alinhar os detalhes.",
+      ]},
+      { t:"Usar a música com reverência", i:[
+        "Escolha músicas dignas da adoração ao Senhor.",
+        "Ajude a criar um ambiente de paz e devoção.",
+      ]},
+    ],
+    fecho:{ t:"A música sagrada abranda o coração e convida o Espírito. Ao reger com fé, você ajuda as irmãs a adorarem e a sentirem o amor de Deus.", f:"Manual Geral, cap. 9 e 19" },
+  }),
+
+  full("Pianista da Sociedade de Socorro", {
+    proposito:"Acompanha os hinos e a música nas reuniões da Sociedade de Socorro, apoiando a adoração e convidando o Espírito por meio da música sagrada.",
+    ref:"Manual Geral, cap. 19",
+    resp:[
+      "Preparar e ensaiar os hinos das reuniões.",
+      "Acompanhar a regência com sensibilidade.",
+      "Chegar cedo para preparar o instrumento.",
+      "Ajudar a ensinar hinos novos.",
+    ],
+    areas:[
+      { t:"Preparar-se com antecedência", i:[
+        "Ensaie os hinos antes da reunião.",
+        "Confirme com a líder de música quais hinos serão cantados.",
+      ]},
+      { t:"Tocar para convidar o Espírito", i:[
+        "Toque com reverência e no andamento adequado.",
+        "Deixe a música apoiar a adoração, sem se destacar.",
+      ]},
+      { t:"Seguir a regente", i:[
+        "Acompanhe a marcação da líder de música.",
+        "Combine os detalhes com antecedência.",
+      ]},
+      { t:"Servir com humildade", i:[
+        "Esteja disponível também para outras reuniões quando puder.",
+        "Ajude a ensinar quem está aprendendo a tocar.",
+      ]},
+      { t:"Usar o hinário aprovado", i:[
+        "Baseie-se nos hinos oficiais da Igreja.",
+        "Escolha arranjos dignos e reverentes.",
+      ]},
+    ],
+    fecho:{ t:"O acompanhamento fiel sustenta o canto das irmãs. Ao servir com humildade, você abençoa cada reunião com o espírito da música sagrada.", f:"Manual Geral, cap. 9 e 19" },
+  }),
+
+  full("Coordenadora de Serviço da Sociedade de Socorro", {
+    escritura:{ t:"Quando estais a serviço de vosso próximo, estais somente a serviço de vosso Deus.", r:"Mosias 2:17" },
+    proposito:"Ajuda a presidência a planejar e realizar projetos de serviço para atender a necessidades, especialmente de curto prazo, dentro e fora da Igreja, promovendo o amor cristão em ação.",
+    ref:"Manual Geral, 9.3.4 (ver 9.2.2.2)",
+    resp:[
+      "Planejar projetos de serviço sob a direção da presidência.",
+      "Coordenar o comitê de serviço e as assistentes.",
+      "Identificar necessidades junto ao conselho da ala e ao quórum de élderes.",
+    ],
+    areas:[
+      { t:"Identificar necessidades reais", i:[
+        "Ouça a presidência, o bispado e o quórum de élderes.",
+        "Considere irmãs e vizinhos que precisam de ajuda.",
+      ]},
+      { t:"Organizar o serviço", i:[
+        "Mobilize as irmãs e defina tarefas claras.",
+        "Planeje com antecedência e com objetivos definidos.",
+      ]},
+      { t:"Servir dentro e fora da Igreja", i:[
+        "Inclua projetos na comunidade, como pelo JustServe.",
+        "Promova o serviço contínuo, não apenas eventual.",
+      ]},
+      { t:"Cuidar da logística e segurança", i:[
+        "Providencie recursos, transporte e materiais.",
+        "Mantenha dois adultos responsáveis quando houver menores.",
+      ]},
+      { t:"Ensinar pelo exemplo", i:[
+        "Ajude as irmãs a amarem o serviço ao próximo.",
+        "Reconheça e agradeça quem serve.",
+      ]},
+    ],
+    fecho:{ t:"“Quando estais a serviço de vosso próximo, estais somente a serviço de vosso Deus.” Ao liderar o serviço, você ajuda a Sociedade de Socorro a amar como o Salvador amou.", f:"Manual Geral, cap. 9" },
+  }),
+
+  full("Coordenadora Assistente de Serviço da Sociedade de Socorro", {
+    proposito:"Apoia a coordenadora de serviço no planejamento e na realização dos projetos de serviço da Sociedade de Socorro, substituindo-a quando necessário.",
+    ref:"Manual Geral, 9.3.4",
+    resp:[
+      "Ajudar a planejar e a executar os projetos de serviço.",
+      "Coordenar tarefas com o comitê de serviço.",
+      "Assumir as funções da coordenadora em sua ausência.",
+    ],
+    areas:[
+      { t:"Apoiar a coordenadora", i:[
+        "Combine a divisão das tarefas de organização.",
+        "Esteja pronta para liderar quando necessário.",
+      ]},
+      { t:"Executar com cuidado", i:[
+        "Cuide dos detalhes práticos de cada projeto.",
+        "Confirme recursos e transporte com antecedência.",
+      ]},
+      { t:"Identificar necessidades", i:[
+        "Ajude a mapear quem precisa de ajuda.",
+        "Leve as informações à coordenadora.",
+      ]},
+      { t:"Zelar pela segurança", i:[
+        "Observe as diretrizes de segurança da Igreja.",
+        "Mantenha a norma dos dois adultos com menores.",
+      ]},
+      { t:"Servir com alegria", i:[
+        "Dê o exemplo de disposição para servir.",
+        "Incentive as irmãs a participarem.",
+      ]},
+    ],
+    fecho:{ t:"O serviço fiel nos bastidores torna possível abençoar muitos. Sua dedicação amplia o alcance da Sociedade de Socorro.", f:"Manual Geral, cap. 9" },
+  }),
+
+  full("Membro do Comitê de Serviço da Sociedade de Socorro", {
+    proposito:"Ajuda a coordenadora de serviço a planejar e a realizar os projetos de serviço da Sociedade de Socorro, assumindo tarefas específicas em equipe.",
+    ref:"Manual Geral, 9.3.4",
+    resp:[
+      "Colaborar no planejamento dos projetos de serviço.",
+      "Assumir tarefas designadas pela coordenadora.",
+      "Ajudar na preparação e na execução do serviço.",
+    ],
+    areas:[
+      { t:"Colaborar no planejamento", i:[
+        "Traga ideias de serviço úteis e viáveis.",
+        "Participe das reuniões de preparação.",
+      ]},
+      { t:"Assumir tarefas", i:[
+        "Cumpra com diligência o que lhe for designado.",
+        "Seja pontual e confiável.",
+      ]},
+      { t:"Servir com o coração", i:[
+        "Sirva com amor, sem esperar reconhecimento.",
+        "Trate cada pessoa ajudada com dignidade.",
+      ]},
+      { t:"Trabalhar em equipe", i:[
+        "Coopere com o comitê e as coordenadoras.",
+        "Comunique dificuldades cedo.",
+      ]},
+      { t:"Zelar pela segurança", i:[
+        "Ajude a manter um ambiente seguro.",
+        "Siga as orientações da coordenadora.",
+      ]},
+    ],
+    fecho:{ t:"Cada ato de serviço, por menor que seja, reflete o amor de Cristo. Sua ajuda no comitê abençoa vidas de forma real.", f:"Manual Geral, cap. 9" },
+  }),
+];
+
+/* ---- ORGANIZAÇÕES (ordem exata da HOME) -------------------------------- */
+const ORGS = [
+  { id:"bispado", nome:"Bispado", icone:"⛪", cor:"#8B6B3D", chamados: BISPADO },
+
+  { id:"quorum-elderes", nome:"Quórum de Élderes", icone:"🤝", cor:"#5F6B47", chamados: QUORUM_ELDERES },
+
+  { id:"sociedade-socorro", nome:"Sociedade de Socorro", icone:"💐", cor:"#8A5B6B", chamados: SOCIEDADE_SOCORRO },
+
+  { id:"sacerdocio-aaronico", nome:"Quóruns do Sacerdócio Aarônico", icone:"🕊️", cor:"#4C6070", grupos:[
+    { nome:"Quórum de Sacerdotes", chamados:[
+      "Presidente do Quórum de Sacerdotes (o bispo)","Primeiro Assistente","Segundo Assistente",
+      "Secretário do Quórum de Sacerdotes","Consultor do Quórum de Sacerdotes","Especialista do Quórum de Sacerdotes",
+    ].map(t) },
+    { nome:"Quórum de Mestres", chamados:[
+      "Presidente do Quórum de Mestres","Primeiro Conselheiro","Segundo Conselheiro",
+      "Secretário do Quórum de Mestres","Consultor do Quórum de Mestres","Consultor Adjunto do Quórum de Mestres",
+    ].map(t) },
+    { nome:"Quórum de Diáconos", chamados:[
+      "Presidente do Quórum de Diáconos","Primeiro Conselheiro","Segundo Conselheiro",
+      "Secretário do Quórum de Diáconos","Consultor do Quórum de Diáconos","Especialista do Quórum de Diáconos",
+    ].map(t) },
+    { nome:"Gerais", chamados:[
+      "Especialista dos Rapazes — Esportes","Especialista dos Rapazes — Assistente de Esportes",
+      "Especialista dos Quóruns do Sacerdócio Aarônico","Diretor de Acampamento dos Rapazes",
+      "Diretor Assistente de Acampamento dos Rapazes",
+    ].map(t) },
+  ]},
+
+  { id:"mocas", nome:"Moças", icone:"🌷", cor:"#9A6480", grupos:[
+    { nome:"Presidência", chamados:[
+      "Presidente das Moças","Primeira Conselheira das Moças","Segunda Conselheira das Moças","Secretária das Moças",
+    ].map(t) },
+    { nome:"Guardiãs da Luz (16+)", chamados:[
+      "Presidente da classe","Primeira Conselheira","Segunda Conselheira","Secretária","Consultora",
+    ].map(t) },
+    { nome:"Mensageiras da Esperança (14–15)", chamados:[
+      "Presidente da classe","Primeira Conselheira","Segunda Conselheira","Secretária","Consultora",
+    ].map(t) },
+    { nome:"Edificadoras da Fé (12–13)", chamados:[
+      "Presidente da classe","Primeira Conselheira","Segunda Conselheira","Secretária","Consultora",
+    ].map(t) },
+    { nome:"Gerais", chamados:[
+      "Especialista das Moças","Especialista das Moças — Atividades","Especialista das Moças — Esportes",
+      "Especialista das Moças — Diretora de Acampamento","Especialista das Moças — Diretora Adjunta de Acampamento",
+    ].map(t) },
+  ]},
+
+  { id:"escola-dominical", nome:"Escola Dominical", icone:"📖", cor:"#6B5B43", chamados:[
+    "Presidente da Escola Dominical","Primeiro Conselheiro da Escola Dominical",
+    "Segundo Conselheiro da Escola Dominical","Secretário da Escola Dominical",
+    "Professor(a) da Escola Dominical","Especialista do Centro de Recursos (Biblioteca)",
+  ].map(t) },
+
+  { id:"primaria", nome:"Primária", icone:"🧸", cor:"#8B7B3D", chamados:[
+    "Presidente da Primária","Primeira Conselheira da Primária","Segunda Conselheira da Primária",
+    "Secretária da Primária","Líder de Música da Primária","Pianista da Primária",
+    "Professor(a) da Primária","Líder do Berçário","Líder de Atividades da Primária",
+  ].map(t) },
+
+  { id:"missionarios-ala", nome:"Missionários de Ala", icone:"✉️", cor:"#46685A", chamados:[
+    "Líder da Missão da Ala","Assistente do Líder da Missão da Ala","Missionário da Ala",
+  ].map(t) },
+
+  { id:"templo-historia", nome:"Templo e História da Família", icone:"🌳", cor:"#57755F", chamados:[
+    "Líder de Templo e História da Família da Ala","Consultor de Templo e História da Família da Ala","Indexador",
+  ].map(t) },
+
+  { id:"jas", nome:"Jovens Adultos Solteiros", icone:"🌟", cor:"#7B5B8B", chamados:[
+    "Líder dos Jovens Adultos Solteiros","Consultor dos Jovens Adultos Solteiros",
+    "Consultora das Irmãs Jovens Adultas Solteiras da Sociedade de Socorro",
+    "Presidente do Comitê de JAS","Membro do Comitê de JAS",
+  ].map(t) },
+
+  { id:"outros", nome:"Outros Chamados", icone:"🗂️", cor:"#6B6456", grupos:[
+    { nome:"Bem-Estar e Autossuficiência", chamados:[
+      "Especialista de Bem-Estar e Autossuficiência","Facilitador de Grupo de Autossuficiência",
+      "Líder de Atividades para Pessoas com Deficiências","Especialista em Pessoas com Necessidades Especiais",
+    ].map(t) },
+    { nome:"Música da Ala", chamados:[
+      "Líder de Música da Ala","Regente da Reunião Sacramental","Coordenador de Música da Ala",
+      "Organista/Pianista da Ala","Diretor de Coro (Regente do Coro da Ala)","Pianista/Organista do Coro","Consultor de Música",
+    ].map(t) },
+    { nome:"Instalações / Patrimônio", chamados:[
+      "Representante do Edifício","Programador do Edifício","Líder de Patrimônio",
+    ].map(t) },
+    { nome:"Comunicação / Tecnologia", chamados:[
+      "Especialista de Tecnologia","Especialista de Comunicações por E-mail","Intérprete da Ala",
+    ].map(t) },
+    { nome:"Diversos", chamados:[
+      "Especialista de História da Ala","Representante de A Liahona","Representante do FSY",
+      "Bibliotecário da Ala","Recepcionista da Ala","Líder Masculino dos Membros Adultos Solteiros",
+      "Líder Feminino dos Membros Adultos Solteiros",
+    ].map(t) },
+  ]},
+];
+
+/* ---- Pós-processamento: ids estáveis + índice de busca ----------------- */
+const INDEX = [];
+ORGS.forEach(org=>{
+  let n = 0;
+  const reg = (c, grupo)=>{
+    c.id = org.id + "-" + (n++);
+    c.orgId = org.id; c.orgNome = org.nome; c.orgIcone = org.icone; c.grupo = grupo || null;
+    INDEX.push(c);
+  };
+  if(org.chamados) org.chamados.forEach(c=>reg(c,null));
+  if(org.grupos) org.grupos.forEach(g=>g.chamados.forEach(c=>reg(c,g.nome)));
+});
+const findOrg = id => ORGS.find(o=>o.id===id);
+const findChamado = id => INDEX.find(c=>c.id===id);
+
+/* ==========================================================================
+   PREFERÊNCIAS (localStorage com try/catch — só tema e tamanho de fonte)
+   ========================================================================== */
+const ZOOMS = [0.9, 1.0, 1.12, 1.28];
+let prefs = { tema:"claro", zoomIdx:1 };
+try{
+  const raw = localStorage.getItem("mag_prefs");
+  if(raw){ const p=JSON.parse(raw); if(p.tema) prefs.tema=p.tema; if(Number.isInteger(p.zoomIdx)) prefs.zoomIdx=p.zoomIdx; }
+}catch(e){}
+function savePrefs(){ try{ localStorage.setItem("mag_prefs", JSON.stringify(prefs)); }catch(e){} }
+function applyPrefs(){
+  document.documentElement.setAttribute("data-theme", prefs.tema);
+  document.body.style.zoom = ZOOMS[prefs.zoomIdx];
+  document.getElementById("themeBtn").textContent = prefs.tema==="escuro" ? "☀" : "☾";
+  document.querySelector('meta[name=theme-color]').setAttribute("content",
+    prefs.tema==="escuro" ? "#201C15" : "#8B6B3D");
+}
+
+/* ==========================================================================
+   NAVEGAÇÃO (estado em memória — sem reload)
+   ========================================================================== */
+let state = { view:"home", orgId:null, chamadoId:null, cameFromSearch:false };
+const el = {
+  view: document.getElementById("view"),
+  back: document.getElementById("btnBack"),
+  hT: document.querySelector("#hTitle .t"),
+  hS: document.querySelector("#hTitle .s"),
+  search: document.getElementById("search"),
+  footer: document.getElementById("footer"),
+};
+function go(next){ state = { ...state, ...next }; render(); window.scrollTo(0,0); }
+function setHeader(t2, s2){ el.hT.textContent=t2; el.hS.textContent=s2||""; }
+function setOrgColor(cor){ document.documentElement.style.setProperty("--org", cor || "var(--accent)"); }
+
+function render(){
+  el.footer.textContent = `v${VERSAO} · ${DATA_STR} · © 2026 Léo Lucas · Todos os direitos reservados`;
+  const q = el.search.value.trim();
+  if(q){ el.back.style.display="none"; setOrgColor(null); return renderBusca(q); }
+  if(state.view==="home") return renderHome();
+  if(state.view==="org") return renderOrg();
+  if(state.view==="detalhe") return renderDetalhe();
+}
+
+/* NÍVEL 1 — HOME */
+function renderHome(){
+  el.back.style.display="none"; setOrgColor(null);
+  setHeader("Magnifique seu Chamado","Guia de chamados da Ala");
+  el.view.innerHTML="";
+  el.view.appendChild(hint("Toque numa organização ou use a busca acima."));
+  const cards = ORGS.map((org,i)=>{
+    const n = org.chamados ? org.chamados.length : org.grupos.reduce((a,g)=>a+g.chamados.length,0);
+    return card(org.icone, `${i+1}. ${org.nome}`, `${n} chamado${n!==1?"s":""}`, org.cor,
+      ()=>go({view:"org",orgId:org.id}));
+  });
+  el.view.appendChild(listWrap(cards));
+}
+
+/* NÍVEL 2 — SUBMENU DA ORGANIZAÇÃO */
+function renderOrg(){
+  const org = findOrg(state.orgId);
+  setOrgColor(org.cor);
+  el.back.style.display="flex"; el.back.onclick=()=>go({view:"home",orgId:null});
+  setHeader(org.nome,"Escolha um chamado");
+  el.view.innerHTML="";
+  const mk = c => card("›", c.titulo, c.c? null : "conteúdo em preparação", org.cor,
+    ()=>go({view:"detalhe",orgId:org.id,chamadoId:c.id,cameFromSearch:false}), true);
+  if(org.chamados){
+    el.view.appendChild(listWrap(org.chamados.map(mk)));
+  } else {
+    org.grupos.forEach(g=>{
+      const h=document.createElement("div"); h.className="subhead"; h.textContent=g.nome;
+      el.view.appendChild(h);
+      el.view.appendChild(listWrap(g.chamados.map(mk)));
+    });
+  }
+}
+
+/* NÍVEL 3 — DETALHE */
+function renderDetalhe(){
+  const c = findChamado(state.chamadoId);
+  const org = findOrg(c.orgId);
+  setOrgColor(org.cor);
+  el.back.style.display="flex";
+  el.back.onclick = state.cameFromSearch
+    ? ()=>{ el.search.value=""; go({view:"home",orgId:null,chamadoId:null}); }
+    : ()=>go({view:"org",orgId:c.orgId,chamadoId:null});
+  setHeader(c.titulo, org.nome + (c.grupo? " · "+c.grupo : ""));
+  el.view.innerHTML="";
+
+  const wrap=document.createElement("div"); wrap.className="detail";
+
+  // Cabeçalho tipográfico (ou foto, se houver c.foto)
+  const cover=document.createElement("div"); cover.className="cover";
+  const escrHtml = c.c && c.c.escritura
+    ? `<div class="escr">“${c.c.escritura.t}”<span class="ref">— ${c.c.escritura.r}</span></div>` : "";
+  if(c.foto){
+    cover.classList.add("hasimg");
+    cover.innerHTML=`<img src="${c.foto}" alt="">
+      <div class="capbar"><div class="org">${org.nome}${c.grupo? " · "+c.grupo : ""}</div>
+      <h2>${c.titulo}</h2>${escrHtml}</div>`;
+  } else {
+    cover.innerHTML=`<div class="org">${org.nome}${c.grupo? " · "+c.grupo : ""}</div>
+      <h2>${c.titulo}</h2>${escrHtml}`;
+  }
+  wrap.appendChild(cover);
+
+  if(!c.c){
+    wrap.appendChild(node(`<div class="prep"><b>Conteúdo em preparação.</b><br>
+      A estrutura deste chamado já está pronta e será preenchida em breve,
+      com base no <i>Manual Geral</i>.</div>`));
+    el.view.appendChild(wrap); return;
+  }
+
+  const d = c.c;
+  // Propósito
+  const sp = section("Propósito");
+  sp.appendChild(node(`<p>${d.proposito}</p>`));
+  if(d.ref) sp.appendChild(node(`<span class="ref-tag">${d.ref}</span>`));
+  wrap.appendChild(sp);
+
+  // Responsabilidades
+  const sr = section("Responsabilidades");
+  const ul=document.createElement("ul"); ul.className="resp";
+  d.resp.forEach(r=>{ const li=document.createElement("li"); li.innerHTML=r; ul.appendChild(li); });
+  sr.appendChild(ul); wrap.appendChild(sr);
+
+  // Como magnificar (5 áreas)
+  const sm = section("Como magnificar seu chamado");
+  d.areas.forEach((a,i)=>{
+    const box=document.createElement("div"); box.className="area";
+    const head=document.createElement("div"); head.className="atit";
+    head.innerHTML=`<span class="num">${i+1}</span><span></span>`;
+    head.querySelector("span:last-child").textContent=a.t;
+    box.appendChild(head);
+    const uli=document.createElement("ul");
+    a.i.forEach(x=>{ const li=document.createElement("li"); li.textContent=x; uli.appendChild(li); });
+    box.appendChild(uli); sm.appendChild(box);
+  });
+  wrap.appendChild(sm);
+
+  // Fechamento
+  const sf=document.createElement("div"); sf.className="sec";
+  sf.innerHTML=`<h3>Fechamento</h3>
+    <div class="fecho"><p>${d.fecho.t}</p><span class="fonte">${d.fecho.f}</span></div>`;
+  wrap.appendChild(sf);
+
+  el.view.appendChild(wrap);
+}
+
+/* BUSCA — leva direto ao Nível 3 */
+function renderBusca(q){
+  setHeader("Resultados da busca","“"+q+"”");
+  const nq = slug(q);
+  const res = INDEX.filter(c=>slug(c.titulo).includes(nq) || slug(c.orgNome).includes(nq));
+  el.view.innerHTML="";
+  if(!res.length){ el.view.appendChild(node(`<div class="empty">Nenhum chamado encontrado para “${q}”.</div>`)); return; }
+  el.view.appendChild(hint(`${res.length} resultado${res.length!==1?"s":""}.`));
+  el.view.appendChild(listWrap(res.map(c=>{
+    const org=findOrg(c.orgId);
+    const sub=c.orgNome+(c.grupo? " · "+c.grupo : "");
+    return card(c.orgIcone, c.titulo, sub, org.cor, ()=>{ el.search.value="";
+      go({view:"detalhe",orgId:c.orgId,chamadoId:c.id,cameFromSearch:true}); });
+  })));
+}
+
+/* ---- Helpers de UI ---- */
+function card(ico, titulo, sub, cor, onClick, plainIco){
+  const b=document.createElement("button"); b.className="card";
+  if(cor) b.style.setProperty("--org", cor);
+  b.innerHTML=`<span class="ico">${ico}</span>
+    <span class="txt"><span class="t"></span>${sub?'<span class="s"></span>':''}</span>
+    <span class="chev">›</span>`;
+  b.querySelector(".t").textContent=titulo;
+  if(sub) b.querySelector(".s").textContent=sub;
+  if(plainIco){ const ic=b.querySelector(".ico"); ic.style.background="transparent"; ic.style.border="none"; ic.style.color="var(--accent-soft)"; }
+  b.onclick=onClick; return b;
+}
+function listWrap(cards){ const d=document.createElement("div"); d.className="list"; cards.forEach(c=>d.appendChild(c)); return d; }
+function section(titulo){ const s=document.createElement("div"); s.className="sec"; const h=document.createElement("h3"); h.textContent=titulo; s.appendChild(h); return s; }
+function hint(txt){ const p=document.createElement("p"); p.className="hint"; p.textContent=txt; return p; }
+function node(html){ const d=document.createElement("div"); d.innerHTML=html.trim(); return d.firstElementChild; }
+
+/* ---- Eventos ---- */
+el.search.addEventListener("input", render);
+document.getElementById("themeBtn").onclick=()=>{ prefs.tema = prefs.tema==="escuro"?"claro":"escuro"; applyPrefs(); savePrefs(); };
+document.getElementById("fPlus").onclick=()=>{ if(prefs.zoomIdx<ZOOMS.length-1){ prefs.zoomIdx++; applyPrefs(); savePrefs(); } };
+document.getElementById("fMinus").onclick=()=>{ if(prefs.zoomIdx>0){ prefs.zoomIdx--; applyPrefs(); savePrefs(); } };
+
+/* ---- Service Worker ---- */
+if("serviceWorker" in navigator){
+  window.addEventListener("load", ()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+}
+
+applyPrefs();
+render();
+</script>
+</body>
+</html>
