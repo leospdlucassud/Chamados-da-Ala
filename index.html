@@ -230,7 +230,7 @@
    Conteúdo fundamentado no Manual Geral (PT-BR). Nunca nominal (só o cargo).
    ========================================================================== */
 
-const VERSAO = "1.3.0";
+const VERSAO = "1.4.0";
 const DATA_STR = "20/07/2026";
 
 const slug = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
@@ -1573,6 +1573,804 @@ const SOCIEDADE_SOCORRO = [
   }),
 ];
 
+/* ---- CONTEÚDO COMPLETO: QUÓRUNS DO SACERDÓCIO AARÔNICO ------------------
+   Rapazes: sacerdotes (16–18), mestres (14–15), diáconos (12–13).
+   Atenção reforçada à proteção de menores (norma dos dois adultos). --------- */
+const SA_SACERDOTES = [
+  full("Presidente do Quórum de Sacerdotes (o bispo)", {
+    escritura:{ t:"Ninguém despreze a tua mocidade; mas sê o exemplo dos fiéis, na palavra, no trato, no amor, na fé e na pureza.", r:"1 Timóteo 4:12" },
+    proposito:"O bispo é o presidente do quórum de sacerdotes. Preside, ensina e cuida dos rapazes de 16 a 18 anos, ajudando-os a cumprir seus deveres no sacerdócio, a preparar-se para o templo e a missão e a aprofundar sua conversão a Jesus Cristo. (Seu papel completo está no Bispado.)",
+    ref:"Manual Geral, 10.3",
+    resp:[
+      "Presidir o quórum de sacerdotes e suas reuniões (10.3).",
+      "Ensinar os sacerdotes seus deveres — administrar o sacramento, batizar, ordenar e ministrar — e ajudá-los a cumpri-los (ver D&C 20:46–52).",
+      "Escolher e orientar o primeiro e o segundo assistentes e a presidência do quórum.",
+      "Reunir-se com o quórum e com cada rapaz, guiando-os no programa Crianças e Jovens.",
+      "Zelar pela proteção dos rapazes, cumprindo a norma dos dois adultos responsáveis.",
+    ],
+    areas:[
+      { t:"Presidir e delegar", i:[
+        "Reúna a presidência do quórum (assistentes) e deixe os rapazes liderarem.",
+        "Delegue responsabilidades e oriente-os com paciência.",
+        "Busque revelação em conjunto sobre cada sacerdote.",
+      ]},
+      { t:"Ensinar os deveres do sacerdócio", i:[
+        "Ajude-os a magnificar o sacramento, o batismo e a ministração.",
+        "Ensine o poder e as bênçãos do sacerdócio.",
+      ]},
+      { t:"Preparar para o templo e a missão", i:[
+        "Faça entrevistas e incentive dignidade e metas.",
+        "Ajude cada rapaz a preparar-se para as ordenanças do templo.",
+      ]},
+      { t:"Conhecer cada rapaz", i:[
+        "Ministre individualmente e alcance os menos ativos.",
+        "Ajude cada um a sentir-se necessário e amado.",
+      ]},
+      { t:"Proteger e fortalecer", i:[
+        "Cumpra sempre as normas de Proteção da Criança e do Jovem.",
+        "Mantenha um ambiente seguro e espiritual em reuniões e atividades.",
+      ]},
+    ],
+    fecho:{ t:"Ao presidir os sacerdotes com amor, o bispo ajuda cada rapaz a preparar-se para servir ao Senhor a vida toda. Eles são exemplo dos fiéis.", f:"Manual Geral, cap. 10 e 7" },
+  }),
+
+  full("Primeiro Assistente", {
+    proposito:"Rapaz chamado dentre os sacerdotes para assistir o bispo na liderança do quórum. Preside as reuniões do quórum sob a direção do bispo e o representa em sua ausência, ajudando os demais a cumprirem seus deveres.",
+    ref:"Manual Geral, 10.3",
+    resp:[
+      "Assistir o bispo e presidir o quórum em sua ausência.",
+      "Ajudar a planejar e conduzir as reuniões e atividades do quórum.",
+      "Convidar e cuidar de cada sacerdote, inclusive os menos ativos.",
+      "Trabalhar com o segundo assistente e o secretário.",
+    ],
+    areas:[
+      { t:"Liderar pelo exemplo", i:[
+        "Prepare e conduza as reuniões com reverência.",
+        "Seja um exemplo de dignidade para os demais.",
+      ]},
+      { t:"Cuidar de cada sacerdote", i:[
+        "Conheça os rapazes e alcance os que faltam.",
+        "Incentive cada um a cumprir seus deveres.",
+      ]},
+      { t:"Planejar com propósito", i:[
+        "Use o programa Crianças e Jovens para guiar metas.",
+        "Ajude a organizar o serviço e as atividades.",
+      ]},
+      { t:"Servir e ministrar", i:[
+        "Organize a ministração do quórum.",
+        "Dê o exemplo no serviço aos outros.",
+      ]},
+      { t:"Buscar dignidade pessoal", i:[
+        "Prepare-se para o templo e a missão.",
+        "Viva de modo a convidar o Espírito.",
+      ]},
+    ],
+    fecho:{ t:"Ao servir como assistente, o rapaz aprende a liderar como o Salvador — servindo primeiro. Sua fidelidade fortalece todo o quórum.", f:"Manual Geral, cap. 10" },
+  }),
+
+  full("Segundo Assistente", {
+    proposito:"Rapaz chamado dentre os sacerdotes para assistir o bispo e o primeiro assistente na liderança do quórum, assumindo as designações que receber.",
+    ref:"Manual Geral, 10.3",
+    resp:[
+      "Assistir o bispo e o primeiro assistente conforme designado.",
+      "Ajudar a cuidar de cada sacerdote do quórum.",
+      "Apoiar as reuniões, atividades e a ministração.",
+      "Substituir o primeiro assistente quando necessário.",
+    ],
+    areas:[
+      { t:"Apoiar a liderança", i:[
+        "Cumpra prontamente as designações recebidas.",
+        "Esteja pronto para servir quando necessário.",
+      ]},
+      { t:"Cuidar dos rapazes", i:[
+        "Ajude a alcançar os que faltam.",
+        "Incentive a fraternidade no quórum.",
+      ]},
+      { t:"Servir e ministrar", i:[
+        "Participe da ministração e do serviço.",
+        "Dê o exemplo de disposição.",
+      ]},
+      { t:"Preparar-se", i:[
+        "Aprenda a liderar observando e servindo.",
+        "Busque dignidade pessoal.",
+      ]},
+      { t:"Ser exemplo", i:[
+        "Viva o evangelho com sinceridade.",
+        "Convide os amigos a se achegarem a Cristo.",
+      ]},
+    ],
+    fecho:{ t:"Cada rapaz que serve com fidelidade cresce em capacidade e em fé. O Senhor magnifica os que se dispõem a ajudar.", f:"Manual Geral, cap. 10" },
+  }),
+
+  full("Secretário do Quórum de Sacerdotes", {
+    proposito:"Rapaz chamado dentre os sacerdotes para ajudar a presidência do quórum: registra a frequência, ajuda a acompanhar as designações e apoia a organização das reuniões e atividades.",
+    ref:"Manual Geral, 10.4",
+    resp:[
+      "Registrar a frequência do quórum.",
+      "Anotar as designações e ajudar a acompanhá-las.",
+      "Ajudar a identificar os rapazes que faltam, para que sejam alcançados.",
+      "Apoiar a presidência nas reuniões e atividades.",
+    ],
+    areas:[
+      { t:"Manter os registros", i:[
+        "Anote a presença e as designações com cuidado.",
+        "Mantenha as informações organizadas.",
+      ]},
+      { t:"Acompanhar os ausentes", i:[
+        "Ajude a notar quem faltou para alcançá-los.",
+        "Comunique a presidência prontamente.",
+      ]},
+      { t:"Ajudar nas reuniões", i:[
+        "Prepare o que a presidência precisar.",
+        "Ajude a começar e a terminar no horário.",
+      ]},
+      { t:"Comunicar", i:[
+        "Ajude a avisar os rapazes sobre atividades.",
+        "Colabore com o secretário da ala quando necessário.",
+      ]},
+      { t:"Servir com fidelidade", i:[
+        "Seja pontual e confiável.",
+        "Dê o exemplo de responsabilidade.",
+      ]},
+    ],
+    fecho:{ t:"A fidelidade nos detalhes ajuda a presidência a cuidar de cada rapaz. Nenhum serviço é pequeno aos olhos do Senhor.", f:"Manual Geral, cap. 10" },
+  }),
+
+  full("Consultor do Quórum de Sacerdotes", {
+    escritura:{ t:"E eis que, sois chamados para… serdes agentes uns dos outros.", r:"Doutrina e Convênios 38:23–24" },
+    proposito:"Adulto chamado para apoiar e orientar os sacerdotes sob a direção do bispo. Ensina, ministra e caminha ao lado dos rapazes, ajudando-os a liderar e a crescer — sempre sob as normas de proteção de menores.",
+    ref:"Manual Geral, 10.5",
+    resp:[
+      "Apoiar e orientar a presidência do quórum sem tomar o lugar dos rapazes.",
+      "Ensinar as aulas do quórum quando designado.",
+      "Participar das reuniões e atividades e ministrar aos rapazes.",
+      "Cumprir rigorosamente a norma dos dois adultos responsáveis e as diretrizes de Proteção da Criança e do Jovem.",
+    ],
+    areas:[
+      { t:"Deixar os rapazes liderarem", i:[
+        "Oriente nos bastidores; não assuma a liderança deles.",
+        "Ajude-os a preparar e a conduzir as reuniões.",
+      ]},
+      { t:"Ensinar e testificar", i:[
+        "Ministre aulas centradas em Jesus Cristo.",
+        "Seja um exemplo constante de discipulado.",
+      ]},
+      { t:"Ministrar a cada rapaz", i:[
+        "Conheça-os pelo nome e interesse-se por sua vida.",
+        "Incentive e alcance os menos ativos.",
+      ]},
+      { t:"Proteger sempre", i:[
+        "Nunca fique a sós com um menor — mantenha dois adultos.",
+        "Faça o treinamento de proteção e siga todas as normas.",
+      ]},
+      { t:"Preparar para o futuro", i:[
+        "Apoie metas de templo, missão e sacerdócio.",
+        "Ajude-os a firmar-se na fé antes da vida adulta.",
+      ]},
+    ],
+    fecho:{ t:"O consultor fiel é um mentor e amigo que aponta para Cristo. Ao servir com amor e retidão, deixa marcas eternas na vida dos rapazes.", f:"Manual Geral, cap. 10" },
+  }),
+
+  full("Especialista do Quórum de Sacerdotes", {
+    proposito:"Chamado para ajudar em necessidades específicas do quórum de sacerdotes — atividades, projetos ou habilidades particulares — sob a direção do bispo e dos consultores.",
+    ref:"Manual Geral, 10.5",
+    resp:[
+      "Apoiar tarefas e atividades específicas conforme designado.",
+      "Trabalhar com os consultores e a presidência do quórum.",
+      "Observar as normas de proteção de menores.",
+    ],
+    areas:[
+      { t:"Servir conforme designado", i:[
+        "Cumpra bem a tarefa específica que lhe foi confiada.",
+        "Combine expectativas com os líderes.",
+      ]},
+      { t:"Usar seus talentos", i:[
+        "Compartilhe habilidades que abençoem os rapazes.",
+        "Ensine com paciência.",
+      ]},
+      { t:"Trabalhar em equipe", i:[
+        "Coordene com consultores e presidência.",
+        "Comunique-se com clareza.",
+      ]},
+      { t:"Proteger os rapazes", i:[
+        "Mantenha a norma dos dois adultos.",
+        "Siga as diretrizes de proteção de menores.",
+      ]},
+      { t:"Servir com dedicação", i:[
+        "Seja pontual e confiável.",
+        "Dê o exemplo de bom ânimo.",
+      ]},
+    ],
+    fecho:{ t:"Cada talento colocado a serviço dos rapazes edifica o reino. Sua ajuda, mesmo pontual, faz diferença real.", f:"Manual Geral, cap. 10" },
+  }),
+];
+
+const SA_MESTRES = [
+  full("Presidente do Quórum de Mestres", {
+    escritura:{ t:"Ninguém despreze a tua mocidade; mas sê o exemplo dos fiéis.", r:"1 Timóteo 4:12" },
+    proposito:"Rapaz chamado pelo bispo, por revelação, e designado para presidir o quórum de mestres (14 e 15 anos). Presta serviço aos demais: preside, ensina e cuida, recebendo autoridade delegada para presidir — as chaves do Sacerdócio Aarônico permanecem com o bispo.",
+    ref:"Manual Geral, 10.4",
+    resp:[
+      "Presidir o quórum de mestres com seus conselheiros e secretário.",
+      "Ajudar cada mestre a cumprir seus deveres — preparar o sacramento, ministrar como companheiro e zelar pela Igreja (ver D&C 20:53–59).",
+      "Convidar e cuidar de todos, inclusive os menos ativos.",
+      "Aconselhar-se com os consultores adultos e representar o quórum no comitê de jovens.",
+    ],
+    areas:[
+      { t:"Presidir por revelação", i:[
+        "Busque orientação do Senhor sobre o quórum.",
+        "Reúna a presidência e delegue com confiança.",
+      ]},
+      { t:"Cuidar de cada mestre", i:[
+        "Conheça os rapazes e alcance os que faltam.",
+        "Ministre e incentive cada um.",
+      ]},
+      { t:"Ensinar pelo exemplo", i:[
+        "Seja exemplo dos fiéis na palavra e no trato.",
+        "Conduza com fé e reverência.",
+      ]},
+      { t:"Usar o programa Crianças e Jovens", i:[
+        "Ajude cada rapaz a definir e a alcançar metas.",
+        "Planeje atividades que fortaleçam a fé.",
+      ]},
+      { t:"Trabalhar com os consultores", i:[
+        "Aceite orientação e aprenda a liderar.",
+        "Prepare-se para receber o Sacerdócio de Melquisedeque no futuro.",
+      ]},
+    ],
+    fecho:{ t:"Ao presidir por revelação, o jovem presidente aprende que o sacerdócio é para servir. Ele guia seus amigos a se achegarem a Cristo.", f:"Manual Geral, cap. 10" },
+  }),
+
+  full("Primeiro Conselheiro", {
+    proposito:"Rapaz chamado para servir na presidência do quórum de mestres, auxiliando o presidente e assumindo as designações que receber, frequentemente ligadas à ministração e ao serviço.",
+    ref:"Manual Geral, 10.4",
+    resp:[
+      "Auxiliar o presidente e presidir na sua ausência.",
+      "Assumir as áreas designadas (p.ex. ministração ou serviço).",
+      "Ajudar a cuidar de cada mestre do quórum.",
+      "Participar da presidência do quórum.",
+    ],
+    areas:[
+      { t:"Apoiar o presidente", i:[
+        "Cumpra prontamente suas designações.",
+        "Prepare-se para presidir quando necessário.",
+      ]},
+      { t:"Cuidar dos rapazes", i:[
+        "Conheça os mestres e alcance os que faltam.",
+        "Incentive a fraternidade.",
+      ]},
+      { t:"Servir e ministrar", i:[
+        "Organize a ministração e o serviço designados.",
+        "Dê o exemplo de disposição.",
+      ]},
+      { t:"Preparar-se", i:[
+        "Aprenda a liderar servindo.",
+        "Busque dignidade pessoal.",
+      ]},
+      { t:"Ser exemplo", i:[
+        "Viva o evangelho com sinceridade.",
+        "Convide os amigos a participarem.",
+      ]},
+    ],
+    fecho:{ t:"O conselheiro fiel fortalece o presidente e o quórum. Ao servir agora, prepara-se para servir a vida inteira.", f:"Manual Geral, cap. 10" },
+  }),
+
+  full("Segundo Conselheiro", {
+    proposito:"Rapaz chamado para servir na presidência do quórum de mestres, auxiliando o presidente e o primeiro conselheiro nas designações que receber.",
+    ref:"Manual Geral, 10.4",
+    resp:[
+      "Auxiliar a presidência conforme designado.",
+      "Ajudar a cuidar de cada mestre do quórum.",
+      "Apoiar as reuniões, atividades e a ministração.",
+      "Substituir o primeiro conselheiro quando necessário.",
+    ],
+    areas:[
+      { t:"Apoiar a presidência", i:[
+        "Cumpra bem as designações recebidas.",
+        "Esteja pronto para servir.",
+      ]},
+      { t:"Cuidar dos rapazes", i:[
+        "Ajude a alcançar os que faltam.",
+        "Incentive a amizade no quórum.",
+      ]},
+      { t:"Servir e ministrar", i:[
+        "Participe da ministração e do serviço.",
+        "Dê o exemplo de bom ânimo.",
+      ]},
+      { t:"Preparar-se", i:[
+        "Aprenda a liderar observando e servindo.",
+        "Busque dignidade pessoal.",
+      ]},
+      { t:"Ser exemplo", i:[
+        "Viva com integridade.",
+        "Convide amigos a se achegarem a Cristo.",
+      ]},
+    ],
+    fecho:{ t:"Todo rapaz que serve com fidelidade cresce em fé e em capacidade. O Senhor honra quem se dispõe a ajudar.", f:"Manual Geral, cap. 10" },
+  }),
+
+  full("Secretário do Quórum de Mestres", {
+    proposito:"Rapaz chamado dentre os mestres para ajudar a presidência: registra a frequência, ajuda a acompanhar as designações e apoia a organização das reuniões e atividades.",
+    ref:"Manual Geral, 10.4",
+    resp:[
+      "Registrar a frequência do quórum.",
+      "Anotar as designações e ajudar a acompanhá-las.",
+      "Ajudar a identificar os rapazes que faltam.",
+      "Apoiar a presidência nas reuniões e atividades.",
+    ],
+    areas:[
+      { t:"Manter os registros", i:[
+        "Anote presença e designações com cuidado.",
+        "Mantenha tudo organizado.",
+      ]},
+      { t:"Acompanhar os ausentes", i:[
+        "Ajude a notar quem faltou para alcançá-los.",
+        "Comunique a presidência.",
+      ]},
+      { t:"Ajudar nas reuniões", i:[
+        "Prepare o que a presidência precisar.",
+        "Ajude a manter o horário.",
+      ]},
+      { t:"Comunicar", i:[
+        "Ajude a avisar os rapazes sobre atividades.",
+        "Colabore com os líderes.",
+      ]},
+      { t:"Servir com fidelidade", i:[
+        "Seja pontual e confiável.",
+        "Dê o exemplo de responsabilidade.",
+      ]},
+    ],
+    fecho:{ t:"A fidelidade nos detalhes ajuda a presidência a não perder nenhum rapaz de vista. Todo serviço conta.", f:"Manual Geral, cap. 10" },
+  }),
+
+  full("Consultor do Quórum de Mestres", {
+    proposito:"Adulto chamado para apoiar e orientar os mestres sob a direção do bispado. Ensina, ministra e caminha ao lado dos rapazes, ajudando-os a liderar — sempre sob as normas de proteção de menores.",
+    ref:"Manual Geral, 10.5",
+    resp:[
+      "Apoiar e orientar a presidência do quórum sem tomar o lugar dos rapazes.",
+      "Ensinar as aulas do quórum quando designado.",
+      "Participar das reuniões e atividades e ministrar aos rapazes.",
+      "Cumprir a norma dos dois adultos responsáveis e as diretrizes de Proteção da Criança e do Jovem.",
+    ],
+    areas:[
+      { t:"Deixar os rapazes liderarem", i:[
+        "Oriente nos bastidores; não assuma a liderança.",
+        "Ajude-os a preparar e conduzir as reuniões.",
+      ]},
+      { t:"Ensinar e testificar", i:[
+        "Ministre aulas centradas em Cristo.",
+        "Seja um exemplo de discipulado.",
+      ]},
+      { t:"Ministrar a cada rapaz", i:[
+        "Conheça-os e interesse-se por sua vida.",
+        "Alcance os menos ativos.",
+      ]},
+      { t:"Proteger sempre", i:[
+        "Nunca fique a sós com um menor — dois adultos.",
+        "Faça o treinamento e siga as normas de proteção.",
+      ]},
+      { t:"Ajudar a crescer", i:[
+        "Apoie as metas do programa Crianças e Jovens.",
+        "Prepare-os para os próximos passos no sacerdócio.",
+      ]},
+    ],
+    fecho:{ t:"O consultor que ama e protege os rapazes torna-se um mentor para toda a vida. Seu exemplo os aproxima do Salvador.", f:"Manual Geral, cap. 10" },
+  }),
+
+  full("Consultor Adjunto do Quórum de Mestres", {
+    proposito:"Adulto que auxilia o consultor do quórum de mestres, garantindo apoio contínuo aos rapazes e o cumprimento das normas de proteção (dois adultos presentes).",
+    ref:"Manual Geral, 10.5",
+    resp:[
+      "Auxiliar o consultor em reuniões, aulas e atividades.",
+      "Ajudar a ministrar aos rapazes.",
+      "Assegurar a presença de dois adultos responsáveis.",
+      "Substituir o consultor quando necessário.",
+    ],
+    areas:[
+      { t:"Apoiar o consultor", i:[
+        "Combine a divisão do trabalho.",
+        "Esteja pronto para assumir quando necessário.",
+      ]},
+      { t:"Garantir a proteção", i:[
+        "Ajude a manter sempre dois adultos com os rapazes.",
+        "Siga as normas de proteção de menores.",
+      ]},
+      { t:"Ministrar aos rapazes", i:[
+        "Conheça-os e incentive-os.",
+        "Alcance os que faltam.",
+      ]},
+      { t:"Apoiar as aulas", i:[
+        "Ajude a preparar e a ensinar quando pedido.",
+        "Mantenha o foco em Cristo.",
+      ]},
+      { t:"Ser exemplo", i:[
+        "Viva o evangelho com constância.",
+        "Sirva com alegria.",
+      ]},
+    ],
+    fecho:{ t:"A presença de um segundo adulto fiel protege e abençoa. Seu apoio torna o quórum um lugar seguro e edificante.", f:"Manual Geral, cap. 10" },
+  }),
+];
+
+const SA_DIACONOS = [
+  full("Presidente do Quórum de Diáconos", {
+    escritura:{ t:"Ninguém despreze a tua mocidade; mas sê o exemplo dos fiéis.", r:"1 Timóteo 4:12" },
+    proposito:"Rapaz chamado pelo bispo, por revelação, e designado para presidir o quórum de diáconos (12 e 13 anos). Presta serviço aos demais: preside, ensina e cuida, recebendo autoridade delegada para presidir — as chaves do Sacerdócio Aarônico permanecem com o bispo.",
+    ref:"Manual Geral, 10.4",
+    resp:[
+      "Presidir o quórum de diáconos com seus conselheiros e secretário.",
+      "Ajudar cada diácono a cumprir seus deveres — distribuir o sacramento, recolher ofertas de jejum, cuidar do templo/edifício e servir como mensageiro do bispo (ver D&C 20:57–59).",
+      "Convidar e cuidar de todos, inclusive os menos ativos.",
+      "Aconselhar-se com os consultores adultos e representar o quórum no comitê de jovens.",
+    ],
+    areas:[
+      { t:"Presidir por revelação", i:[
+        "Busque a orientação do Senhor sobre o quórum.",
+        "Reúna a presidência e delegue com confiança.",
+      ]},
+      { t:"Cuidar de cada diácono", i:[
+        "Conheça os rapazes e alcance os que faltam.",
+        "Incentive e ministre a cada um.",
+      ]},
+      { t:"Dar o exemplo", i:[
+        "Seja exemplo dos fiéis, apesar da pouca idade.",
+        "Cumpra seus deveres com reverência.",
+      ]},
+      { t:"Usar o programa Crianças e Jovens", i:[
+        "Ajude cada rapaz a definir metas.",
+        "Planeje atividades que fortaleçam a fé e a amizade.",
+      ]},
+      { t:"Trabalhar com os consultores", i:[
+        "Aceite orientação e aprenda a liderar.",
+        "Prepare-se para avançar no sacerdócio.",
+      ]},
+    ],
+    fecho:{ t:"Mesmo jovem, o presidente dos diáconos aprende que liderar é servir. Ao guiar seus amigos, todos se achegam mais a Cristo.", f:"Manual Geral, cap. 10" },
+  }),
+
+  full("Primeiro Conselheiro", {
+    proposito:"Rapaz chamado para servir na presidência do quórum de diáconos, auxiliando o presidente e assumindo as designações que receber.",
+    ref:"Manual Geral, 10.4",
+    resp:[
+      "Auxiliar o presidente e presidir na sua ausência.",
+      "Assumir as áreas designadas.",
+      "Ajudar a cuidar de cada diácono do quórum.",
+      "Participar da presidência do quórum.",
+    ],
+    areas:[
+      { t:"Apoiar o presidente", i:[
+        "Cumpra prontamente suas designações.",
+        "Prepare-se para presidir quando necessário.",
+      ]},
+      { t:"Cuidar dos rapazes", i:[
+        "Conheça os diáconos e alcance os que faltam.",
+        "Incentive a amizade.",
+      ]},
+      { t:"Servir e ministrar", i:[
+        "Ajude a organizar o serviço do quórum.",
+        "Dê o exemplo de disposição.",
+      ]},
+      { t:"Preparar-se", i:[
+        "Aprenda a liderar servindo.",
+        "Cumpra seus deveres com fidelidade.",
+      ]},
+      { t:"Ser exemplo", i:[
+        "Viva o evangelho com sinceridade.",
+        "Convide os amigos a participarem.",
+      ]},
+    ],
+    fecho:{ t:"O conselheiro fiel ajuda o presidente e fortalece o quórum. Servir agora prepara para servir sempre.", f:"Manual Geral, cap. 10" },
+  }),
+
+  full("Segundo Conselheiro", {
+    proposito:"Rapaz chamado para servir na presidência do quórum de diáconos, auxiliando o presidente e o primeiro conselheiro nas designações que receber.",
+    ref:"Manual Geral, 10.4",
+    resp:[
+      "Auxiliar a presidência conforme designado.",
+      "Ajudar a cuidar de cada diácono do quórum.",
+      "Apoiar as reuniões, atividades e o serviço.",
+      "Substituir o primeiro conselheiro quando necessário.",
+    ],
+    areas:[
+      { t:"Apoiar a presidência", i:[
+        "Cumpra bem as designações recebidas.",
+        "Esteja pronto para servir.",
+      ]},
+      { t:"Cuidar dos rapazes", i:[
+        "Ajude a alcançar os que faltam.",
+        "Incentive a amizade no quórum.",
+      ]},
+      { t:"Servir", i:[
+        "Participe do serviço e das atividades.",
+        "Dê o exemplo de bom ânimo.",
+      ]},
+      { t:"Preparar-se", i:[
+        "Aprenda a liderar observando e servindo.",
+        "Cumpra seus deveres com reverência.",
+      ]},
+      { t:"Ser exemplo", i:[
+        "Viva com integridade.",
+        "Convide amigos a se achegarem a Cristo.",
+      ]},
+    ],
+    fecho:{ t:"Todo rapaz que serve fielmente cresce em fé. O Senhor honra os corações dispostos, mesmo os mais jovens.", f:"Manual Geral, cap. 10" },
+  }),
+
+  full("Secretário do Quórum de Diáconos", {
+    proposito:"Rapaz chamado dentre os diáconos para ajudar a presidência: registra a frequência, ajuda a acompanhar as designações e apoia a organização das reuniões e atividades.",
+    ref:"Manual Geral, 10.4",
+    resp:[
+      "Registrar a frequência do quórum.",
+      "Anotar as designações e ajudar a acompanhá-las.",
+      "Ajudar a identificar os rapazes que faltam.",
+      "Apoiar a presidência nas reuniões e atividades.",
+    ],
+    areas:[
+      { t:"Manter os registros", i:[
+        "Anote presença e designações com cuidado.",
+        "Mantenha tudo organizado.",
+      ]},
+      { t:"Acompanhar os ausentes", i:[
+        "Ajude a notar quem faltou.",
+        "Comunique a presidência.",
+      ]},
+      { t:"Ajudar nas reuniões", i:[
+        "Prepare o que a presidência precisar.",
+        "Ajude a manter o horário.",
+      ]},
+      { t:"Comunicar", i:[
+        "Ajude a avisar sobre atividades.",
+        "Colabore com os líderes.",
+      ]},
+      { t:"Servir com fidelidade", i:[
+        "Seja pontual e confiável.",
+        "Dê o exemplo de responsabilidade.",
+      ]},
+    ],
+    fecho:{ t:"A fidelidade do secretário ajuda a presidência a cuidar de cada rapaz. Nenhum serviço é pequeno demais.", f:"Manual Geral, cap. 10" },
+  }),
+
+  full("Consultor do Quórum de Diáconos", {
+    proposito:"Adulto chamado para apoiar e orientar os diáconos sob a direção do bispado. Ensina, ministra e caminha ao lado dos rapazes mais jovens do Sacerdócio Aarônico — sempre sob as normas de proteção de menores.",
+    ref:"Manual Geral, 10.5",
+    resp:[
+      "Apoiar e orientar a presidência do quórum sem tomar o lugar dos rapazes.",
+      "Ensinar as aulas do quórum quando designado.",
+      "Participar das reuniões e atividades e ministrar aos rapazes.",
+      "Cumprir a norma dos dois adultos responsáveis e as diretrizes de Proteção da Criança e do Jovem.",
+    ],
+    areas:[
+      { t:"Deixar os rapazes liderarem", i:[
+        "Oriente com paciência; não assuma a liderança.",
+        "Ajude-os a preparar e conduzir as reuniões.",
+      ]},
+      { t:"Ensinar e testificar", i:[
+        "Ministre aulas simples e centradas em Cristo.",
+        "Seja um exemplo constante.",
+      ]},
+      { t:"Ministrar a cada rapaz", i:[
+        "Conheça-os e interesse-se por sua vida.",
+        "Alcance os menos ativos com amor.",
+      ]},
+      { t:"Proteger sempre", i:[
+        "Nunca fique a sós com um menor — dois adultos.",
+        "Faça o treinamento e siga as normas de proteção.",
+      ]},
+      { t:"Ajudar a crescer", i:[
+        "Apoie as metas do programa Crianças e Jovens.",
+        "Ajude-os a firmar hábitos de fé.",
+      ]},
+    ],
+    fecho:{ t:"Os diáconos estão dando os primeiros passos no sacerdócio. O consultor que os ama e protege planta sementes de fé que durarão a vida toda.", f:"Manual Geral, cap. 10" },
+  }),
+
+  full("Especialista do Quórum de Diáconos", {
+    proposito:"Chamado para ajudar em necessidades específicas do quórum de diáconos — atividades, projetos ou habilidades — sob a direção do bispado e dos consultores.",
+    ref:"Manual Geral, 10.5",
+    resp:[
+      "Apoiar tarefas e atividades específicas conforme designado.",
+      "Trabalhar com os consultores e a presidência do quórum.",
+      "Observar as normas de proteção de menores.",
+    ],
+    areas:[
+      { t:"Servir conforme designado", i:[
+        "Cumpra bem a tarefa que lhe foi confiada.",
+        "Combine expectativas com os líderes.",
+      ]},
+      { t:"Usar seus talentos", i:[
+        "Compartilhe habilidades que abençoem os rapazes.",
+        "Ensine com paciência.",
+      ]},
+      { t:"Trabalhar em equipe", i:[
+        "Coordene com consultores e presidência.",
+        "Comunique-se com clareza.",
+      ]},
+      { t:"Proteger os rapazes", i:[
+        "Mantenha a norma dos dois adultos.",
+        "Siga as diretrizes de proteção de menores.",
+      ]},
+      { t:"Servir com dedicação", i:[
+        "Seja pontual e confiável.",
+        "Dê o exemplo de bom ânimo.",
+      ]},
+    ],
+    fecho:{ t:"Cada talento a serviço dos rapazes edifica a próxima geração. Sua ajuda, mesmo pontual, deixa boas marcas.", f:"Manual Geral, cap. 10" },
+  }),
+];
+
+const SA_GERAIS = [
+  full("Especialista dos Rapazes — Esportes", {
+    escritura:{ t:"Corramos, com paciência, a carreira que nos está proposta.", r:"Hebreus 12:1" },
+    proposito:"Ajuda a organizar atividades esportivas saudáveis e seguras para os rapazes, promovendo boa esportividade, inclusão e amizade, sob a direção dos líderes e observando a proteção de menores.",
+    ref:"Manual Geral, 10.5 (ver cap. 20)",
+    resp:[
+      "Planejar e conduzir atividades esportivas sob a direção dos líderes.",
+      "Promover a boa esportividade e a segurança.",
+      "Incluir todos os rapazes, independentemente da habilidade.",
+      "Cumprir as normas de proteção de menores (dois adultos).",
+    ],
+    areas:[
+      { t:"Planejar com segurança", i:[
+        "Escolha atividades adequadas à idade e seguras.",
+        "Verifique local, equipamentos e primeiros socorros.",
+      ]},
+      { t:"Ensinar esportividade", i:[
+        "Valorize o esforço e o respeito acima da vitória.",
+        "Seja exemplo de bom espírito esportivo.",
+      ]},
+      { t:"Incluir a todos", i:[
+        "Convide também os menos ativos e os menos habilidosos.",
+        "Forme equipes equilibradas e acolhedoras.",
+      ]},
+      { t:"Proteger os rapazes", i:[
+        "Mantenha sempre dois adultos responsáveis.",
+        "Siga as diretrizes de proteção de menores.",
+      ]},
+      { t:"Coordenar com os líderes", i:[
+        "Alinhe as atividades com o quórum e o comitê de jovens.",
+        "Ajude a integrar o esporte ao propósito espiritual.",
+      ]},
+    ],
+    fecho:{ t:"Boas atividades esportivas constroem amizade, disciplina e caráter. Ao servir com cuidado, você ajuda cada rapaz a sentir-se incluído e valorizado.", f:"Manual Geral, cap. 10" },
+  }),
+
+  full("Especialista dos Rapazes — Assistente de Esportes", {
+    proposito:"Apoia o especialista de esportes no planejamento e na condução das atividades esportivas dos rapazes, substituindo-o quando necessário e ajudando a garantir segurança e inclusão.",
+    ref:"Manual Geral, 10.5",
+    resp:[
+      "Ajudar a planejar e conduzir as atividades esportivas.",
+      "Apoiar a segurança e a boa esportividade.",
+      "Ajudar a incluir todos os rapazes.",
+      "Assegurar a presença de dois adultos responsáveis.",
+    ],
+    areas:[
+      { t:"Apoiar o especialista", i:[
+        "Combine a divisão das tarefas.",
+        "Esteja pronto para assumir quando necessário.",
+      ]},
+      { t:"Cuidar da segurança", i:[
+        "Ajude a verificar local e equipamentos.",
+        "Mantenha os primeiros socorros à mão.",
+      ]},
+      { t:"Incluir a todos", i:[
+        "Acolha os menos ativos e menos habilidosos.",
+        "Incentive o respeito entre os rapazes.",
+      ]},
+      { t:"Proteger", i:[
+        "Ajude a manter dois adultos presentes.",
+        "Siga as normas de proteção de menores.",
+      ]},
+      { t:"Ser exemplo", i:[
+        "Demonstre bom espírito esportivo.",
+        "Sirva com alegria.",
+      ]},
+    ],
+    fecho:{ t:"O apoio fiel de um assistente garante atividades seguras e alegres. Sua ajuda fortalece a amizade entre os rapazes.", f:"Manual Geral, cap. 10" },
+  }),
+
+  full("Especialista dos Quóruns do Sacerdócio Aarônico", {
+    proposito:"Chamado para ajudar em necessidades gerais dos quóruns do Sacerdócio Aarônico — atividades, projetos, habilidades ou apoio a acampamentos — sob a direção do bispado.",
+    ref:"Manual Geral, 10.5",
+    resp:[
+      "Apoiar atividades e projetos dos quóruns conforme designado.",
+      "Trabalhar com os consultores e a liderança do Sacerdócio Aarônico.",
+      "Observar as normas de proteção de menores.",
+    ],
+    areas:[
+      { t:"Servir conforme designado", i:[
+        "Cumpra bem a necessidade específica que lhe for confiada.",
+        "Combine expectativas com o bispado.",
+      ]},
+      { t:"Usar seus talentos", i:[
+        "Compartilhe habilidades úteis aos rapazes.",
+        "Ensine com paciência.",
+      ]},
+      { t:"Trabalhar com os líderes", i:[
+        "Coordene com consultores e presidências.",
+        "Comunique-se com clareza.",
+      ]},
+      { t:"Proteger os rapazes", i:[
+        "Mantenha a norma dos dois adultos.",
+        "Siga as diretrizes de proteção de menores.",
+      ]},
+      { t:"Servir com dedicação", i:[
+        "Seja confiável e pontual.",
+        "Dê o exemplo de disposição.",
+      ]},
+    ],
+    fecho:{ t:"Talentos consagrados ao serviço dos rapazes abençoam toda a organização. Sua ajuda faz diferença real.", f:"Manual Geral, cap. 10" },
+  }),
+
+  full("Diretor de Acampamento dos Rapazes", {
+    escritura:{ t:"Aprende em tua juventude a guardar os mandamentos de Deus.", r:"Alma 37:35" },
+    proposito:"Planeja e realiza os acampamentos dos rapazes, criando experiências que fortaleçam a fé e a fraternidade, com total atenção à segurança e à proteção dos menores.",
+    ref:"Manual Geral, 10.5 (ver cap. 20)",
+    resp:[
+      "Planejar o acampamento: local, logística, alimentação e programa espiritual.",
+      "Garantir a segurança e obter as autorizações necessárias.",
+      "Coordenar com o bispado, os líderes dos quóruns e os pais.",
+      "Assegurar a norma dos dois adultos responsáveis em todo o acampamento.",
+    ],
+    areas:[
+      { t:"Planejar com propósito espiritual", i:[
+        "Inclua momentos de devoção, oração e testemunho.",
+        "Ligue as atividades ao programa Crianças e Jovens.",
+      ]},
+      { t:"Segurança em primeiro lugar", i:[
+        "Providencie primeiros socorros e plano de emergência.",
+        "Obtenha autorizações dos pais e verifique riscos do local.",
+      ]},
+      { t:"Cuidar da logística", i:[
+        "Organize transporte, alimentação e equipamentos.",
+        "Distribua responsabilidades com antecedência.",
+      ]},
+      { t:"Envolver os rapazes na liderança", i:[
+        "Deixe as presidências dos quóruns ajudarem a planejar.",
+        "Dê oportunidades de servir e liderar.",
+      ]},
+      { t:"Proteger sempre", i:[
+        "Mantenha dois adultos responsáveis em todas as situações.",
+        "Siga rigorosamente as diretrizes de proteção de menores.",
+      ]},
+    ],
+    fecho:{ t:"Um bom acampamento pode marcar a vida de um rapaz para sempre. Ao unir fé, natureza e segurança, você cria memórias que fortalecem o testemunho.", f:"Manual Geral, cap. 10" },
+  }),
+
+  full("Diretor Assistente de Acampamento dos Rapazes", {
+    proposito:"Apoia o diretor de acampamento no planejamento e na realização dos acampamentos dos rapazes, substituindo-o quando necessário e ajudando a garantir segurança e propósito espiritual.",
+    ref:"Manual Geral, 10.5",
+    resp:[
+      "Ajudar a planejar e a conduzir o acampamento.",
+      "Apoiar a segurança e a logística.",
+      "Ajudar a coordenar com líderes e pais.",
+      "Assegurar a presença de dois adultos responsáveis.",
+    ],
+    areas:[
+      { t:"Apoiar o diretor", i:[
+        "Combine a divisão das tarefas.",
+        "Esteja pronto para assumir quando necessário.",
+      ]},
+      { t:"Cuidar da segurança", i:[
+        "Ajude com primeiros socorros e plano de emergência.",
+        "Verifique autorizações e riscos.",
+      ]},
+      { t:"Ajudar na logística", i:[
+        "Apoie transporte, alimentação e equipamentos.",
+        "Confirme os detalhes com antecedência.",
+      ]},
+      { t:"Fortalecer o espiritual", i:[
+        "Ajude a preparar devocionais e testemunhos.",
+        "Incentive a reverência nos momentos espirituais.",
+      ]},
+      { t:"Proteger sempre", i:[
+        "Ajude a manter dois adultos em todas as situações.",
+        "Siga as diretrizes de proteção de menores.",
+      ]},
+    ],
+    fecho:{ t:"O apoio fiel de um assistente torna o acampamento seguro e inspirador. Sua dedicação abençoa cada rapaz presente.", f:"Manual Geral, cap. 10" },
+  }),
+];
+
 /* ---- ORGANIZAÇÕES (ordem exata da HOME) -------------------------------- */
 const ORGS = [
   { id:"bispado", nome:"Bispado", icone:"⛪", cor:"#8B6B3D", chamados: BISPADO },
@@ -1582,23 +2380,10 @@ const ORGS = [
   { id:"sociedade-socorro", nome:"Sociedade de Socorro", icone:"💐", cor:"#8A5B6B", chamados: SOCIEDADE_SOCORRO },
 
   { id:"sacerdocio-aaronico", nome:"Quóruns do Sacerdócio Aarônico", icone:"🕊️", cor:"#4C6070", grupos:[
-    { nome:"Quórum de Sacerdotes", chamados:[
-      "Presidente do Quórum de Sacerdotes (o bispo)","Primeiro Assistente","Segundo Assistente",
-      "Secretário do Quórum de Sacerdotes","Consultor do Quórum de Sacerdotes","Especialista do Quórum de Sacerdotes",
-    ].map(t) },
-    { nome:"Quórum de Mestres", chamados:[
-      "Presidente do Quórum de Mestres","Primeiro Conselheiro","Segundo Conselheiro",
-      "Secretário do Quórum de Mestres","Consultor do Quórum de Mestres","Consultor Adjunto do Quórum de Mestres",
-    ].map(t) },
-    { nome:"Quórum de Diáconos", chamados:[
-      "Presidente do Quórum de Diáconos","Primeiro Conselheiro","Segundo Conselheiro",
-      "Secretário do Quórum de Diáconos","Consultor do Quórum de Diáconos","Especialista do Quórum de Diáconos",
-    ].map(t) },
-    { nome:"Gerais", chamados:[
-      "Especialista dos Rapazes — Esportes","Especialista dos Rapazes — Assistente de Esportes",
-      "Especialista dos Quóruns do Sacerdócio Aarônico","Diretor de Acampamento dos Rapazes",
-      "Diretor Assistente de Acampamento dos Rapazes",
-    ].map(t) },
+    { nome:"Quórum de Sacerdotes", chamados: SA_SACERDOTES },
+    { nome:"Quórum de Mestres", chamados: SA_MESTRES },
+    { nome:"Quórum de Diáconos", chamados: SA_DIACONOS },
+    { nome:"Gerais", chamados: SA_GERAIS },
   ]},
 
   { id:"mocas", nome:"Moças", icone:"🌷", cor:"#9A6480", grupos:[

@@ -30,7 +30,7 @@ Status atual do conteúdo:
 - [x] Bispado
 - [x] Quórum de Élderes
 - [x] Sociedade de Socorro
-- [ ] Quóruns do Sacerdócio Aarônico
+- [x] Quóruns do Sacerdócio Aarônico
 - [ ] Moças
 - [ ] Escola Dominical
 - [ ] Primária
