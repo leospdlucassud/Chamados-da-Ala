@@ -25,19 +25,19 @@ seu chamado, com base no **Manual Geral** e em fontes oficiais da Igreja.
 O app cobre **todos os chamados possíveis de uma Ala** (134 no total), organizados por
 organização. O conteúdo doutrinário é preenchido organização por organização.
 
-Status atual do conteúdo:
+Status atual do conteúdo: **conteúdo completo das 11 organizações (134 chamados).**
 
 - [x] Bispado
 - [x] Quórum de Élderes
 - [x] Sociedade de Socorro
 - [x] Quóruns do Sacerdócio Aarônico
-- [ ] Moças
-- [ ] Escola Dominical
-- [ ] Primária
-- [ ] Missionários de Ala
-- [ ] Templo e História da Família
-- [ ] Jovens Adultos Solteiros
-- [ ] Outros Chamados
+- [x] Moças
+- [x] Escola Dominical
+- [x] Primária
+- [x] Missionários de Ala
+- [x] Templo e História da Família
+- [x] Jovens Adultos Solteiros
+- [x] Outros Chamados
 
 ## Como usar / desenvolver
 

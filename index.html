@@ -230,7 +230,7 @@
    Conteúdo fundamentado no Manual Geral (PT-BR). Nunca nominal (só o cargo).
    ========================================================================== */
 
-const VERSAO = "1.4.0";
+const VERSAO = "1.5.0";
 const DATA_STR = "20/07/2026";
 
 const slug = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
@@ -2371,6 +2371,1092 @@ const SA_GERAIS = [
   }),
 ];
 
+/* ---- CONTEÚDO COMPLETO: MOÇAS (jovens de 12 a 18) ----------------------
+   Estrutura por faixa etária (jun/2026): Edificadoras da Fé (12–13),
+   Mensageiras da Esperança (14–15), Guardiãs da Luz (16+).
+   Norma dos dois adultos responsáveis em toda interação com as jovens. ------ */
+const MOCAS_PRESIDENCIA = [
+  full("Presidente das Moças", {
+    escritura:{ t:"Levantai-vos e resplandecei, para que a vossa luz seja um estandarte às nações.", r:"Doutrina e Convênios 115:5" },
+    proposito:"Chamada pelo bispo, a presidente das Moças lidera as jovens de 12 a 18 anos sob a direção dele. Ministra a cada moça, orienta as presidências de classe e lidera o trabalho de salvação e exaltação, ajudando cada jovem a fazer e guardar convênios e a achegar-se a Jesus Cristo.",
+    ref:"Manual Geral, 11.3.2",
+    resp:[
+      "Liderar as Moças e servir como membro do conselho da ala (11.3.2).",
+      "Ministrar individualmente a cada moça e orientar as presidências de classe (11.3.4).",
+      "Liderar o trabalho de salvação e exaltação por meio do programa Crianças e Jovens.",
+      "Supervisionar registros, orçamento e atividades, inclusive acampamento e FSY.",
+      "Assegurar a norma dos dois adultos responsáveis em toda interação com as jovens (11.6.1).",
+    ],
+    areas:[
+      { t:"Deixar as jovens liderarem", i:[
+        "Oriente as presidências de classe e deixe-as planejar e dirigir.",
+        "Ensine princípios e confie responsabilidades às jovens.",
+      ]},
+      { t:"Ministrar a cada moça", i:[
+        "Conheça cada jovem pelo nome e por suas circunstâncias.",
+        "Alcance com amor as menos ativas e as recém-chegadas.",
+      ]},
+      { t:"Liderar por revelação e conselhos", i:[
+        "Reúna a presidência com regularidade e busque inspiração.",
+        "Delegue as áreas da obra às conselheiras.",
+      ]},
+      { t:"Guiar pelo programa Crianças e Jovens", i:[
+        "Ajude cada moça a definir metas e a ter experiências espirituais.",
+        "Planeje atividades que fortaleçam a fé e a amizade.",
+      ]},
+      { t:"Proteger sempre", i:[
+        "Cumpra a norma dos dois adultos responsáveis em tudo.",
+        "Zele por um ambiente seguro física e espiritualmente.",
+      ]},
+    ],
+    fecho:{ t:"As Moças são luzes que resplandecem no mundo. Ao ministrar com amor e deixá-las liderar, a presidente ajuda cada jovem a firmar-se em seus convênios com o Salvador.", f:"Manual Geral, cap. 11" },
+  }),
+  full("Primeira Conselheira das Moças", {
+    proposito:"Serve sob a direção da presidente das Moças, auxiliando-a a liderar a organização e orientando as presidências de classe que lhe forem designadas.",
+    ref:"Manual Geral, 11.3.2",
+    resp:[
+      "Auxiliar a presidente e representá-la quando designada.",
+      "Orientar as presidências de classe atribuídas.",
+      "Participar da presidência e ajudar na ministração às jovens.",
+      "Observar a norma dos dois adultos responsáveis.",
+    ],
+    areas:[
+      { t:"Apoiar a presidente", i:["Assuma as designações e alivie a carga da presidente.","Prepare-se para presidir quando necessário."]},
+      { t:"Orientar as classes designadas", i:["Ajude as jovens líderes a planejar e dirigir.","Deixe-as liderar; oriente nos bastidores."]},
+      { t:"Ministrar às jovens", i:["Conheça as moças e alcance as que faltam.","Incentive experiências espirituais."]},
+      { t:"Preparar-se", i:["Estude o cap. 11 e o programa Crianças e Jovens.","Participe dos treinamentos."]},
+      { t:"Proteger e unir", i:["Cumpra a norma dos dois adultos.","Apoie as decisões da presidência e guarde confidências."]},
+    ],
+    fecho:{ t:"A conselheira fiel amplia o cuidado com as jovens. Ao servir com dedicação, torna-se um exemplo do discipulado que ensina.", f:"Manual Geral, cap. 11" },
+  }),
+  full("Segunda Conselheira das Moças", {
+    proposito:"Serve sob a direção da presidente das Moças, auxiliando-a e orientando as presidências de classe designadas, frequentemente as jovens mais novas.",
+    ref:"Manual Geral, 11.3.2",
+    resp:[
+      "Auxiliar a presidente e representá-la quando designada.",
+      "Orientar as presidências de classe atribuídas.",
+      "Participar da presidência e ajudar na ministração.",
+      "Observar a norma dos dois adultos responsáveis.",
+    ],
+    areas:[
+      { t:"Apoiar a presidente", i:["Cumpra prontamente suas designações.","Esteja pronta para servir."]},
+      { t:"Cuidar das mais novas", i:["Acolha as que estão chegando à organização.","Ajude na transição vinda da Primária."]},
+      { t:"Orientar as classes", i:["Deixe as jovens líderes dirigirem.","Oriente com paciência."]},
+      { t:"Preparar-se", i:["Estude o programa Crianças e Jovens.","Participe dos treinamentos."]},
+      { t:"Proteger e unir", i:["Cumpra a norma dos dois adultos.","Sustente as decisões da presidência."]},
+    ],
+    fecho:{ t:"Ao acolher as jovens mais novas, a segunda conselheira ajuda cada uma a sentir-se em casa e amada na organização das Moças.", f:"Manual Geral, cap. 11" },
+  }),
+  full("Secretária das Moças", {
+    proposito:"Ajuda a presidência das Moças a manter a ordem: prepara pautas, mantém registros de frequência e ajuda com o orçamento e a comunicação.",
+    ref:"Manual Geral, 11.3.3",
+    resp:[
+      "Preparar pautas e anotações das reuniões da presidência.",
+      "Manter os registros de frequência das jovens.",
+      "Ajudar com o orçamento e o controle de despesas.",
+      "Apoiar a comunicação de atividades e reuniões.",
+    ],
+    areas:[
+      { t:"Organizar as reuniões", i:["Prepare a pauta e registre as designações.","Dê seguimento às atribuições."]},
+      { t:"Cuidar dos registros", i:["Mantenha a frequência atualizada.","Ajude a identificar as jovens que faltam."]},
+      { t:"Apoiar o orçamento", i:["Ajude a planejar e controlar as despesas.","Guarde os comprovantes organizados."]},
+      { t:"Comunicar", i:["Ajude a avisar sobre atividades e acampamentos.","Colabore com a secretária da ala."]},
+      { t:"Servir com fidelidade", i:["Seja pontual e confiável.","Trate os dados com discrição."]},
+    ],
+    fecho:{ t:"A fidelidade da secretária ajuda a presidência a não perder nenhuma jovem de vista. Todo serviço conta na obra do Senhor.", f:"Manual Geral, cap. 11" },
+  }),
+];
+
+// Fábrica das presidências de classe por faixa etária (4 jovens + 1 consultora adulta)
+function classeMocas(faixa, idade){
+  return [
+    full("Presidente da classe", {
+      escritura:{ t:"Ninguém despreze a tua mocidade; mas sê o exemplo dos fiéis.", r:"1 Timóteo 4:12" },
+      proposito:"Jovem chamada pelo bispado para presidir a classe "+faixa+" ("+idade+"). Lidera o trabalho de salvação e exaltação entre as jovens da classe: preside, planeja as reuniões dominicais e as atividades, e ajuda cada moça a achegar-se a Cristo. Recebe autoridade delegada para presidir.",
+      ref:"Manual Geral, 11.3.4",
+      resp:[
+        "Presidir a classe com suas conselheiras e secretária.",
+        "Planejar as reuniões dominicais e as atividades da classe.",
+        "Conhecer e cuidar de cada moça, inclusive as menos ativas.",
+        "Aconselhar-se com a consultora e representar a classe no comitê de jovens.",
+      ],
+      areas:[
+        { t:"Presidir por revelação", i:["Busque a orientação do Senhor sobre a classe.","Reúna a presidência e delegue."]},
+        { t:"Cuidar de cada moça", i:["Conheça as jovens e alcance as que faltam.","Ministre e convide com amor."]},
+        { t:"Dar o exemplo", i:["Seja exemplo dos fiéis na palavra e no trato.","Conduza com fé e reverência."]},
+        { t:"Planejar com propósito", i:["Use o programa Crianças e Jovens.","Planeje reuniões e atividades que edifiquem."]},
+        { t:"Trabalhar com a consultora", i:["Aceite orientação e aprenda a liderar.","Prepare-se para servir a vida toda."]},
+      ],
+      fecho:{ t:"Ao presidir sua classe, a jovem aprende que liderar é servir. Ela guia suas amigas a fazerem e guardarem convênios com o Salvador.", f:"Manual Geral, cap. 11" },
+    }),
+    full("Primeira Conselheira", {
+      proposito:"Jovem chamada para servir na presidência da classe "+faixa+", auxiliando a presidente e assumindo as designações que receber.",
+      ref:"Manual Geral, 11.3.4",
+      resp:["Auxiliar a presidente e presidir na sua ausência.","Assumir as áreas designadas.","Ajudar a cuidar de cada moça da classe.","Participar da presidência da classe."],
+      areas:[
+        { t:"Apoiar a presidente", i:["Cumpra suas designações.","Prepare-se para presidir quando necessário."]},
+        { t:"Cuidar das moças", i:["Conheça as jovens e alcance as que faltam.","Incentive a amizade."]},
+        { t:"Servir e ministrar", i:["Ajude a organizar reuniões e atividades.","Dê o exemplo de disposição."]},
+        { t:"Preparar-se", i:["Aprenda a liderar servindo.","Busque experiências espirituais."]},
+        { t:"Ser exemplo", i:["Viva o evangelho com sinceridade.","Convide as amigas a participarem."]},
+      ],
+      fecho:{ t:"A conselheira fiel fortalece a presidente e a classe. Servir agora prepara para servir sempre.", f:"Manual Geral, cap. 11" },
+    }),
+    full("Segunda Conselheira", {
+      proposito:"Jovem chamada para servir na presidência da classe "+faixa+", auxiliando a presidente e a primeira conselheira nas designações que receber.",
+      ref:"Manual Geral, 11.3.4",
+      resp:["Auxiliar a presidência conforme designada.","Ajudar a cuidar de cada moça da classe.","Apoiar as reuniões e atividades.","Substituir a primeira conselheira quando necessário."],
+      areas:[
+        { t:"Apoiar a presidência", i:["Cumpra bem as designações.","Esteja pronta para servir."]},
+        { t:"Cuidar das moças", i:["Ajude a alcançar as que faltam.","Incentive a amizade na classe."]},
+        { t:"Servir", i:["Participe das atividades e do serviço.","Dê o exemplo de bom ânimo."]},
+        { t:"Preparar-se", i:["Aprenda a liderar observando e servindo.","Busque dignidade pessoal."]},
+        { t:"Ser exemplo", i:["Viva com integridade.","Convide amigas a se achegarem a Cristo."]},
+      ],
+      fecho:{ t:"Toda jovem que serve com fidelidade cresce em fé. O Senhor honra os corações dispostos.", f:"Manual Geral, cap. 11" },
+    }),
+    full("Secretária", {
+      proposito:"Jovem chamada dentre as moças da classe "+faixa+" para ajudar a presidência: registra a frequência e ajuda a acompanhar cada moça e as designações.",
+      ref:"Manual Geral, 11.3.4",
+      resp:["Registrar a frequência da classe.","Anotar as designações e ajudar a acompanhá-las.","Ajudar a identificar as moças que faltam.","Apoiar a presidência nas reuniões e atividades."],
+      areas:[
+        { t:"Manter os registros", i:["Anote presença e designações com cuidado.","Mantenha tudo organizado."]},
+        { t:"Acompanhar as ausentes", i:["Ajude a notar quem faltou.","Comunique a presidência."]},
+        { t:"Ajudar nas reuniões", i:["Prepare o que a presidência precisar.","Ajude a manter o horário."]},
+        { t:"Comunicar", i:["Ajude a avisar sobre atividades.","Colabore com os líderes."]},
+        { t:"Servir com fidelidade", i:["Seja pontual e confiável.","Dê o exemplo de responsabilidade."]},
+      ],
+      fecho:{ t:"A fidelidade da secretária ajuda a presidência a cuidar de cada jovem. Nenhum serviço é pequeno demais.", f:"Manual Geral, cap. 11" },
+    }),
+    full("Consultora", {
+      proposito:"Adulta chamada para apoiar e orientar a presidência e as moças da classe "+faixa+" ("+idade+"), sob a direção da presidência das Moças. Ensina, ministra e caminha ao lado das jovens — sempre sob as normas de proteção de menores.",
+      ref:"Manual Geral, 11.3.5",
+      resp:[
+        "Apoiar e orientar a presidência de classe sem tomar o lugar das jovens.",
+        "Ensinar as reuniões dominicais da classe quando designada.",
+        "Participar das reuniões e atividades e ministrar às moças.",
+        "Cumprir a norma dos dois adultos responsáveis e as diretrizes de Proteção da Criança e do Jovem (11.6.1).",
+      ],
+      areas:[
+        { t:"Deixar as jovens liderarem", i:["Oriente nos bastidores; não assuma a liderança.","Ajude-as a preparar e dirigir as reuniões."]},
+        { t:"Ensinar e testificar", i:["Ministre aulas centradas em Jesus Cristo.","Seja um exemplo de discipulado."]},
+        { t:"Ministrar a cada moça", i:["Conheça-as e interesse-se por sua vida.","Alcance as menos ativas com amor."]},
+        { t:"Proteger sempre", i:["Nunca fique a sós com uma menor — dois adultos.","Faça o treinamento e siga as normas de proteção."]},
+        { t:"Ajudar a crescer", i:["Apoie as metas do programa Crianças e Jovens.","Ajude cada jovem a firmar-se na fé."]},
+      ],
+      fecho:{ t:"A consultora que ama e protege as jovens torna-se mentora e amiga para toda a vida. Seu exemplo as aproxima do Salvador.", f:"Manual Geral, cap. 11" },
+    }),
+  ];
+}
+
+const MOCAS_GERAIS = [
+  full("Especialista das Moças", {
+    proposito:"Chamada para ajudar em necessidades específicas das Moças — atividades, projetos ou habilidades particulares — sob a direção da presidência, observando a proteção de menores.",
+    ref:"Manual Geral, 11.3.6",
+    resp:["Apoiar tarefas e atividades específicas conforme designada.","Trabalhar com a presidência das Moças e as consultoras.","Observar as normas de proteção de menores."],
+    areas:[
+      { t:"Servir conforme designada", i:["Cumpra bem a tarefa confiada.","Combine expectativas com a presidência."]},
+      { t:"Usar seus talentos", i:["Compartilhe habilidades que abençoem as jovens.","Ensine com paciência."]},
+      { t:"Trabalhar em equipe", i:["Coordene com a presidência e consultoras.","Comunique-se com clareza."]},
+      { t:"Proteger as jovens", i:["Mantenha a norma dos dois adultos.","Siga as diretrizes de proteção de menores."]},
+      { t:"Servir com dedicação", i:["Seja confiável e pontual.","Dê o exemplo de bom ânimo."]},
+    ],
+    fecho:{ t:"Talentos a serviço das jovens edificam a próxima geração. Sua ajuda faz diferença real.", f:"Manual Geral, cap. 11" },
+  }),
+  full("Especialista das Moças — Atividades", {
+    proposito:"Ajuda a planejar e realizar as atividades das Moças que fortalecem a fé, os convênios e a amizade, sob a direção da presidência e observando a proteção de menores.",
+    ref:"Manual Geral, 11.3.6",
+    resp:["Planejar atividades sob a direção da presidência.","Cuidar de local, recursos, orçamento e segurança.","Incluir todas as jovens.","Assegurar a norma dos dois adultos responsáveis."],
+    areas:[
+      { t:"Planejar com propósito", i:["Escolha atividades que fortaleçam os convênios.","Planeje com antecedência."]},
+      { t:"Incluir a todas", i:["Convide também as menos ativas.","Crie um ambiente acolhedor."]},
+      { t:"Cuidar da logística", i:["Providencie local, recursos e orçamento aprovado.","Prepare os detalhes com cuidado."]},
+      { t:"Proteger as jovens", i:["Mantenha dois adultos responsáveis.","Siga as diretrizes de segurança."]},
+      { t:"Avaliar e melhorar", i:["Peça sugestões às jovens.","Ajuste as próximas atividades."]},
+    ],
+    fecho:{ t:"Boas atividades fortalecem a fé e a amizade. Ao reunir as jovens com propósito, você ajuda cada uma a permanecer firme.", f:"Manual Geral, cap. 11" },
+  }),
+  full("Especialista das Moças — Esportes", {
+    proposito:"Ajuda a organizar atividades esportivas saudáveis e seguras para as moças, promovendo boa esportividade, inclusão e amizade, sob a direção da presidência e observando a proteção de menores.",
+    ref:"Manual Geral, 11.3.6",
+    resp:["Planejar e conduzir atividades esportivas seguras.","Promover a boa esportividade e a inclusão.","Cuidar da segurança das jovens.","Assegurar a norma dos dois adultos responsáveis."],
+    areas:[
+      { t:"Planejar com segurança", i:["Escolha atividades adequadas à idade.","Verifique local, equipamentos e primeiros socorros."]},
+      { t:"Ensinar esportividade", i:["Valorize o esforço e o respeito.","Seja exemplo de bom espírito."]},
+      { t:"Incluir a todas", i:["Convide também as menos habilidosas.","Forme equipes acolhedoras."]},
+      { t:"Proteger as jovens", i:["Mantenha dois adultos responsáveis.","Siga as diretrizes de proteção."]},
+      { t:"Coordenar", i:["Alinhe as atividades com a presidência.","Integre o esporte ao propósito espiritual."]},
+    ],
+    fecho:{ t:"O esporte saudável constrói amizade e caráter. Ao servir com cuidado, você ajuda cada jovem a sentir-se incluída.", f:"Manual Geral, cap. 11" },
+  }),
+  full("Especialista das Moças — Diretora de Acampamento", {
+    escritura:{ t:"Aprende em tua juventude a guardar os mandamentos de Deus.", r:"Alma 37:35" },
+    proposito:"Planeja e realiza os acampamentos das Moças, criando experiências que fortaleçam a fé e a fraternidade, com total atenção à segurança e à proteção das jovens.",
+    ref:"Manual Geral, 11.3.6 (ver cap. 20)",
+    resp:[
+      "Planejar o acampamento: local, logística, alimentação e programa espiritual.",
+      "Garantir a segurança e obter as autorizações necessárias.",
+      "Coordenar com a presidência das Moças e os pais.",
+      "Assegurar a norma dos dois adultos responsáveis em todo o acampamento.",
+    ],
+    areas:[
+      { t:"Planejar com propósito espiritual", i:["Inclua devocionais, oração e testemunho.","Ligue as atividades ao programa Crianças e Jovens."]},
+      { t:"Segurança em primeiro lugar", i:["Providencie primeiros socorros e plano de emergência.","Obtenha autorizações e verifique riscos do local."]},
+      { t:"Cuidar da logística", i:["Organize transporte, alimentação e equipamentos.","Distribua responsabilidades com antecedência."]},
+      { t:"Envolver as jovens na liderança", i:["Deixe as presidências de classe ajudarem a planejar.","Dê oportunidades de servir e liderar."]},
+      { t:"Proteger sempre", i:["Mantenha dois adultos responsáveis em todas as situações.","Siga rigorosamente as diretrizes de proteção de menores."]},
+    ],
+    fecho:{ t:"Um bom acampamento marca a vida de uma jovem para sempre. Ao unir fé, natureza e segurança, você cria memórias que fortalecem o testemunho.", f:"Manual Geral, cap. 11" },
+  }),
+  full("Especialista das Moças — Diretora Adjunta de Acampamento", {
+    proposito:"Apoia a diretora de acampamento das Moças no planejamento e na realização dos acampamentos, substituindo-a quando necessário e ajudando a garantir segurança e propósito espiritual.",
+    ref:"Manual Geral, 11.3.6",
+    resp:["Ajudar a planejar e conduzir o acampamento.","Apoiar a segurança e a logística.","Ajudar a coordenar com a presidência e os pais.","Assegurar a presença de dois adultos responsáveis."],
+    areas:[
+      { t:"Apoiar a diretora", i:["Combine a divisão das tarefas.","Esteja pronta para assumir quando necessário."]},
+      { t:"Cuidar da segurança", i:["Ajude com primeiros socorros e plano de emergência.","Verifique autorizações e riscos."]},
+      { t:"Ajudar na logística", i:["Apoie transporte, alimentação e equipamentos.","Confirme os detalhes com antecedência."]},
+      { t:"Fortalecer o espiritual", i:["Ajude a preparar devocionais.","Incentive a reverência."]},
+      { t:"Proteger sempre", i:["Ajude a manter dois adultos em todas as situações.","Siga as diretrizes de proteção de menores."]},
+    ],
+    fecho:{ t:"O apoio fiel de uma adjunta torna o acampamento seguro e inspirador. Sua dedicação abençoa cada jovem presente.", f:"Manual Geral, cap. 11" },
+  }),
+];
+
+/* ---- CONTEÚDO COMPLETO: ESCOLA DOMINICAL ------------------------------- */
+const ESCOLA_DOMINICAL = [
+  full("Presidente da Escola Dominical", {
+    escritura:{ t:"Buscai diligentemente e ensinai-vos uns aos outros palavras de sabedoria.", r:"Doutrina e Convênios 88:118" },
+    proposito:"Chamado para apoiar o ensino do evangelho na ala — no lar e na Igreja. Organiza as classes com a aprovação do bispado, apoia e instrui os professores e dirige o conselho de professores, ajudando a elevar a qualidade do ensino à maneira do Salvador.",
+    ref:"Manual Geral, 13.2.2",
+    resp:[
+      "Servir no conselho da ala e apoiar o ensino no lar e na Igreja (13.2.2).",
+      "Organizar as classes da Escola Dominical com aprovação do bispado.",
+      "Apoiar, incentivar e instruir os professores.",
+      "Dirigir as reuniões do conselho de professores.",
+      "Manter os registros de frequência.",
+    ],
+    areas:[
+      { t:"Apoiar os professores", i:[
+        "Visite as classes e ofereça incentivo específico.",
+        "Ajude os novos professores a se prepararem.",
+        "Compartilhe recursos de “Ensinar à Maneira do Salvador”.",
+      ]},
+      { t:"Dirigir o conselho de professores", i:[
+        "Reúna os professores de todas as organizações periodicamente.",
+        "Concentre-se em princípios de ensino, não só em logística.",
+      ]},
+      { t:"Organizar as classes", i:[
+        "Proponha ao bispado a estrutura das classes.",
+        "A partir de setembro de 2026, as aulas passam a ser semanais, de 25 minutos — ajude a adaptar o ensino a esse novo formato.",
+      ]},
+      { t:"Elevar o ensino no lar", i:[
+        "Incentive o uso de “Vem, e Segue-Me” em família.",
+        "Ajude os membros a aprenderem em casa e na Igreja.",
+      ]},
+      { t:"Cuidar dos registros", i:[
+        "Mantenha a frequência atualizada.",
+        "Ajude o bispado a acompanhar a participação.",
+      ]},
+    ],
+    fecho:{ t:"O bom ensino muda vidas. Ao apoiar e elevar os professores, o presidente da Escola Dominical ajuda toda a ala a aprender de Cristo.", f:"Manual Geral, cap. 13" },
+  }),
+  full("Primeiro Conselheiro da Escola Dominical", {
+    proposito:"Serve sob a direção do presidente da Escola Dominical, auxiliando-o a apoiar o ensino na ala e assumindo as designações que receber.",
+    ref:"Manual Geral, 13.2.2.1",
+    resp:["Auxiliar o presidente e representá-lo quando designado.","Apoiar e instruir os professores designados.","Ajudar a organizar as classes e o conselho de professores.","Participar da presidência."],
+    areas:[
+      { t:"Apoiar o presidente", i:["Assuma as designações recebidas.","Prepare-se para presidir na ausência dele."]},
+      { t:"Apoiar os professores", i:["Visite as classes designadas.","Ofereça incentivo e recursos."]},
+      { t:"Ajudar no conselho de professores", i:["Ajude a preparar as reuniões.","Compartilhe boas práticas de ensino."]},
+      { t:"Preparar-se", i:["Estude “Ensinar à Maneira do Salvador”.","Participe dos treinamentos."]},
+      { t:"Servir com unidade", i:["Apoie as decisões da presidência.","Comunique-se com clareza."]},
+    ],
+    fecho:{ t:"O conselheiro fiel ajuda a elevar o ensino na ala. Seu apoio fortalece cada professor e cada classe.", f:"Manual Geral, cap. 13" },
+  }),
+  full("Segundo Conselheiro da Escola Dominical", {
+    proposito:"Serve sob a direção do presidente da Escola Dominical, auxiliando-o e assumindo as designações que receber, frequentemente ligadas a certas classes ou ao apoio a novos professores.",
+    ref:"Manual Geral, 13.2.2.1",
+    resp:["Auxiliar o presidente e representá-lo quando designado.","Apoiar e instruir os professores designados.","Ajudar a organizar as classes.","Participar da presidência."],
+    areas:[
+      { t:"Apoiar o presidente", i:["Cumpra prontamente suas designações.","Esteja pronto para servir."]},
+      { t:"Apoiar os professores", i:["Ajude os novos professores a começar bem.","Ofereça incentivo específico."]},
+      { t:"Ajudar na organização", i:["Apoie a estrutura das classes.","Ajude no conselho de professores."]},
+      { t:"Preparar-se", i:["Estude os recursos de ensino.","Participe dos treinamentos."]},
+      { t:"Servir com unidade", i:["Sustente as decisões da presidência.","Colabore com o outro conselheiro."]},
+    ],
+    fecho:{ t:"Cada professor apoiado abençoa muitos alunos. Seu serviço eleva silenciosamente a qualidade do ensino na ala.", f:"Manual Geral, cap. 13" },
+  }),
+  full("Secretário da Escola Dominical", {
+    proposito:"Ajuda a presidência da Escola Dominical a acompanhar as designações e a frequência e a organizar as reuniões, apoiando o bom funcionamento das classes.",
+    ref:"Manual Geral, 13.2.2.1",
+    resp:["Manter os registros de frequência das classes.","Ajudar a acompanhar as designações dos professores.","Apoiar a organização do conselho de professores.","Auxiliar a presidência conforme necessário."],
+    areas:[
+      { t:"Cuidar dos registros", i:["Mantenha a frequência atualizada.","Organize as listas de classes e professores."]},
+      { t:"Acompanhar designações", i:["Ajude a registrar quem ensina cada classe.","Dê seguimento às atribuições."]},
+      { t:"Apoiar as reuniões", i:["Ajude a preparar o conselho de professores.","Registre o que for decidido."]},
+      { t:"Comunicar", i:["Avise sobre reuniões e treinamentos.","Colabore com a secretaria da ala."]},
+      { t:"Servir com fidelidade", i:["Seja pontual e organizado.","Trate os dados com discrição."]},
+    ],
+    fecho:{ t:"A ordem nos bastidores permite que o ensino floresça. Sua fidelidade sustenta o trabalho da Escola Dominical.", f:"Manual Geral, cap. 13" },
+  }),
+  full("Professor(a) da Escola Dominical", {
+    escritura:{ t:"E dar-vos-ei pastores segundo o meu coração, que vos apascentarão com ciência e com inteligência.", r:"Jeremias 3:15" },
+    proposito:"Ensina as classes da Escola Dominical usando “Vem, e Segue-Me”, ajudando os membros a aprenderem e a viverem o evangelho de Jesus Cristo. Ensina à maneira do Salvador: por amor, pelo Espírito e convidando à ação.",
+    ref:"Manual Geral, 13.2.3 (ver cap. 17)",
+    resp:[
+      "Preparar-se com as escrituras e o material “Vem, e Segue-Me”.",
+      "Conhecer os membros da classe e amá-los.",
+      "Ensinar por meio do Espírito, convidando à participação e à conversão.",
+    ],
+    areas:[
+      { t:"Preparar-se espiritualmente", i:["Estude as escrituras com antecedência e oração.","Busque a orientação do Espírito."]},
+      { t:"Ensinar à maneira do Salvador", i:["Centre cada aula em Jesus Cristo.","Ame e conheça cada aluno."]},
+      { t:"Convidar à participação", i:["Faça boas perguntas e ouça.","Crie um ambiente seguro para compartilhar."]},
+      { t:"Usar “Vem, e Segue-Me”", i:["Siga o cronograma de estudo.","Ligue a aula ao estudo feito em casa."]},
+      { t:"Convidar à ação", i:["Ajude os alunos a aplicarem o que aprendem.","Incentive-os a guardar seus convênios."]},
+    ],
+    fecho:{ t:"Ensinar o evangelho é apascentar as ovelhas do Senhor. Ao ensinar por amor e pelo Espírito, você aproxima cada aluno de Cristo.", f:"Manual Geral, cap. 13 e 17" },
+  }),
+  full("Especialista do Centro de Recursos (Biblioteca)", {
+    proposito:"Organiza os recursos da biblioteca da capela e ajuda líderes e membros a localizarem e usarem os materiais de ensino, apoiando o bom funcionamento das aulas.",
+    ref:"Manual Geral, 13.7.2",
+    resp:["Organizar e manter os recursos da biblioteca.","Ajudar os professores a encontrar e preparar materiais.","Controlar o empréstimo e a devolução de itens.","Zelar pelos equipamentos e suprimentos."],
+    areas:[
+      { t:"Organizar os recursos", i:["Mantenha os materiais catalogados e acessíveis.","Reponha suprimentos quando necessário."]},
+      { t:"Ajudar os professores", i:["Auxilie na busca de recursos para as aulas.","Ensine a usar os equipamentos."]},
+      { t:"Controlar empréstimos", i:["Registre o que é emprestado e devolvido.","Cuide da conservação dos itens."]},
+      { t:"Zelar pelo espaço", i:["Mantenha a biblioteca limpa e ordenada.","Comunique necessidades de reparo."]},
+      { t:"Servir com prontidão", i:["Esteja disponível antes das reuniões.","Atenda a todos com gentileza."]},
+    ],
+    fecho:{ t:"Bons recursos, bem organizados, tornam o ensino mais eficaz. Seu serviço discreto abençoa cada professor e cada classe.", f:"Manual Geral, cap. 13" },
+  }),
+];
+
+/* ---- CONTEÚDO COMPLETO: PRIMÁRIA (crianças) ----------------------------
+   Norma dos dois adultos responsáveis em toda interação com crianças. ------ */
+const PRIMARIA = [
+  full("Presidente da Primária", {
+    escritura:{ t:"Deixai vir a mim os pequeninos e não os impeçais, porque dos tais é o reino de Deus.", r:"Marcos 10:14" },
+    proposito:"Chamada pelo bispo, a presidente da Primária ajuda os pais a preparar seus filhos para o caminho dos convênios. Coordena o ensino do evangelho às crianças por meio de aulas, música e atividades, preparando-as para o batismo e, os meninos, para o Sacerdócio Aarônico.",
+    ref:"Manual Geral, 12.3.2",
+    resp:[
+      "Liderar a Primária e servir no conselho da ala (12.3.2).",
+      "Coordenar as aulas, a música e as atividades das crianças.",
+      "Supervisionar o berçário e cuidar para que haja professores suficientes.",
+      "Supervisionar registros e orçamento; ajudar a preparar as crianças para o batismo.",
+      "Assegurar a norma dos dois adultos responsáveis em toda interação com crianças (12.5.1).",
+    ],
+    areas:[
+      { t:"Preparar as crianças para os convênios", i:[
+        "Apoie os pais em seu papel principal de ensinar em casa.",
+        "Ajude a preparar as crianças para o batismo aos 8 anos.",
+      ]},
+      { t:"Cuidar dos professores", i:[
+        "Assegure professores suficientes e bem preparados.",
+        "Visite as classes e ofereça apoio e incentivo.",
+      ]},
+      { t:"Liderar por conselhos", i:[
+        "Reúna a presidência com regularidade e delegue.",
+        "Busque revelação sobre as necessidades das crianças.",
+      ]},
+      { t:"Ensinar pelo amor e pela música", i:[
+        "Valorize o tempo de partilha e o canto como formas de ensino.",
+        "Crie um ambiente alegre, reverente e acolhedor.",
+      ]},
+      { t:"Proteger sempre", i:[
+        "Cumpra rigorosamente a norma dos dois adultos responsáveis.",
+        "Assegure que todos os líderes façam o treinamento de proteção.",
+      ]},
+    ],
+    fecho:{ t:"O Salvador amava as criancinhas. Ao liderar a Primária, a presidente ajuda cada criança a sentir o amor de Deus e a preparar-se para segui-Lo.", f:"Manual Geral, cap. 12" },
+  }),
+  full("Primeira Conselheira da Primária", {
+    proposito:"Serve sob a direção da presidente da Primária, auxiliando-a e assumindo as designações que receber, frequentemente ligadas às aulas e aos professores.",
+    ref:"Manual Geral, 12.3.2",
+    resp:["Auxiliar a presidente e representá-la quando designada.","Supervisionar as áreas designadas (p.ex. classes e professores).","Ajudar a cuidar das crianças e a apoiar os pais.","Observar a norma dos dois adultos responsáveis."],
+    areas:[
+      { t:"Apoiar a presidente", i:["Assuma as designações e alivie a carga.","Prepare-se para presidir quando necessário."]},
+      { t:"Cuidar dos professores", i:["Apoie e incentive os professores.","Ajude a preencher as necessidades de ensino."]},
+      { t:"Cuidar das crianças", i:["Conheça as crianças pelo nome.","Alcance as que faltam, com os pais."]},
+      { t:"Preparar-se", i:["Estude o cap. 12 e os recursos da Primária.","Participe dos treinamentos."]},
+      { t:"Proteger sempre", i:["Cumpra a norma dos dois adultos.","Zele por um ambiente seguro."]},
+    ],
+    fecho:{ t:"A conselheira fiel amplia o cuidado com as crianças. Seu serviço ajuda cada pequenino a sentir-se amado e seguro.", f:"Manual Geral, cap. 12" },
+  }),
+  full("Segunda Conselheira da Primária", {
+    proposito:"Serve sob a direção da presidente da Primária, auxiliando-a e assumindo as designações que receber, frequentemente ligadas ao berçário, à música e às atividades.",
+    ref:"Manual Geral, 12.3.2",
+    resp:["Auxiliar a presidente e representá-la quando designada.","Supervisionar as áreas designadas (p.ex. berçário, música e atividades).","Ajudar a cuidar das crianças e apoiar os pais.","Observar a norma dos dois adultos responsáveis."],
+    areas:[
+      { t:"Apoiar a presidente", i:["Cumpra prontamente suas designações.","Esteja pronta para servir."]},
+      { t:"Cuidar do berçário", i:["Assegure líderes suficientes e um espaço seguro.","Apoie a transição das crianças menores."]},
+      { t:"Apoiar música e atividades", i:["Ajude a líder de música e a de atividades.","Garanta recursos e segurança."]},
+      { t:"Preparar-se", i:["Estude os recursos da Primária.","Participe dos treinamentos."]},
+      { t:"Proteger sempre", i:["Cumpra a norma dos dois adultos.","Zele pela segurança das crianças."]},
+    ],
+    fecho:{ t:"Ao cuidar dos menores e das atividades, a segunda conselheira ajuda cada criança a ter alegria em aprender o evangelho.", f:"Manual Geral, cap. 12" },
+  }),
+  full("Secretária da Primária", {
+    proposito:"Ajuda a presidência da Primária com os registros: mantém a frequência, acompanha as crianças elegíveis para o batismo e o avanço, e ajuda a designar orações e discursos.",
+    ref:"Manual Geral, 12.3.3",
+    resp:[
+      "Manter os registros de frequência das crianças.",
+      "Acompanhar as crianças que farão 8 anos (batismo) e as que avançam de classe.",
+      "Ajudar a designar orações, discursos e participações no tempo de partilha.",
+      "Apoiar a presidência nas pautas e na comunicação.",
+    ],
+    areas:[
+      { t:"Cuidar dos registros", i:["Mantenha a frequência e as listas atualizadas.","Confira os dados das crianças."]},
+      { t:"Acompanhar marcos", i:["Sinalize quem completará 8 anos, para o batismo.","Acompanhe os avanços de classe."]},
+      { t:"Organizar participações", i:["Ajude a designar orações e discursos.","Comunique as famílias com antecedência."]},
+      { t:"Apoiar a presidência", i:["Prepare pautas e anote decisões.","Ajude a comunicar atividades."]},
+      { t:"Servir com fidelidade", i:["Seja organizada e pontual.","Trate os dados com discrição."]},
+    ],
+    fecho:{ t:"A fidelidade nos detalhes garante que nenhuma criança seja esquecida — nem seu batismo, nem seu progresso. Seu serviço é precioso.", f:"Manual Geral, cap. 12" },
+  }),
+  full("Líder de Música da Primária", {
+    escritura:{ t:"A canção dos justos é uma oração para mim.", r:"Doutrina e Convênios 25:12" },
+    proposito:"Ensina o evangelho de Jesus Cristo às crianças por meio da música. Dirige o canto no tempo de partilha, ajuda a memorizar as escrituras cantando e prepara as crianças para a apresentação anual na reunião sacramental.",
+    ref:"Manual Geral, 12.3.4",
+    resp:[
+      "Ensinar e dirigir os hinos e canções da Primária.",
+      "Ajudar as crianças a aprenderem o evangelho e as escrituras por meio da música.",
+      "Preparar a apresentação anual das crianças na reunião sacramental.",
+      "Trabalhar com a pianista e a presidência.",
+    ],
+    areas:[
+      { t:"Ensinar pela música", i:["Use canções para ensinar doutrina simples.","Ajude a memorizar escrituras cantando."]},
+      { t:"Envolver as crianças", i:["Torne o canto alegre e participativo.","Use gestos e recursos visuais."]},
+      { t:"Preparar a apresentação anual", i:["Planeje com antecedência com a presidência.","Ensaie com reverência e alegria."]},
+      { t:"Coordenar com a pianista", i:["Combine hinos e andamentos.","Preparem-se juntas."]},
+      { t:"Convidar o Espírito", i:["Escolha músicas que convidem a reverência.","Ajude as crianças a sentirem o amor de Deus."]},
+    ],
+    fecho:{ t:"As crianças aprendem e lembram o evangelho pela música. Ao ensinar cantando, você planta verdades que ficarão no coração delas para sempre.", f:"Manual Geral, cap. 12" },
+  }),
+  full("Pianista da Primária", {
+    proposito:"Acompanha a música da Primária, apoiando o ensino do evangelho às crianças por meio dos hinos e das canções, e ajudando a criar um ambiente reverente e alegre.",
+    ref:"Manual Geral, 12.3.4",
+    resp:["Preparar e ensaiar as canções da Primária.","Acompanhar a líder de música com sensibilidade.","Ajudar na apresentação anual na reunião sacramental.","Chegar cedo para preparar o instrumento."],
+    areas:[
+      { t:"Preparar-se", i:["Ensaie as canções antes das reuniões.","Confirme o repertório com a líder de música."]},
+      { t:"Acompanhar bem", i:["Toque no andamento adequado às crianças.","Apoie o canto sem se sobrepor."]},
+      { t:"Apoiar a apresentação anual", i:["Ensaie com a líder de música.","Ajude as crianças a se sentirem seguras."]},
+      { t:"Criar reverência", i:["Use música de prelúdio para acalmar.","Convide o Espírito pela música."]},
+      { t:"Servir com alegria", i:["Sorria e incentive as crianças.","Esteja disponível para ensaios."]},
+    ],
+    fecho:{ t:"O acompanhamento fiel sustenta o canto das crianças. Sua música ajuda cada pequenino a sentir o amor do Salvador.", f:"Manual Geral, cap. 12" },
+  }),
+  full("Professor(a) da Primária", {
+    escritura:{ t:"Ensina a criança no caminho em que deve andar, e até quando envelhecer não se desviará dele.", r:"Provérbios 22:6" },
+    proposito:"Ensina o evangelho de Jesus Cristo às crianças usando “Vem, e Segue-Me — Para a Primária”, com amor e reverência. Ensinar as crianças é um privilégio sagrado que ajuda a firmar sua fé desde cedo.",
+    ref:"Manual Geral, 12.3.5",
+    resp:[
+      "Preparar e ministrar as aulas com “Vem, e Segue-Me — Para a Primária”.",
+      "Conhecer e amar cada criança da classe.",
+      "Ensinar com reverência, mantendo um ambiente seguro e ordeiro.",
+      "Servir com pelo menos dois adultos responsáveis presentes (12.5.1).",
+    ],
+    areas:[
+      { t:"Preparar-se com amor", i:["Estude a lição com antecedência e oração.","Pense em cada criança ao preparar."]},
+      { t:"Ensinar à maneira do Salvador", i:["Centre a aula em Jesus Cristo.","Use histórias, música e atividades simples."]},
+      { t:"Envolver as crianças", i:["Dê a cada uma a chance de participar.","Ouça e valorize suas contribuições."]},
+      { t:"Manter reverência e ordem", i:["Crie rotinas simples e acolhedoras.","Ajude as crianças a sentirem o Espírito."]},
+      { t:"Proteger sempre", i:["Nunca fique a sós com uma criança — dois adultos.","Faça o treinamento de proteção de menores."]},
+    ],
+    fecho:{ t:"Ensinar uma criança é plantar sementes eternas. Ao ensinar com amor, você ajuda a firmar no coração dela a fé em Jesus Cristo.", f:"Manual Geral, cap. 12" },
+  }),
+  full("Líder do Berçário", {
+    escritura:{ t:"Olhai para vossas criancinhas.", r:"3 Néfi 17:23" },
+    proposito:"Cuida e ensina as crianças do berçário (18 meses a 3 anos), oferecendo um ambiente seguro, amoroso e reverente. Usa “Olhai para Vossas Criancinhas” para apresentar às crianças o amor do Pai Celestial e de Jesus Cristo.",
+    ref:"Manual Geral, 12.3.5",
+    resp:[
+      "Preparar e conduzir o tempo do berçário com “Olhai para Vossas Criancinhas”.",
+      "Oferecer um ambiente seguro, limpo e acolhedor.",
+      "Ajudar as crianças a sentirem amor e reverência.",
+      "Servir sempre com pelo menos dois líderes responsáveis (do mesmo sexo, se não forem um casal).",
+    ],
+    areas:[
+      { t:"Acolher com amor", i:["Receba cada criança com carinho.","Ajude os pais na transição, com paciência."]},
+      { t:"Ensinar com simplicidade", i:["Use histórias, canções e brincadeiras curtas.","Fale do amor de Jesus de forma simples."]},
+      { t:"Cuidar da segurança e higiene", i:["Mantenha o espaço limpo e sem riscos.","Conheça alergias e cuidados de cada criança."]},
+      { t:"Criar rotina reverente", i:["Combine brincadeira, lanche e momento de reverência.","Traga previsibilidade e paz."]},
+      { t:"Proteger sempre", i:["Nunca fique sozinho com uma criança — dois líderes.","Faça o treinamento de proteção de menores."]},
+    ],
+    fecho:{ t:"No berçário, as crianças têm suas primeiras experiências na Igreja. Ao servi-las com amor, você ajuda a plantar sentimentos de segurança e de fé.", f:"Manual Geral, cap. 12" },
+  }),
+  full("Líder de Atividades da Primária", {
+    proposito:"Planeja e realiza as atividades das crianças de 8 a 11 anos (Valorosos), como parte do programa Crianças e Jovens, promovendo desenvolvimento espiritual, social, físico e intelectual — sempre com segurança e proteção.",
+    ref:"Manual Geral, 12.3.6",
+    resp:[
+      "Planejar atividades regulares para as crianças mais velhas da Primária.",
+      "Ajudar as crianças a definirem e alcançarem metas no programa Crianças e Jovens.",
+      "Coordenar projetos de serviço apropriados à idade.",
+      "Assegurar a norma dos dois adultos responsáveis (12.5.1).",
+    ],
+    areas:[
+      { t:"Planejar com propósito", i:["Equilibre o espiritual, o social, o físico e o intelectual.","Envolva as crianças na escolha das atividades."]},
+      { t:"Apoiar as metas", i:["Ajude cada criança com o programa Crianças e Jovens.","Celebre o esforço e o progresso."]},
+      { t:"Servir a comunidade", i:["Organize projetos de serviço simples.","Ensine a alegria de ajudar o próximo."]},
+      { t:"Incluir a todas", i:["Acolha as crianças menos ativas.","Adapte as atividades a diferentes necessidades."]},
+      { t:"Proteger sempre", i:["Mantenha dois adultos responsáveis.","Verifique a segurança de cada atividade."]},
+    ],
+    fecho:{ t:"Boas atividades ajudam as crianças a crescer de modo equilibrado, como Jesus cresceu “em sabedoria, em estatura e em graça”. Seu serviço as prepara para o futuro.", f:"Manual Geral, cap. 12" },
+  }),
+];
+
+/* ---- CONTEÚDO COMPLETO: MISSIONÁRIOS DE ALA ---------------------------- */
+const MISSIONARIOS = [
+  full("Líder da Missão da Ala", {
+    escritura:{ t:"E se acontecer que trabalheis todos os vossos dias… e trouxerdes uma só alma a mim, quão grande será a vossa alegria!", r:"Doutrina e Convênios 18:15" },
+    proposito:"Lidera a obra missionária na ala sob a direção do bispado. Coordena o trabalho dos missionários de tempo integral com os membros, ajudando a encontrar, ensinar e integrar pessoas, e apoiando os novos conversos e os que retornam à atividade.",
+    ref:"Manual Geral, 23.5",
+    resp:[
+      "Coordenar a obra missionária da ala no conselho da ala.",
+      "Trabalhar com os missionários de tempo integral e os missionários da ala.",
+      "Ajudar os membros a compartilhar o evangelho com naturalidade.",
+      "Apoiar a integração dos novos membros e o retorno dos menos ativos.",
+    ],
+    areas:[
+      { t:"Unir membros e missionários", i:[
+        "Reúna-se com os missionários de tempo integral regularmente.",
+        "Ajude os membros a apresentarem amigos aos missionários.",
+      ]},
+      { t:"Coordenar pelo conselho da ala", i:[
+        "Leve a obra missionária ao conselho da ala.",
+        "Trabalhe com o quórum de élderes e a Sociedade de Socorro.",
+      ]},
+      { t:"Cuidar dos novos membros", i:[
+        "Ajude cada novo converso a ter um amigo, um chamado e a palavra de Deus.",
+        "Acompanhe seu progresso rumo ao templo.",
+      ]},
+      { t:"Encontrar com amor", i:[
+        "Incentive convites naturais e sem pressão.",
+        "Ajude a identificar pessoas preparadas.",
+      ]},
+      { t:"Inspirar pelo exemplo", i:[
+        "Compartilhe o evangelho você mesmo.",
+        "Ajude a ala a amar a obra missionária.",
+      ]},
+    ],
+    fecho:{ t:"Não há alegria maior do que ajudar uma alma a achegar-se a Cristo. Ao unir membros e missionários, você abre portas para milagres na ala.", f:"Manual Geral, cap. 23" },
+  }),
+  full("Assistente do Líder da Missão da Ala", {
+    proposito:"Apoia o líder da missão da ala na coordenação da obra missionária, assumindo as designações que receber e substituindo-o quando necessário.",
+    ref:"Manual Geral, 23.5",
+    resp:["Ajudar a coordenar a obra missionária da ala.","Apoiar o trabalho com os missionários de tempo integral.","Ajudar a acompanhar novos membros e menos ativos.","Substituir o líder da missão quando necessário."],
+    areas:[
+      { t:"Apoiar o líder", i:["Combine a divisão das tarefas.","Esteja pronto para assumir quando necessário."]},
+      { t:"Trabalhar com os missionários", i:["Ajude a agendar e apoiar as visitas.","Reúna referências dos membros."]},
+      { t:"Cuidar dos novos membros", i:["Ajude a integrar os recém-batizados.","Acompanhe seu progresso."]},
+      { t:"Incentivar os membros", i:["Ajude a criar oportunidades naturais.","Dê o exemplo de compartilhar o evangelho."]},
+      { t:"Servir com fé", i:["Ore pelas pessoas que a ala procura ajudar.","Sirva com entusiasmo e amor."]},
+    ],
+    fecho:{ t:"O apoio fiel de um assistente amplia o alcance da obra missionária. Sua dedicação ajuda a levar o evangelho a mais corações.", f:"Manual Geral, cap. 23" },
+  }),
+  full("Missionário da Ala", {
+    proposito:"Membro chamado para ajudar na obra missionária da ala: encontra, ensina e integra pessoas junto com os missionários de tempo integral, e apoia os novos membros e os que retornam à atividade.",
+    ref:"Manual Geral, 23.5",
+    resp:["Ajudar a encontrar e ensinar pessoas interessadas.","Acompanhar os missionários de tempo integral nas visitas.","Ajudar a integrar e a apoiar os novos membros.","Ser um amigo para quem está aprendendo o evangelho."],
+    areas:[
+      { t:"Encontrar com amor", i:["Convide amigos e vizinhos com naturalidade.","Ore por oportunidades de servir e testemunhar."]},
+      { t:"Ensinar e testificar", i:["Acompanhe as lições dos missionários.","Compartilhe seu testemunho com sinceridade."]},
+      { t:"Fazer amizade", i:["Seja um amigo verdadeiro para os pesquisadores.","Acolha-os na ala."]},
+      { t:"Integrar novos membros", i:["Ajude cada novo converso a sentir-se em casa.","Acompanhe seu progresso rumo ao templo."]},
+      { t:"Servir com fé", i:["Confie no Senhor para preparar corações.","Sirva com paciência e amor."]},
+    ],
+    fecho:{ t:"Cada pessoa ajudada a achegar-se a Cristo traz alegria ao céu e à ala. Seu serviço como missionário abençoa vidas para a eternidade.", f:"Manual Geral, cap. 23" },
+  }),
+];
+
+/* ---- CONTEÚDO COMPLETO: TEMPLO E HISTÓRIA DA FAMÍLIA -------------------- */
+const TEMPLO_HF = [
+  full("Líder de Templo e História da Família da Ala", {
+    escritura:{ t:"Ele converterá o coração dos pais aos filhos, e o coração dos filhos aos pais.", r:"Malaquias 4:6" },
+    proposito:"Lidera a obra do templo e da história da família na ala, sob a direção do bispado. Ajuda os membros a encontrar seus antepassados, a realizar as ordenanças por eles e a irem ao templo, unindo as famílias pela eternidade.",
+    ref:"Manual Geral, 25.2",
+    resp:[
+      "Coordenar a obra do templo e da história da família no conselho da ala.",
+      "Orientar os consultores de templo e história da família.",
+      "Ajudar os membros a preparar nomes e a receber a recomendação para o templo.",
+      "Incentivar as famílias a participarem da obra em conjunto.",
+    ],
+    areas:[
+      { t:"Liderar pelo conselho da ala", i:[
+        "Leve a obra do templo e da história da família ao conselho.",
+        "Trabalhe com o quórum de élderes e a Sociedade de Socorro.",
+      ]},
+      { t:"Orientar os consultores", i:[
+        "Ajude os consultores a auxiliarem os membros no FamilySearch.",
+        "Ofereça treinamento e incentivo.",
+      ]},
+      { t:"Ajudar a preparar nomes", i:[
+        "Ajude as famílias a encontrar antepassados e a reservar ordenanças.",
+        "Incentive levar os próprios nomes ao templo.",
+      ]},
+      { t:"Incentivar a ida ao templo", i:[
+        "Ajude os membros a obterem a recomendação.",
+        "Organize visitas do quórum e da Sociedade de Socorro ao templo.",
+      ]},
+      { t:"Envolver as famílias e os jovens", i:[
+        "Ajude os jovens a fazerem a obra por seus antepassados.",
+        "Torne a história da família uma experiência em família.",
+      ]},
+    ],
+    fecho:{ t:"O coração dos filhos volta-se aos pais no templo. Ao liderar esta obra, você ajuda a unir famílias dos dois lados do véu para a eternidade.", f:"Manual Geral, cap. 25" },
+  }),
+  full("Consultor de Templo e História da Família da Ala", {
+    proposito:"Ajuda os membros, individualmente, a descobrir seus antepassados no FamilySearch, a preparar nomes para as ordenanças do templo e a experimentar a alegria de unir a família pela eternidade.",
+    ref:"Manual Geral, 25.4",
+    resp:["Ajudar os membros a usar o FamilySearch.","Ajudá-los a encontrar antepassados e a reservar ordenanças.","Incentivar a preparação para o templo.","Ensinar e inspirar o amor pela história da família."],
+    areas:[
+      { t:"Ajudar no FamilySearch", i:["Sente-se com os membros para iniciar a árvore.","Mostre como encontrar e verificar antepassados."]},
+      { t:"Preparar nomes para o templo", i:["Ajude a reservar e imprimir ordenanças.","Incentive levar os próprios nomes ao templo."]},
+      { t:"Ensinar com paciência", i:["Adapte-se ao ritmo de cada pessoa.","Comemore cada descoberta."]},
+      { t:"Envolver as famílias", i:["Ajude famílias a trabalharem juntas.","Incentive histórias e memórias."]},
+      { t:"Inspirar pelo testemunho", i:["Compartilhe experiências pessoais.","Ajude os membros a sentirem o Espírito de Elias."]},
+    ],
+    fecho:{ t:"Ao ajudar um membro a encontrar um antepassado, você abre a porta para bênçãos eternas. O Espírito de Elias toca corações dos dois lados do véu.", f:"Manual Geral, cap. 25" },
+  }),
+  full("Indexador", {
+    proposito:"Participa da indexação de registros no FamilySearch, transcrevendo documentos para que se tornem pesquisáveis. Esse serviço, muitas vezes feito de casa, torna possível que milhões encontrem seus antepassados.",
+    ref:"Manual Geral, cap. 25",
+    resp:["Indexar registros pelo FamilySearch com exatidão.","Seguir as instruções de cada projeto.","Contribuir com regularidade, no ritmo possível.","Ajudar a revisar quando qualificado."],
+    areas:[
+      { t:"Indexar com exatidão", i:["Siga cuidadosamente as instruções do projeto.","Confira nomes e datas com atenção."]},
+      { t:"Servir com constância", i:["Reserve um tempo regular, mesmo que curto.","Contribua no ritmo que puder manter."]},
+      { t:"Aprender e melhorar", i:["Comece por projetos mais simples.","Use os tutoriais do FamilySearch."]},
+      { t:"Colaborar", i:["Ajude a revisar quando estiver apto.","Tire dúvidas com o líder de história da família."]},
+      { t:"Lembrar o propósito", i:["Lembre-se de que cada registro representa uma pessoa.","Sirva com reverência e amor."]},
+    ],
+    fecho:{ t:"Cada nome indexado ajuda alguém a encontrar sua família. Esse serviço silencioso conecta gerações e abençoa incontáveis pessoas.", f:"Manual Geral, cap. 25" },
+  }),
+];
+
+/* ---- CONTEÚDO COMPLETO: JOVENS ADULTOS SOLTEIROS ----------------------- */
+const JAS = [
+  full("Líder dos Jovens Adultos Solteiros", {
+    escritura:{ t:"Ninguém despreze a tua mocidade; mas sê o exemplo dos fiéis.", r:"1 Timóteo 4:12" },
+    proposito:"Ajuda os jovens adultos solteiros (geralmente de 18 a 30 anos) a participarem do trabalho de salvação e exaltação e a sentirem-se parte da ala. Serve no comitê de JAS da estaca e lidera o comitê de JAS da ala, quando houver.",
+    ref:"Manual Geral, 14.1.2.3",
+    resp:[
+      "Ajudar os JAS a participar da obra e a permanecerem ligados à ala.",
+      "Servir no comitê de JAS da estaca e liderar o da ala.",
+      "Reunir-se regularmente com os líderes do quórum de élderes e da Sociedade de Socorro.",
+      "Ajudar a planejar atividades de amizade, serviço e aprendizado.",
+    ],
+    areas:[
+      { t:"Incluir cada JAS", i:[
+        "Conheça pelo nome os jovens adultos solteiros da ala.",
+        "Alcance os menos ativos e os que chegam de fora.",
+      ]},
+      { t:"Fazer amizade verdadeira", i:[
+        "Promova amizades sinceras, não apenas eventos.",
+        "Ajude cada um a sentir-se necessário na ala.",
+      ]},
+      { t:"Coordenar com os líderes", i:[
+        "Reúna-se com o quórum de élderes e a Sociedade de Socorro.",
+        "Participe do comitê de JAS da estaca.",
+      ]},
+      { t:"Planejar atividades significativas", i:[
+        "Equilibre serviço, aprendizado e convívio.",
+        "Envolva os próprios JAS no planejamento.",
+      ]},
+      { t:"Apoiar decisões de vida", i:[
+        "Incentive o templo, a educação e o serviço missionário.",
+        "Ministre com sensibilidade às circunstâncias de cada um.",
+      ]},
+    ],
+    fecho:{ t:"Os jovens adultos solteiros trazem força e fé à Igreja. Ao incluí-los e amá-los, você ajuda cada um a firmar-se em Cristo nesta fase decisiva.", f:"Manual Geral, cap. 14" },
+  }),
+  full("Consultor dos Jovens Adultos Solteiros", {
+    proposito:"Adulto chamado para apoiar e ministrar aos jovens adultos solteiros da ala, ajudando-os a sentir-se incluídos e a participar do trabalho de salvação e exaltação.",
+    ref:"Manual Geral, 14.1",
+    resp:["Ministrar aos JAS e apoiá-los.","Ajudar o líder de JAS a planejar e realizar atividades.","Incentivar a amizade e a inclusão.","Apoiar decisões de templo, educação e missão."],
+    areas:[
+      { t:"Ministrar com amor", i:["Conheça cada JAS e suas circunstâncias.","Alcance os menos ativos."]},
+      { t:"Apoiar as atividades", i:["Ajude a planejar e a realizar atividades.","Incentive a participação de todos."]},
+      { t:"Fazer amizade", i:["Seja um mentor acessível e de confiança.","Promova amizades sinceras."]},
+      { t:"Incentivar o crescimento", i:["Apoie metas de templo, estudo e serviço.","Ofereça encorajamento pessoal."]},
+      { t:"Servir com sensibilidade", i:["Respeite a individualidade de cada um.","Evite pressão; ofereça apoio genuíno."]},
+    ],
+    fecho:{ t:"Um consultor atencioso pode ser âncora de fé para um jovem adulto. Sua amizade e ministração fazem diferença duradoura.", f:"Manual Geral, cap. 14" },
+  }),
+  full("Consultora das Irmãs Jovens Adultas Solteiras da Sociedade de Socorro", {
+    proposito:"Irmã designada pela presidência da Sociedade de Socorro para ministrar às jovens adultas solteiras da ala, ajudando-as a sentir-se incluídas, amadas e ligadas à Sociedade de Socorro.",
+    ref:"Manual Geral, 14.1",
+    resp:["Ministrar às irmãs jovens adultas solteiras.","Ajudá-las a integrar-se à Sociedade de Socorro.","Apoiar sua participação na obra e nas atividades.","Coordenar com o líder de JAS e a presidência da SS."],
+    areas:[
+      { t:"Ministrar às irmãs", i:["Conheça cada jovem adulta solteira.","Alcance as menos ativas com amor."]},
+      { t:"Integrar à Sociedade de Socorro", i:["Ajude-as a sentir-se parte da irmandade.","Convide-as a participar e a servir."]},
+      { t:"Apoiar suas decisões", i:["Incentive o templo, a educação e o serviço.","Ofereça amizade e conselho quando pedido."]},
+      { t:"Coordenar o cuidado", i:["Trabalhe com o líder de JAS e a presidência da SS.","Comunique necessidades com discrição."]},
+      { t:"Servir com sensibilidade", i:["Respeite cada circunstância de vida.","Seja uma amiga constante."]},
+    ],
+    fecho:{ t:"Toda jovem adulta solteira precisa sentir que pertence. Sua ministração ajuda cada irmã a sentir o amor do Salvador por meio da Sociedade de Socorro.", f:"Manual Geral, cap. 14" },
+  }),
+  full("Presidente do Comitê de JAS", {
+    proposito:"Lidera o comitê de jovens adultos solteiros da ala, ajudando a planejar e realizar atividades de amizade, serviço e aprendizado, sob a direção do líder de JAS e do bispado.",
+    ref:"Manual Geral, 14.1.1.2",
+    resp:["Liderar o comitê de JAS da ala.","Planejar atividades de amizade, serviço e aprendizado.","Ajudar a alcançar e incluir cada JAS.","Coordenar com o líder de JAS e os líderes da ala."],
+    areas:[
+      { t:"Liderar o comitê", i:["Reúna e oriente os membros do comitê.","Delegue responsabilidades."]},
+      { t:"Planejar com propósito", i:["Equilibre serviço, aprendizado e convívio.","Ouça as ideias dos próprios JAS."]},
+      { t:"Incluir a todos", i:["Alcance os menos ativos e os recém-chegados.","Crie um ambiente acolhedor."]},
+      { t:"Coordenar", i:["Trabalhe com o líder de JAS e o bispado.","Alinhe-se com o comitê da estaca."]},
+      { t:"Servir pelo exemplo", i:["Dê o exemplo de amizade e participação.","Sirva com entusiasmo."]},
+    ],
+    fecho:{ t:"Ao reunir os jovens adultos solteiros em amizade e serviço, você ajuda cada um a sentir-se em casa e a crescer na fé.", f:"Manual Geral, cap. 14" },
+  }),
+  full("Membro do Comitê de JAS", {
+    proposito:"Ajuda o comitê de jovens adultos solteiros a planejar e realizar atividades e a alcançar cada JAS da ala com amizade e inclusão.",
+    ref:"Manual Geral, 14.1.1.2",
+    resp:["Colaborar no planejamento das atividades.","Assumir tarefas designadas pelo comitê.","Ajudar a alcançar e acolher cada JAS.","Apoiar as atividades de serviço e aprendizado."],
+    areas:[
+      { t:"Colaborar no planejamento", i:["Traga ideias que unam os JAS.","Participe das reuniões do comitê."]},
+      { t:"Assumir tarefas", i:["Cumpra o que lhe for designado.","Seja confiável e pontual."]},
+      { t:"Fazer amizade", i:["Acolha os que chegam.","Alcance os que costumam faltar."]},
+      { t:"Servir e aprender", i:["Ajude nos projetos de serviço.","Apoie as atividades de aprendizado."]},
+      { t:"Ser exemplo", i:["Participe com entusiasmo.","Convide amigos a se juntarem."]},
+    ],
+    fecho:{ t:"Cada gesto de amizade ajuda um jovem adulto a sentir-se parte da Igreja. Sua colaboração no comitê fortalece toda a comunidade de JAS.", f:"Manual Geral, cap. 14" },
+  }),
+];
+
+/* ---- CONTEÚDO COMPLETO: OUTROS CHAMADOS -------------------------------- */
+const OUTROS_BEMESTAR = [
+  full("Especialista de Bem-Estar e Autossuficiência", {
+    escritura:{ t:"Lembrai-vos, em todas as coisas, dos pobres e dos necessitados.", r:"Doutrina e Convênios 52:40" },
+    proposito:"Ajuda o bispado e os líderes a promover o bem-estar e a autossuficiência na ala, ensinando princípios e conectando os membros aos recursos disponíveis para fortalecerem a si mesmos e às suas famílias.",
+    ref:"Manual Geral, cap. 22",
+    resp:["Ajudar a promover a autossuficiência (emprego, finanças, educação, saúde).","Conectar os membros a grupos e recursos de autossuficiência.","Apoiar o bispado e a Sociedade de Socorro no bem-estar.","Ajudar a identificar necessidades e soluções."],
+    areas:[
+      { t:"Ensinar autossuficiência", i:["Divulgue os grupos e cursos de autossuficiência.","Ajude os membros a definir metas."]},
+      { t:"Conectar a recursos", i:["Oriente sobre serviços e recursos da Igreja.","Ajude a acessar formação e emprego."]},
+      { t:"Apoiar os líderes", i:["Trabalhe com o bispado e a Sociedade de Socorro.","Ajude a planejar o cuidado."]},
+      { t:"Ministrar com dignidade", i:["Trate cada pessoa com respeito.","Foque em capacitar, não apenas em socorrer."]},
+      { t:"Acompanhar o progresso", i:["Acompanhe os que buscam autossuficiência.","Comemore cada conquista."]},
+    ],
+    fecho:{ t:"Ajudar alguém a tornar-se autossuficiente é dar-lhe dignidade e esperança. Seu serviço fortalece famílias e prepara-as para ajudar outras.", f:"Manual Geral, cap. 22" },
+  }),
+  full("Facilitador de Grupo de Autossuficiência", {
+    proposito:"Conduz um grupo de autossuficiência (emprego, finanças pessoais, educação ou início de negócio), ajudando os participantes a aprenderem uns com os outros e a agirem, com base nos materiais da Igreja.",
+    ref:"Manual Geral, cap. 22",
+    resp:["Facilitar as reuniões do grupo (não ensinar como especialista).","Seguir o manual de autossuficiência do curso.","Incentivar cada participante a agir e a prestar contas.","Criar um ambiente de apoio mútuo."],
+    areas:[
+      { t:"Facilitar, não palestrar", i:["Deixe o grupo aprender em conjunto.","Siga o manual passo a passo."]},
+      { t:"Incentivar a ação", i:["Ajude cada um a assumir compromissos.","Acompanhe o cumprimento das metas."]},
+      { t:"Criar apoio mútuo", i:["Promova a confiança e o incentivo entre os membros.","Comemore os progressos."]},
+      { t:"Manter o foco", i:["Conduza reuniões objetivas e no horário.","Mantenha o grupo motivado até o fim do curso."]},
+      { t:"Apontar para princípios", i:["Ligue a autossuficiência aos princípios do evangelho.","Incentive fé e trabalho."]},
+    ],
+    fecho:{ t:"Ao facilitar um grupo, você ajuda pessoas a mudarem sua vida pelo aprendizado e pela ação. É um serviço que capacita e transforma.", f:"Manual Geral, cap. 22" },
+  }),
+  full("Líder de Atividades para Pessoas com Deficiências", {
+    proposito:"Ajuda a ala a incluir e a ministrar às pessoas com deficiências e às suas famílias, planejando adaptações e atividades para que todos possam participar plenamente.",
+    ref:"Manual Geral, cap. 22 (ver 38.8.20)",
+    resp:["Ajudar a identificar necessidades de pessoas com deficiências.","Planejar adaptações para reuniões, aulas e atividades.","Apoiar as famílias e os professores.","Promover a inclusão em toda a ala."],
+    areas:[
+      { t:"Conhecer as necessidades", i:["Converse com as pessoas e suas famílias.","Entenda como melhor apoiá-las."]},
+      { t:"Adaptar com criatividade", i:["Ajude a ajustar aulas e atividades.","Providencie recursos de acessibilidade."]},
+      { t:"Apoiar as famílias", i:["Ofereça alívio e amizade aos cuidadores.","Ajude a família a participar junta."]},
+      { t:"Orientar os líderes", i:["Ajude professores a incluir a todos.","Compartilhe recursos da Igreja."]},
+      { t:"Promover a inclusão", i:["Ajude a ala a acolher com naturalidade.","Combata o isolamento com amizade."]},
+    ],
+    fecho:{ t:"Cada filho de Deus é precioso e tem lugar em Sua Igreja. Ao promover a inclusão, você ajuda todos a sentirem o amor do Salvador.", f:"Manual Geral, cap. 22" },
+  }),
+  full("Especialista em Pessoas com Necessidades Especiais", {
+    proposito:"Ajuda a ala a atender às necessidades especiais de membros específicos, oferecendo apoio individual e ajudando líderes e professores a incluí-los com amor e dignidade.",
+    ref:"Manual Geral, cap. 22 (ver 38.8.20)",
+    resp:["Apoiar individualmente membros com necessidades especiais.","Ajudar professores e líderes a adaptarem o ensino.","Apoiar as famílias.","Promover a inclusão e a dignidade."],
+    areas:[
+      { t:"Apoiar individualmente", i:["Conheça a pessoa e suas necessidades.","Ofereça acompanhamento paciente."]},
+      { t:"Ajudar no ensino", i:["Auxilie professores a adaptarem as aulas.","Sugira recursos apropriados."]},
+      { t:"Apoiar as famílias", i:["Ofereça amizade e alívio aos cuidadores.","Ajude a família a participar."]},
+      { t:"Coordenar o cuidado", i:["Trabalhe com o bispado e as organizações.","Comunique necessidades com discrição."]},
+      { t:"Defender a dignidade", i:["Trate cada pessoa com respeito.","Promova a inclusão em tudo."]},
+    ],
+    fecho:{ t:"Servir quem tem necessidades especiais é servir ao próprio Salvador. Seu cuidado ajuda cada pessoa a sentir seu valor infinito aos olhos de Deus.", f:"Manual Geral, cap. 22" },
+  }),
+];
+
+const OUTROS_MUSICA = [
+  full("Líder de Música da Ala", {
+    escritura:{ t:"A canção dos justos é uma oração para mim, e será respondida com uma bênção.", r:"Doutrina e Convênios 25:12" },
+    proposito:"Coordena a música da ala sob a direção do bispado, ajudando a música sagrada a convidar o Espírito e a fortalecer a adoração nas reuniões, especialmente na reunião sacramental.",
+    ref:"Manual Geral, cap. 19",
+    resp:["Coordenar a música das reuniões da ala.","Ajudar a escolher hinos apropriados com o bispado.","Apoiar regentes, organistas e o coro.","Incentivar o canto congregacional."],
+    areas:[
+      { t:"Planejar a música", i:["Escolha hinos em harmonia com as reuniões.","Coordene regentes e músicos."]},
+      { t:"Apoiar os músicos", i:["Ajude a formar novos regentes e organistas.","Incentive e treine os voluntários."]},
+      { t:"Fortalecer o canto", i:["Incentive toda a congregação a cantar.","Ensine a importância dos hinos."]},
+      { t:"Cuidar dos recursos", i:["Assegure hinários e instrumentos disponíveis.","Zele pela qualidade e reverência."]},
+      { t:"Convidar o Espírito", i:["Priorize músicas dignas de adoração.","Ajude a criar reverência nas reuniões."]},
+    ],
+    fecho:{ t:"A música sagrada prepara o coração para adorar. Ao coordenar a música da ala, você ajuda o Espírito a estar presente em cada reunião.", f:"Manual Geral, cap. 19" },
+  }),
+  full("Regente da Reunião Sacramental", {
+    proposito:"Dirige o canto congregacional na reunião sacramental, ajudando os membros a adorarem por meio dos hinos e convidando o Espírito.",
+    ref:"Manual Geral, cap. 19",
+    resp:["Reger os hinos da reunião sacramental.","Combinar hinos e andamentos com o organista.","Ajudar a congregação a cantar com reverência.","Preparar-se para cada reunião."],
+    areas:[
+      { t:"Preparar-se", i:["Revise os hinos antes da reunião.","Combine com o organista os andamentos."]},
+      { t:"Reger com clareza", i:["Marque o compasso com naturalidade.","Conduza com reverência."]},
+      { t:"Envolver a congregação", i:["Incentive todos a cantarem.","Mantenha um ritmo adorativo."]},
+      { t:"Coordenar", i:["Alinhe-se com quem dirige a reunião.","Ajuste-se a mudanças de última hora."]},
+      { t:"Convidar o Espírito", i:["Ajude os hinos a serem uma oração.","Priorize a reverência sobre a performance."]},
+    ],
+    fecho:{ t:"Ao reger os hinos sacramentais, você ajuda a congregação a preparar o coração para o sacramento. O canto torna-se uma oração ao Senhor.", f:"Manual Geral, cap. 19" },
+  }),
+  full("Coordenador de Música da Ala", {
+    proposito:"Apoia o líder de música da ala na organização dos músicos e da programação musical das reuniões e eventos, garantindo que haja regentes e acompanhantes disponíveis.",
+    ref:"Manual Geral, cap. 19",
+    resp:["Ajudar a escalar regentes e acompanhantes.","Organizar a programação musical das reuniões.","Apoiar a comunicação entre os músicos.","Ajudar a cuidar dos recursos musicais."],
+    areas:[
+      { t:"Organizar a escala", i:["Assegure regente e acompanhante em cada reunião.","Combine com antecedência."]},
+      { t:"Apoiar os músicos", i:["Ajude com partituras e recursos.","Incentive e agradeça os voluntários."]},
+      { t:"Comunicar", i:["Confirme presenças e hinos.","Avise sobre mudanças."]},
+      { t:"Cuidar dos recursos", i:["Mantenha hinários e instrumentos em ordem.","Comunique necessidades."]},
+      { t:"Servir com ordem", i:["Antecipe as necessidades musicais.","Colabore com o líder de música."]},
+    ],
+    fecho:{ t:"A boa organização musical permite que a adoração flua sem falhas. Seu serviço nos bastidores abençoa cada reunião.", f:"Manual Geral, cap. 19" },
+  }),
+  full("Organista/Pianista da Ala", {
+    proposito:"Acompanha o canto congregacional nas reuniões da ala, apoiando a adoração e convidando o Espírito por meio da música sagrada.",
+    ref:"Manual Geral, cap. 19",
+    resp:["Acompanhar os hinos das reuniões.","Tocar prelúdio e poslúdio reverentes.","Combinar hinos e andamentos com o regente.","Chegar cedo para preparar-se."],
+    areas:[
+      { t:"Preparar-se", i:["Ensaie os hinos antes da reunião.","Confirme o repertório com o regente."]},
+      { t:"Acompanhar bem", i:["Toque no andamento adequado.","Apoie o canto sem se sobrepor."]},
+      { t:"Criar reverência", i:["Use o prelúdio para convidar o Espírito.","Escolha música digna e serena."]},
+      { t:"Coordenar", i:["Siga o regente com atenção.","Combine mudanças com antecedência."]},
+      { t:"Servir com constância", i:["Esteja disponível com regularidade.","Ajude a ensinar novos músicos."]},
+    ],
+    fecho:{ t:"O acompanhamento fiel sustenta a adoração de toda a congregação. Sua música ajuda o Espírito a tocar corações.", f:"Manual Geral, cap. 19" },
+  }),
+  full("Diretor de Coro (Regente do Coro da Ala)", {
+    proposito:"Dirige o coro da ala, ajudando os membros a adorarem e a servirem por meio da música, e preparando apresentações que convidem o Espírito nas reuniões.",
+    ref:"Manual Geral, cap. 19",
+    resp:["Reger e preparar o coro da ala.","Escolher músicas apropriadas com o líder de música e o bispado.","Ensaiar e incentivar os coristas.","Coordenar as apresentações nas reuniões."],
+    areas:[
+      { t:"Escolher bom repertório", i:["Prefira músicas sacras e adequadas às reuniões.","Considere o nível do coro."]},
+      { t:"Ensaiar com propósito", i:["Planeje ensaios objetivos e edificantes.","Ajude cada corista a melhorar."]},
+      { t:"Incluir e incentivar", i:["Acolha membros de todos os níveis.","Torne o coro um lugar de amizade."]},
+      { t:"Coordenar apresentações", i:["Combine datas com o bispado.","Prepare o coro com antecedência."]},
+      { t:"Convidar o Espírito", i:["Foque na adoração, não na performance.","Ajude o coro a testificar de Cristo."]},
+    ],
+    fecho:{ t:"Um coro que canta com o Espírito eleva toda a congregação. Ao dirigi-lo, você une os membros em adoração e testemunho.", f:"Manual Geral, cap. 19" },
+  }),
+  full("Pianista/Organista do Coro", {
+    proposito:"Acompanha o coro da ala nos ensaios e nas apresentações, apoiando o diretor e ajudando a música a convidar o Espírito.",
+    ref:"Manual Geral, cap. 19",
+    resp:["Acompanhar o coro nos ensaios e apresentações.","Preparar as partituras com antecedência.","Apoiar o diretor de coro.","Ajudar os coristas a aprenderem suas partes."],
+    areas:[
+      { t:"Preparar-se", i:["Ensaie as músicas antes dos encontros.","Domine as passagens difíceis."]},
+      { t:"Apoiar os ensaios", i:["Ajude o diretor a ensinar as vozes.","Toque as partes para os coristas."]},
+      { t:"Acompanhar com sensibilidade", i:["Siga o diretor com atenção.","Apoie o coro sem se sobrepor."]},
+      { t:"Coordenar", i:["Combine detalhes com o diretor.","Prepare-se para as apresentações."]},
+      { t:"Servir com dedicação", i:["Esteja presente nos ensaios.","Ajude com paciência e alegria."]},
+    ],
+    fecho:{ t:"O acompanhamento fiel dá segurança ao coro. Sua música ajuda cada apresentação a tocar o coração da congregação.", f:"Manual Geral, cap. 19" },
+  }),
+  full("Consultor de Música", {
+    proposito:"Ajuda a fortalecer a música na ala, ensinando e incentivando membros a reger e a acompanhar hinos, para que nunca falte música nas reuniões e organizações.",
+    ref:"Manual Geral, cap. 19",
+    resp:["Ensinar membros a reger e a tocar hinos.","Incentivar novos músicos, especialmente jovens e crianças.","Apoiar as organizações com necessidades musicais.","Promover o uso do curso de música da Igreja."],
+    areas:[
+      { t:"Ensinar a reger e tocar", i:["Ofereça aulas simples de regência e teclado.","Use o curso de música da Igreja."]},
+      { t:"Incentivar novos músicos", i:["Convide jovens e crianças a aprenderem.","Comemore cada progresso."]},
+      { t:"Apoiar as organizações", i:["Ajude a suprir necessidades musicais.","Forme voluntários para cada organização."]},
+      { t:"Multiplicar talentos", i:["Ajude a criar uma cultura de música na ala.","Incentive a prática constante."]},
+      { t:"Servir com paciência", i:["Ensine no ritmo de cada aluno.","Encoraje sem julgar."]},
+    ],
+    fecho:{ t:"Ao ensinar alguém a fazer música, você abençoa a ala por muitos anos. Cada novo músico é um presente para a adoração.", f:"Manual Geral, cap. 19" },
+  }),
+];
+
+const OUTROS_INSTALACOES = [
+  full("Representante do Edifício", {
+    escritura:{ t:"Organizai-vos; preparai todas as coisas necessárias; e estabelecei uma casa… uma casa de ordem.", r:"Doutrina e Convênios 88:119" },
+    proposito:"Ajuda a cuidar do edifício da reunião sob a direção do bispado, coordenando a limpeza, o uso e a conservação do prédio para que seja uma casa de ordem, digna da adoração.",
+    ref:"Manual Geral, cap. 35",
+    resp:["Coordenar a limpeza e a conservação do edifício.","Ajudar a organizar a participação dos membros nos cuidados.","Comunicar necessidades de reparo aos responsáveis.","Zelar pelo bom uso das instalações."],
+    areas:[
+      { t:"Organizar a limpeza", i:["Ajude a escalar os membros para a limpeza.","Assegure materiais disponíveis."]},
+      { t:"Cuidar da conservação", i:["Acompanhe o estado do prédio.","Comunique reparos necessários."]},
+      { t:"Coordenar o uso", i:["Ajude a agendar salas e recursos.","Evite conflitos de horário."]},
+      { t:"Ensinar o cuidado", i:["Incentive todos a zelarem pelo edifício.","Agradeça quem ajuda."]},
+      { t:"Manter a ordem e a reverência", i:["Ajude a manter o prédio limpo e digno.","Zele por um ambiente de adoração."]},
+    ],
+    fecho:{ t:"A casa do Senhor deve ser uma casa de ordem. Ao cuidar do edifício, você ajuda a criar um lugar digno para adorar e servir.", f:"Manual Geral, cap. 35" },
+  }),
+  full("Programador do Edifício", {
+    proposito:"Ajuda a agendar e coordenar o uso das salas e instalações do edifício, garantindo que reuniões, aulas e atividades tenham espaço adequado e sem conflitos.",
+    ref:"Manual Geral, cap. 35",
+    resp:["Agendar o uso das salas e instalações.","Evitar conflitos de horário entre organizações.","Comunicar a programação aos líderes.","Ajudar a preparar os espaços para os eventos."],
+    areas:[
+      { t:"Organizar a agenda", i:["Mantenha um calendário claro de uso.","Confirme reservas com antecedência."]},
+      { t:"Evitar conflitos", i:["Coordene os pedidos das organizações.","Resolva sobreposições com bom senso."]},
+      { t:"Comunicar", i:["Informe os líderes sobre a programação.","Avise mudanças prontamente."]},
+      { t:"Preparar os espaços", i:["Ajude a arrumar salas conforme o uso.","Verifique recursos necessários."]},
+      { t:"Servir com ordem", i:["Antecipe as necessidades.","Colabore com o representante do edifício."]},
+    ],
+    fecho:{ t:"Uma boa programação evita conflitos e permite que tudo aconteça com ordem. Seu serviço mantém a casa do Senhor funcionando em paz.", f:"Manual Geral, cap. 35" },
+  }),
+  full("Líder de Patrimônio", {
+    proposito:"Ajuda a cuidar do patrimônio e dos bens da ala, mantendo o controle de equipamentos e suprimentos e zelando por seu bom uso e conservação.",
+    ref:"Manual Geral, cap. 35",
+    resp:["Controlar equipamentos e suprimentos da ala.","Zelar pela conservação dos bens.","Comunicar necessidades de reposição ou reparo.","Apoiar as organizações com recursos."],
+    areas:[
+      { t:"Controlar o patrimônio", i:["Mantenha um inventário atualizado.","Registre empréstimos e devoluções."]},
+      { t:"Conservar os bens", i:["Acompanhe o estado dos equipamentos.","Providencie manutenção quando necessário."]},
+      { t:"Repor com prudência", i:["Comunique necessidades ao bispado.","Evite desperdício."]},
+      { t:"Apoiar as organizações", i:["Ajude a suprir recursos para as atividades.","Oriente o bom uso dos bens."]},
+      { t:"Servir com fidelidade", i:["Trate os bens da ala com cuidado.","Seja organizado e transparente."]},
+    ],
+    fecho:{ t:"Zelar pelos bens da ala é ser um bom despenseiro dos recursos consagrados. Seu cuidado permite que tudo esteja pronto para servir.", f:"Manual Geral, cap. 35" },
+  }),
+];
+
+const OUTROS_COMUNICACAO = [
+  full("Especialista de Tecnologia", {
+    proposito:"Ajuda a ala a usar bem a tecnologia da Igreja — equipamentos, sistemas e transmissões — apoiando reuniões, ensino e comunicação, sob a direção do bispado.",
+    ref:"Manual Geral, cap. 33 (ver 38.8.44)",
+    resp:["Apoiar equipamentos e sistemas da ala (som, transmissões, computadores).","Ajudar nas transmissões de reuniões quando autorizado.","Orientar líderes no uso das ferramentas da Igreja.","Zelar pela segurança e privacidade dos dados."],
+    areas:[
+      { t:"Apoiar as reuniões", i:["Garanta som e transmissão funcionando.","Prepare os equipamentos com antecedência."]},
+      { t:"Orientar os líderes", i:["Ensine a usar as ferramentas da Igreja.","Ajude com contas e acessos."]},
+      { t:"Cuidar dos equipamentos", i:["Acompanhe o estado dos aparelhos.","Comunique necessidades de reparo."]},
+      { t:"Zelar pela segurança", i:["Proteja dados e senhas.","Siga as diretrizes de privacidade da Igreja."]},
+      { t:"Servir com prontidão", i:["Esteja disponível antes das reuniões.","Resolva problemas com paciência."]},
+    ],
+    fecho:{ t:"A tecnologia bem usada aproxima e edifica. Seu serviço permite que reuniões e ensino alcancem a todos com clareza.", f:"Manual Geral, cap. 33" },
+  }),
+  full("Especialista de Comunicações por E-mail", {
+    proposito:"Ajuda a ala a comunicar-se de forma clara e oportuna, cuidando dos avisos por e-mail e outros canais autorizados, sob a direção do bispado e respeitando a privacidade dos membros.",
+    ref:"Manual Geral, cap. 33 (ver 38.8.44)",
+    resp:["Preparar e enviar comunicados da ala por e-mail.","Manter listas de contato atualizadas e seguras.","Respeitar a privacidade e as preferências dos membros.","Coordenar as mensagens com o bispado e os líderes."],
+    areas:[
+      { t:"Comunicar com clareza", i:["Escreva avisos objetivos e cordiais.","Envie com a antecedência necessária."]},
+      { t:"Cuidar das listas", i:["Mantenha os contatos atualizados.","Use cópia oculta para proteger endereços."]},
+      { t:"Respeitar a privacidade", i:["Não compartilhe dados sem autorização.","Respeite quem prefere não receber e-mails."]},
+      { t:"Coordenar as mensagens", i:["Alinhe os comunicados com o bispado.","Evite excesso de mensagens."]},
+      { t:"Servir com constância", i:["Seja pontual nos envios.","Confira as informações antes de enviar."]},
+    ],
+    fecho:{ t:"Boa comunicação une a ala e evita mal-entendidos. Seu serviço ajuda cada membro a sentir-se informado e lembrado.", f:"Manual Geral, cap. 33" },
+  }),
+  full("Intérprete da Ala", {
+    escritura:{ t:"Todo homem ouvirá a plenitude do evangelho em sua própria língua.", r:"Doutrina e Convênios 90:11" },
+    proposito:"Ajuda os membros que falam outro idioma (ou usam língua de sinais) a participarem plenamente das reuniões, interpretando com fidelidade e reverência, para que todos sintam o Espírito.",
+    ref:"Manual Geral, cap. 33 (ver 38.8.24)",
+    resp:["Interpretar reuniões e aulas para membros que precisam.","Preparar-se com o vocabulário do evangelho.","Interpretar com fidelidade e reverência.","Ajudar esses membros a sentirem-se incluídos."],
+    areas:[
+      { t:"Preparar-se", i:["Familiarize-se com os termos do evangelho.","Informe-se sobre os temas da reunião."]},
+      { t:"Interpretar com fidelidade", i:["Transmita a mensagem com exatidão.","Mantenha o tom e o Espírito."]},
+      { t:"Cuidar da reverência", i:["Fale com clareza e discrição.","Não acrescente comentários próprios."]},
+      { t:"Incluir os membros", i:["Ajude-os a sentir-se parte da congregação.","Verifique se estão acompanhando bem."]},
+      { t:"Servir com humildade", i:["Ore por ajuda para transmitir o Espírito.","Sirva com paciência e amor."]},
+    ],
+    fecho:{ t:"Cada pessoa merece ouvir o evangelho em sua própria língua. Ao interpretar com fidelidade, você abre o caminho para que o Espírito toque cada coração.", f:"Manual Geral, cap. 33" },
+  }),
+];
+
+const OUTROS_DIVERSOS = [
+  full("Especialista de História da Ala", {
+    escritura:{ t:"Haverá um registro mantido entre vós.", r:"Doutrina e Convênios 21:1" },
+    proposito:"Mantém um registro da história da ala, preservando os acontecimentos, os marcos espirituais e as experiências dignas de memória, para benefício das gerações futuras.",
+    ref:"Manual Geral, cap. 33",
+    resp:["Registrar os acontecimentos importantes da ala.","Preservar fotos, relatos e marcos espirituais.","Ajudar a organizar o histórico anual da unidade.","Guardar os registros com cuidado e discrição."],
+    areas:[
+      { t:"Registrar os fatos", i:["Anote eventos, chamados e marcos.","Mantenha um registro simples e regular."]},
+      { t:"Preservar memórias", i:["Guarde fotos e relatos edificantes.","Recolha testemunhos de experiências espirituais."]},
+      { t:"Organizar o histórico", i:["Ajude a preparar o relato anual da ala.","Mantenha os arquivos ordenados."]},
+      { t:"Envolver os membros", i:["Convide-os a compartilhar memórias.","Valorize a história de cada família."]},
+      { t:"Servir com discrição", i:["Trate as informações com respeito.","Preserve o que é sagrado."]},
+    ],
+    fecho:{ t:"A história da ala é um tesouro de fé para o futuro. Ao registrá-la, você preserva testemunhos que fortalecerão as próximas gerações.", f:"Manual Geral, cap. 33" },
+  }),
+  full("Representante de A Liahona", {
+    proposito:"Incentiva os membros a assinarem e a lerem A Liahona (a revista da Igreja), ajudando-os a acessar as mensagens dos profetas e a fortalecer a fé no lar.",
+    ref:"Manual Geral, cap. 33",
+    resp:["Promover as assinaturas de A Liahona na ala.","Ajudar os membros a assinar (impresso ou digital).","Incentivar a leitura das mensagens dos profetas.","Divulgar conteúdos edificantes da revista."],
+    areas:[
+      { t:"Promover a revista", i:["Fale das bênçãos de ler A Liahona.","Ajude quem deseja assinar."]},
+      { t:"Facilitar o acesso", i:["Mostre como acessar a versão digital gratuita.","Ajude com a assinatura impressa."]},
+      { t:"Incentivar a leitura", i:["Sugira artigos edificantes.","Ligue as mensagens ao estudo em família."]},
+      { t:"Alcançar a todos", i:["Lembre-se dos que não têm internet.","Ajude idosos e novos membros."]},
+      { t:"Servir com entusiasmo", i:["Compartilhe o que edifica você.","Testifique das mensagens dos profetas."]},
+    ],
+    fecho:{ t:"As mensagens dos profetas fortalecem a fé no lar. Ao promover A Liahona, você leva a voz do Senhor a mais famílias.", f:"Manual Geral, cap. 33" },
+  }),
+  full("Representante do FSY", {
+    proposito:"Ajuda a ala a preparar e apoiar os jovens para participarem do FSY (Para o Vigor da Juventude — a conferência de jovens), cuidando das inscrições, informações e do preparo espiritual.",
+    ref:"Manual Geral, cap. 11 e 10 (ver diretrizes do FSY)",
+    resp:["Divulgar o FSY e ajudar nas inscrições dos jovens.","Coordenar informações com os pais e líderes.","Apoiar o preparo espiritual e prático dos jovens.","Assegurar o cumprimento das normas de proteção de menores."],
+    areas:[
+      { t:"Informar e inscrever", i:["Divulgue datas, custos e requisitos.","Ajude as famílias com as inscrições."]},
+      { t:"Coordenar com os pais", i:["Comunique-se com clareza sobre a logística.","Reúna autorizações necessárias."]},
+      { t:"Preparar os jovens", i:["Incentive o preparo espiritual e a dignidade.","Ajude os jovens a irem com expectativa."]},
+      { t:"Apoiar os líderes", i:["Trabalhe com as Moças e o Sacerdócio Aarônico.","Ajude a organizar transporte e acompanhamento."]},
+      { t:"Proteger sempre", i:["Assegure a norma dos dois adultos responsáveis.","Siga as diretrizes de proteção de menores."]},
+    ],
+    fecho:{ t:"O FSY pode ser um marco espiritual na vida de um jovem. Ao ajudá-los a participar, você abre portas para experiências que fortalecem o testemunho.", f:"Manual Geral, cap. 10 e 11" },
+  }),
+  full("Bibliotecário da Ala", {
+    proposito:"Cuida da biblioteca (centro de recursos) da capela, organizando materiais e equipamentos e ajudando os líderes e professores a encontrarem o que precisam para ensinar.",
+    ref:"Manual Geral, 13.7.2",
+    resp:["Organizar e manter os recursos da biblioteca.","Controlar o empréstimo de materiais e equipamentos.","Ajudar os professores a localizar recursos.","Zelar pelos suprimentos e equipamentos."],
+    areas:[
+      { t:"Organizar os recursos", i:["Mantenha os materiais catalogados.","Reponha suprimentos quando faltar."]},
+      { t:"Ajudar os professores", i:["Auxilie na busca de materiais.","Ensine a usar os equipamentos."]},
+      { t:"Controlar empréstimos", i:["Registre o que sai e retorna.","Cuide da conservação."]},
+      { t:"Preparar-se antes das aulas", i:["Esteja disponível antes das reuniões.","Deixe os recursos prontos."]},
+      { t:"Servir com gentileza", i:["Atenda a todos com cortesia.","Antecipe as necessidades dos professores."]},
+    ],
+    fecho:{ t:"Bons recursos, bem organizados, tornam o ensino mais eficaz. Seu serviço discreto abençoa cada professor e cada aula.", f:"Manual Geral, cap. 13" },
+  }),
+  full("Recepcionista da Ala", {
+    escritura:{ t:"Não vos esqueçais da hospitalidade… porque por ela alguns… hospedaram anjos.", r:"Hebreus 13:2" },
+    proposito:"Recebe com cordialidade os membros e visitantes na entrada da capela, ajudando cada pessoa a sentir-se bem-vinda e a encontrar as reuniões e as salas.",
+    ref:"Manual Geral, cap. 29",
+    resp:["Receber e orientar membros e visitantes.","Ajudar as pessoas a encontrar reuniões e salas.","Acolher especialmente os recém-chegados e visitantes.","Ajudar a criar um ambiente reverente e acolhedor."],
+    areas:[
+      { t:"Acolher com calor", i:["Cumprimente cada pessoa com um sorriso.","Dê atenção especial aos visitantes."]},
+      { t:"Orientar", i:["Ajude a encontrar salas e reuniões.","Informe horários e avisos."]},
+      { t:"Cuidar dos recém-chegados", i:["Apresente-os a alguém da ala.","Ajude-os a sentir-se em casa."]},
+      { t:"Zelar pela reverência", i:["Ajude a manter o silêncio antes das reuniões.","Colabore com quem preside."]},
+      { t:"Servir com amor", i:["Esteja atento a quem parece perdido.","Trate cada um como faria o Salvador."]},
+    ],
+    fecho:{ t:"Um acolhimento caloroso pode mudar a experiência de alguém na Igreja. Ao receber com amor, você reflete o convite do Salvador: “Vinde a mim.”", f:"Manual Geral, cap. 29" },
+  }),
+  full("Líder Masculino dos Membros Adultos Solteiros", {
+    proposito:"Ajuda a alcançar, incluir e ministrar aos membros adultos solteiros (geralmente com 31 anos ou mais) da ala, ajudando-os a sentir-se valorizados e a participar plenamente da obra.",
+    ref:"Manual Geral, 14.2",
+    resp:["Ministrar aos membros adultos solteiros e incluí-los.","Ajudar a planejar oportunidades de amizade e serviço.","Coordenar com o quórum de élderes e o bispado.","Incentivar a participação na obra de salvação e exaltação."],
+    areas:[
+      { t:"Incluir cada um", i:["Conheça os adultos solteiros da ala.","Alcance os que se sentem à margem."]},
+      { t:"Promover amizade", i:["Incentive amizades sinceras.","Ajude cada um a sentir-se necessário."]},
+      { t:"Coordenar o cuidado", i:["Trabalhe com o quórum de élderes.","Comunique necessidades ao bispado."]},
+      { t:"Envolver na obra", i:["Convide-os a servir e a ministrar.","Reconheça seus dons e contribuições."]},
+      { t:"Servir com sensibilidade", i:["Respeite cada circunstância de vida.","Ofereça amizade sem pressão."]},
+    ],
+    fecho:{ t:"Todo membro adulto solteiro é parte vital da ala. Ao incluí-los e amá-los, você ajuda cada um a sentir plenamente seu lugar no reino.", f:"Manual Geral, cap. 14" },
+  }),
+  full("Líder Feminino dos Membros Adultos Solteiros", {
+    proposito:"Ajuda a alcançar, incluir e ministrar às irmãs adultas solteiras (geralmente com 31 anos ou mais) da ala, ajudando-as a sentir-se valorizadas e a participar plenamente da obra.",
+    ref:"Manual Geral, 14.2",
+    resp:["Ministrar às irmãs adultas solteiras e incluí-las.","Ajudar a planejar oportunidades de amizade e serviço.","Coordenar com a Sociedade de Socorro e o bispado.","Incentivar a participação na obra de salvação e exaltação."],
+    areas:[
+      { t:"Incluir cada uma", i:["Conheça as irmãs adultas solteiras da ala.","Alcance as que se sentem à margem."]},
+      { t:"Promover amizade", i:["Incentive amizades sinceras.","Ajude cada uma a sentir-se necessária."]},
+      { t:"Coordenar o cuidado", i:["Trabalhe com a Sociedade de Socorro.","Comunique necessidades ao bispado."]},
+      { t:"Envolver na obra", i:["Convide-as a servir e a ministrar.","Reconheça seus dons e contribuições."]},
+      { t:"Servir com sensibilidade", i:["Respeite cada circunstância de vida.","Ofereça amizade sem pressão."]},
+    ],
+    fecho:{ t:"Toda irmã adulta solteira é parte vital da ala. Ao incluí-las e amá-las, você ajuda cada uma a sentir plenamente seu lugar no reino.", f:"Manual Geral, cap. 14" },
+  }),
+];
+
 /* ---- ORGANIZAÇÕES (ordem exata da HOME) -------------------------------- */
 const ORGS = [
   { id:"bispado", nome:"Bispado", icone:"⛪", cor:"#8B6B3D", chamados: BISPADO },
@@ -2387,70 +3473,29 @@ const ORGS = [
   ]},
 
   { id:"mocas", nome:"Moças", icone:"🌷", cor:"#9A6480", grupos:[
-    { nome:"Presidência", chamados:[
-      "Presidente das Moças","Primeira Conselheira das Moças","Segunda Conselheira das Moças","Secretária das Moças",
-    ].map(t) },
-    { nome:"Guardiãs da Luz (16+)", chamados:[
-      "Presidente da classe","Primeira Conselheira","Segunda Conselheira","Secretária","Consultora",
-    ].map(t) },
-    { nome:"Mensageiras da Esperança (14–15)", chamados:[
-      "Presidente da classe","Primeira Conselheira","Segunda Conselheira","Secretária","Consultora",
-    ].map(t) },
-    { nome:"Edificadoras da Fé (12–13)", chamados:[
-      "Presidente da classe","Primeira Conselheira","Segunda Conselheira","Secretária","Consultora",
-    ].map(t) },
-    { nome:"Gerais", chamados:[
-      "Especialista das Moças","Especialista das Moças — Atividades","Especialista das Moças — Esportes",
-      "Especialista das Moças — Diretora de Acampamento","Especialista das Moças — Diretora Adjunta de Acampamento",
-    ].map(t) },
+    { nome:"Presidência", chamados: MOCAS_PRESIDENCIA },
+    { nome:"Guardiãs da Luz (16+)", chamados: classeMocas("Guardiãs da Luz","16 anos ou mais") },
+    { nome:"Mensageiras da Esperança (14–15)", chamados: classeMocas("Mensageiras da Esperança","14 e 15 anos") },
+    { nome:"Edificadoras da Fé (12–13)", chamados: classeMocas("Edificadoras da Fé","12 e 13 anos") },
+    { nome:"Gerais", chamados: MOCAS_GERAIS },
   ]},
 
-  { id:"escola-dominical", nome:"Escola Dominical", icone:"📖", cor:"#6B5B43", chamados:[
-    "Presidente da Escola Dominical","Primeiro Conselheiro da Escola Dominical",
-    "Segundo Conselheiro da Escola Dominical","Secretário da Escola Dominical",
-    "Professor(a) da Escola Dominical","Especialista do Centro de Recursos (Biblioteca)",
-  ].map(t) },
+  { id:"escola-dominical", nome:"Escola Dominical", icone:"📖", cor:"#6B5B43", chamados: ESCOLA_DOMINICAL },
 
-  { id:"primaria", nome:"Primária", icone:"🧸", cor:"#8B7B3D", chamados:[
-    "Presidente da Primária","Primeira Conselheira da Primária","Segunda Conselheira da Primária",
-    "Secretária da Primária","Líder de Música da Primária","Pianista da Primária",
-    "Professor(a) da Primária","Líder do Berçário","Líder de Atividades da Primária",
-  ].map(t) },
+  { id:"primaria", nome:"Primária", icone:"🧸", cor:"#8B7B3D", chamados: PRIMARIA },
 
-  { id:"missionarios-ala", nome:"Missionários de Ala", icone:"✉️", cor:"#46685A", chamados:[
-    "Líder da Missão da Ala","Assistente do Líder da Missão da Ala","Missionário da Ala",
-  ].map(t) },
+  { id:"missionarios-ala", nome:"Missionários de Ala", icone:"✉️", cor:"#46685A", chamados: MISSIONARIOS },
 
-  { id:"templo-historia", nome:"Templo e História da Família", icone:"🌳", cor:"#57755F", chamados:[
-    "Líder de Templo e História da Família da Ala","Consultor de Templo e História da Família da Ala","Indexador",
-  ].map(t) },
+  { id:"templo-historia", nome:"Templo e História da Família", icone:"🌳", cor:"#57755F", chamados: TEMPLO_HF },
 
-  { id:"jas", nome:"Jovens Adultos Solteiros", icone:"🌟", cor:"#7B5B8B", chamados:[
-    "Líder dos Jovens Adultos Solteiros","Consultor dos Jovens Adultos Solteiros",
-    "Consultora das Irmãs Jovens Adultas Solteiras da Sociedade de Socorro",
-    "Presidente do Comitê de JAS","Membro do Comitê de JAS",
-  ].map(t) },
+  { id:"jas", nome:"Jovens Adultos Solteiros", icone:"🌟", cor:"#7B5B8B", chamados: JAS },
 
   { id:"outros", nome:"Outros Chamados", icone:"🗂️", cor:"#6B6456", grupos:[
-    { nome:"Bem-Estar e Autossuficiência", chamados:[
-      "Especialista de Bem-Estar e Autossuficiência","Facilitador de Grupo de Autossuficiência",
-      "Líder de Atividades para Pessoas com Deficiências","Especialista em Pessoas com Necessidades Especiais",
-    ].map(t) },
-    { nome:"Música da Ala", chamados:[
-      "Líder de Música da Ala","Regente da Reunião Sacramental","Coordenador de Música da Ala",
-      "Organista/Pianista da Ala","Diretor de Coro (Regente do Coro da Ala)","Pianista/Organista do Coro","Consultor de Música",
-    ].map(t) },
-    { nome:"Instalações / Patrimônio", chamados:[
-      "Representante do Edifício","Programador do Edifício","Líder de Patrimônio",
-    ].map(t) },
-    { nome:"Comunicação / Tecnologia", chamados:[
-      "Especialista de Tecnologia","Especialista de Comunicações por E-mail","Intérprete da Ala",
-    ].map(t) },
-    { nome:"Diversos", chamados:[
-      "Especialista de História da Ala","Representante de A Liahona","Representante do FSY",
-      "Bibliotecário da Ala","Recepcionista da Ala","Líder Masculino dos Membros Adultos Solteiros",
-      "Líder Feminino dos Membros Adultos Solteiros",
-    ].map(t) },
+    { nome:"Bem-Estar e Autossuficiência", chamados: OUTROS_BEMESTAR },
+    { nome:"Música da Ala", chamados: OUTROS_MUSICA },
+    { nome:"Instalações / Patrimônio", chamados: OUTROS_INSTALACOES },
+    { nome:"Comunicação / Tecnologia", chamados: OUTROS_COMUNICACAO },
+    { nome:"Diversos", chamados: OUTROS_DIVERSOS },
   ]},
 ];
 

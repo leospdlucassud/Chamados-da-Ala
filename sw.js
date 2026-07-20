@@ -1,7 +1,7 @@
 /* Service Worker — Magnifique seu Chamado
    Estratégia network-first p/ o app shell, com fallback ao cache offline.
    Bump o CACHE a cada release (mesma lógica da versão do app). */
-const CACHE = "chamado-v1.4.0";
+const CACHE = "chamado-v1.5.0";
 const ASSETS = ["./", "./index.html", "./manifest.webmanifest"];
 
 self.addEventListener("install", e=>{
