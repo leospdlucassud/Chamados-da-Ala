@@ -12,6 +12,8 @@ seu chamado, com base no **Manual Geral** e em fontes oficiais da Igreja.
 - **Modo claro/escuro** e **tamanho de fonte ajustável** (preferências salvas localmente).
 - Navegação em 3 níveis: **Organizações → Chamados → Detalhe**, com **busca global**.
 - Design "estilo Liahona": fundo off-white quente, tipografia serifada, acento dourado.
+- **Citações clicáveis**: cada referência ao Manual Geral e cada escritura abre a
+  página oficial correspondente em churchofjesuschrist.org (PT-BR).
 
 ## Estrutura de navegação
 

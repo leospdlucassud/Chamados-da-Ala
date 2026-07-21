@@ -197,6 +197,95 @@
     font-size:11px; color:var(--ink-soft); line-height:1.6;
     font-family:system-ui,sans-serif;
   }
+
+  /* ======================================================================
+     REFINAMENTO VISUAL (v1.6) — mais elegante e detalhado
+     ====================================================================== */
+  :root{ --serif:Georgia,"Times New Roman","Palatino Linotype",serif;
+         --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  body{ -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+
+  /* Links externos (Manual e escrituras) */
+  a.ext{ color:var(--org); text-decoration:none; font-style:normal; white-space:nowrap;
+    border-bottom:1px solid color-mix(in srgb, var(--org) 38%, transparent); padding-bottom:1px;
+    transition:background .12s,border-color .12s; }
+  a.ext::after{ content:"↗"; font-size:.72em; margin-left:2px; vertical-align:.15em; opacity:.6; }
+  a.ext:hover{ border-bottom-color:var(--org);
+    background:color-mix(in srgb, var(--org) 9%, transparent); }
+
+  /* ---- HERO da home ---- */
+  .hero{ text-align:center; padding:24px 16px 6px; margin:-14px -14px 10px;
+    background:radial-gradient(120% 80% at 50% 0%, color-mix(in srgb, var(--accent) 9%, var(--bg)), var(--bg)); }
+  .hero .mark{ font-size:24px; color:var(--accent); line-height:1; }
+  .hero h1{ font-family:var(--serif); font-size:26px; font-weight:700; margin:8px 0 4px; letter-spacing:.01em; }
+  .hero .sub{ font-size:13px; color:var(--ink-soft); font-style:italic; max-width:300px; margin:0 auto; }
+  .orn{ display:flex; align-items:center; justify-content:center; gap:12px;
+    color:var(--accent-soft); margin:14px auto 2px; max-width:210px; }
+  .orn::before,.orn::after{ content:""; height:1px; flex:1; }
+  .orn::before{ background:linear-gradient(90deg,transparent,var(--line-strong)); }
+  .orn::after{ background:linear-gradient(90deg,var(--line-strong),transparent); }
+  .orn .d{ font-size:11px; }
+
+  /* ---- Cartões: pílula de contagem + hover em telas grandes ---- */
+  .card .s2{ display:block; margin-top:5px; }
+  .card .count{ display:inline-block; font-family:var(--sans); font-size:11px; font-weight:700;
+    color:var(--org); background:color-mix(in srgb, var(--org) 12%, var(--panel));
+    border:1px solid color-mix(in srgb, var(--org) 26%, var(--line));
+    border-radius:999px; padding:2px 9px; }
+  @media (hover:hover){
+    .card{ transition:transform .13s, box-shadow .13s, border-color .13s; }
+    .card:hover{ transform:translateY(-1px);
+      border-color:color-mix(in srgb, var(--org) 36%, var(--line));
+      box-shadow:0 5px 16px rgba(60,45,15,.11); }
+    html[data-theme="escuro"] .card:hover{ box-shadow:0 5px 16px rgba(0,0,0,.4); }
+  }
+
+  /* ---- Capa do detalhe ---- */
+  .cover{ margin-bottom:6px; padding-bottom:26px; }
+  .cover .kicker{ display:inline-block; font-family:var(--sans); font-size:11px; font-weight:700;
+    letter-spacing:.13em; text-transform:uppercase; color:var(--org);
+    background:color-mix(in srgb, var(--org) 10%, var(--panel));
+    border:1px solid color-mix(in srgb, var(--org) 24%, var(--line));
+    border-radius:999px; padding:4px 11px; }
+  .cover h2{ font-size:28px; margin-top:11px; letter-spacing:.005em; }
+  .cover .escr{ border-left:none; padding-left:0; margin:16px 0 0; font-size:15.5px; line-height:1.5; }
+  .cover .escr .qm{ font-family:var(--serif); font-size:34px; color:var(--accent-soft);
+    line-height:0; vertical-align:-14px; margin-right:1px; opacity:.7; }
+  .cover .escr .ref{ margin-top:7px; font-size:12.5px; }
+
+  /* ---- Seções com ícone ---- */
+  .sec > h3 .ic{ color:var(--org); font-size:13px; opacity:.9; }
+  .sec > h3 .lbl{ white-space:nowrap; }
+  .sec.proposito p{ font-size:16.5px; line-height:1.6; }
+  .ref-tag{ display:inline-flex; align-items:center; gap:5px; background:var(--panel-2);
+    border:1px solid var(--line); border-radius:999px; padding:4px 11px; font-style:normal;
+    font-size:12px; margin-top:8px; }
+  .ref-tag .ic{ font-size:12px; }
+
+  /* ---- Responsabilidades com check dourado ---- */
+  ul.resp li{ padding:6px 0 6px 26px; }
+  ul.resp li::before{ content:"✓"; background:none; border-radius:0; width:auto; height:auto;
+    top:6px; left:3px; color:var(--org); font-weight:700; font-size:14px; }
+
+  /* ---- Áreas práticas ---- */
+  .area{ border-left:3px solid color-mix(in srgb, var(--org) 55%, var(--line));
+    transition:box-shadow .13s; }
+  @media (hover:hover){ .area:hover{ box-shadow:0 4px 14px rgba(60,45,15,.09); } }
+  .area .atit{ align-items:flex-start; }
+  .area .atxt{ padding-top:1px; }
+  .area .num{ background:var(--org); color:#fff; border:none; box-shadow:0 1px 3px rgba(0,0,0,.15); }
+
+  /* ---- Fechamento como testemunho ---- */
+  .fecho{ position:relative; padding-top:20px; }
+  .fecho::before{ content:"“"; position:absolute; top:6px; left:12px; font-family:var(--serif);
+    font-size:44px; line-height:1; color:color-mix(in srgb, var(--org) 32%, transparent); }
+  .fecho p{ padding-left:24px; }
+  .fecho .fonte{ padding-left:24px; }
+
+  /* ---- Rodapé com fio dourado ---- */
+  footer{ position:relative; }
+  footer::before{ content:""; position:absolute; top:-1px; left:50%; transform:translateX(-50%);
+    width:60px; height:2px; background:linear-gradient(90deg,transparent,var(--accent-soft),transparent); }
 </style>
 </head>
 <body>
@@ -230,7 +319,7 @@
    Conteúdo fundamentado no Manual Geral (PT-BR). Nunca nominal (só o cargo).
    ========================================================================== */
 
-const VERSAO = "1.5.0";
+const VERSAO = "1.6.0";
 const DATA_STR = "20/07/2026";
 
 const slug = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
@@ -3536,6 +3625,67 @@ function applyPrefs(){
    NAVEGAÇÃO (estado em memória — sem reload)
    ========================================================================== */
 let state = { view:"home", orgId:null, chamadoId:null, cameFromSearch:false };
+/* ==========================================================================
+   LINKS PARA O SITE OFICIAL (Manual Geral e escrituras) — churchofjesuschrist.org
+   URLs validadas (retornam 200). Numeração de seções liga ao capítulo.
+   ========================================================================== */
+const norm = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+
+const MANUAL_CH = {
+  7:"7", 8:"8-elders-quorum", 9:"9-relief-society", 10:"10-aaronic-priesthood",
+  11:"11-young-women", 12:"12-primary", 13:"13-sunday-school", 14:"14-single-members",
+  16:"16-living-the-gospel", 17:"17-teaching-the-gospel", 18:"18-priesthood-ordinances-and-blessings",
+  19:"19-music", 20:"20-activities", 21:"21-ministering", 22:"22-providing-for-temporal-needs",
+  23:"23", 25:"25-temple-and-family-history-work", 26:"26-temple-recommends",
+  29:"29-meetings-in-the-church", 30:"30-callings-in-the-church",
+  32:"32-repentance-and-membership-councils", 33:"33-records-and-reports",
+  34:"34-finances-and-audits", 35:"35", 38:"38-church-policies-and-guidelines",
+};
+function manualUrl(ch){
+  return "https://www.churchofjesuschrist.org/study/manual/general-handbook/"
+    + (MANUAL_CH[ch] || String(ch)) + "?lang=por";
+}
+const manualLink = (label,ch)=>`<a class="ext" href="${manualUrl(ch)}" target="_blank" rel="noopener">${label}</a>`;
+// Para o campo de referência (só contém números do Manual): liga todos os tokens.
+function linkManualRef(text){
+  return text.replace(/\d+(?:\.\d+)*/g, tok=>{
+    const ch = parseInt(tok,10);
+    return (ch>=1 && ch<=38) ? manualLink(tok,ch) : tok;
+  });
+}
+// Para texto corrido (responsabilidades): liga só seções com ponto (7.1.4) e "cap. N",
+// evitando idades ("8 anos") e escrituras ("D&C 20:46").
+function linkManualInline(text){
+  text = text.replace(/\b\d+\.\d+(?:\.\d+)*\b/g, tok=>{
+    const ch = parseInt(tok,10);
+    return (ch>=1 && ch<=38) ? manualLink(tok,ch) : tok;
+  });
+  text = text.replace(/cap\.\s*(\d+)/g, (m,n)=>{
+    const ch = parseInt(n,10);
+    return (ch>=1 && ch<=38) ? "cap. "+manualLink(n,ch) : m;
+  });
+  return text;
+}
+
+const LIVROS = {
+  "1 pedro":["nt","1-pet"], "eclesiastes":["ot","eccl"], "mosias":["bofm","mosiah"],
+  "1 corintios":["nt","1-cor"], "moroni":["bofm","moro"], "alma":["bofm","alma"],
+  "1 timoteo":["nt","1-tim"], "hebreus":["nt","heb"], "marcos":["nt","mark"],
+  "malaquias":["ot","mal"], "jeremias":["ot","jer"], "proverbios":["ot","prov"],
+  "3 nefi":["bofm","3-ne"], "doutrina e convenios":["dc-testament","dc"],
+};
+function escrituraUrl(ref){
+  const m = ref.match(/^(.+?)\s+(\d+):(\d+)/);
+  if(!m) return null;
+  const map = LIVROS[norm(m[1]).trim()];
+  if(!map) return null;
+  return `https://www.churchofjesuschrist.org/study/scriptures/${map[0]}/${map[1]}/${m[2]}?lang=por&id=p${m[3]}#p${m[3]}`;
+}
+function linkEscrituraRef(ref){
+  const u = escrituraUrl(ref);
+  return u ? `<a class="ext" href="${u}" target="_blank" rel="noopener">${ref}</a>` : ref;
+}
+
 const el = {
   view: document.getElementById("view"),
   back: document.getElementById("btnBack"),
@@ -3562,13 +3712,25 @@ function renderHome(){
   el.back.style.display="none"; setOrgColor(null);
   setHeader("Magnifique seu Chamado","Guia de chamados da Ala");
   el.view.innerHTML="";
-  el.view.appendChild(hint("Toque numa organização ou use a busca acima."));
-  const cards = ORGS.map((org,i)=>{
+  el.view.appendChild(node(`<div class="hero">
+      <div class="mark">✦</div>
+      <h1>Magnifique seu Chamado</h1>
+      <div class="sub">Guia dos chamados da Ala, fundamentado no Manual Geral</div>
+      <div class="orn"><span class="d">✦</span></div>
+    </div>`));
+  const list=document.createElement("div"); list.className="list";
+  ORGS.forEach((org,i)=>{
     const n = org.chamados ? org.chamados.length : org.grupos.reduce((a,g)=>a+g.chamados.length,0);
-    return card(org.icone, `${i+1}. ${org.nome}`, `${n} chamado${n!==1?"s":""}`, org.cor,
-      ()=>go({view:"org",orgId:org.id}));
+    const b=document.createElement("button"); b.className="card"; b.style.setProperty("--org",org.cor);
+    b.innerHTML=`<span class="ico">${org.icone}</span>
+      <span class="txt"><span class="t"></span>
+        <span class="s2"><span class="count">${n} chamado${n!==1?"s":""}</span></span></span>
+      <span class="chev">›</span>`;
+    b.querySelector(".t").textContent = `${i+1}. ${org.nome}`;
+    b.onclick=()=>go({view:"org",orgId:org.id});
+    list.appendChild(b);
   });
-  el.view.appendChild(listWrap(cards));
+  el.view.appendChild(list);
 }
 
 /* NÍVEL 2 — SUBMENU DA ORGANIZAÇÃO */
@@ -3605,17 +3767,18 @@ function renderDetalhe(){
 
   const wrap=document.createElement("div"); wrap.className="detail";
 
-  // Cabeçalho tipográfico (ou foto, se houver c.foto)
+  // Capa (tipográfica ou foto)
   const cover=document.createElement("div"); cover.className="cover";
+  const kicker = org.nome + (c.grupo? " · "+c.grupo : "");
   const escrHtml = c.c && c.c.escritura
-    ? `<div class="escr">“${c.c.escritura.t}”<span class="ref">— ${c.c.escritura.r}</span></div>` : "";
+    ? `<div class="escr"><span class="qm">“</span>${c.c.escritura.t}”<span class="ref">— ${linkEscrituraRef(c.c.escritura.r)}</span></div>` : "";
   if(c.foto){
     cover.classList.add("hasimg");
     cover.innerHTML=`<img src="${c.foto}" alt="">
-      <div class="capbar"><div class="org">${org.nome}${c.grupo? " · "+c.grupo : ""}</div>
+      <div class="capbar"><span class="kicker">${kicker}</span>
       <h2>${c.titulo}</h2>${escrHtml}</div>`;
   } else {
-    cover.innerHTML=`<div class="org">${org.nome}${c.grupo? " · "+c.grupo : ""}</div>
+    cover.innerHTML=`<span class="kicker">${kicker}</span>
       <h2>${c.titulo}</h2>${escrHtml}`;
   }
   wrap.appendChild(cover);
@@ -3629,24 +3792,24 @@ function renderDetalhe(){
 
   const d = c.c;
   // Propósito
-  const sp = section("Propósito");
+  const sp = section("Propósito","◈","proposito");
   sp.appendChild(node(`<p>${d.proposito}</p>`));
-  if(d.ref) sp.appendChild(node(`<span class="ref-tag">${d.ref}</span>`));
+  if(d.ref) sp.appendChild(node(`<span class="ref-tag"><span class="ic">📖</span><span>${linkManualRef(d.ref)}</span></span>`));
   wrap.appendChild(sp);
 
   // Responsabilidades
-  const sr = section("Responsabilidades");
+  const sr = section("Responsabilidades","❖");
   const ul=document.createElement("ul"); ul.className="resp";
-  d.resp.forEach(r=>{ const li=document.createElement("li"); li.innerHTML=r; ul.appendChild(li); });
+  d.resp.forEach(r=>{ const li=document.createElement("li"); li.innerHTML=linkManualInline(r); ul.appendChild(li); });
   sr.appendChild(ul); wrap.appendChild(sr);
 
   // Como magnificar (5 áreas)
-  const sm = section("Como magnificar seu chamado");
+  const sm = section("Como magnificar seu chamado","✦");
   d.areas.forEach((a,i)=>{
     const box=document.createElement("div"); box.className="area";
     const head=document.createElement("div"); head.className="atit";
-    head.innerHTML=`<span class="num">${i+1}</span><span></span>`;
-    head.querySelector("span:last-child").textContent=a.t;
+    head.innerHTML=`<span class="num">${i+1}</span><span class="atxt"></span>`;
+    head.querySelector(".atxt").textContent=a.t;
     box.appendChild(head);
     const uli=document.createElement("ul");
     a.i.forEach(x=>{ const li=document.createElement("li"); li.textContent=x; uli.appendChild(li); });
@@ -3655,9 +3818,8 @@ function renderDetalhe(){
   wrap.appendChild(sm);
 
   // Fechamento
-  const sf=document.createElement("div"); sf.className="sec";
-  sf.innerHTML=`<h3>Fechamento</h3>
-    <div class="fecho"><p>${d.fecho.t}</p><span class="fonte">${d.fecho.f}</span></div>`;
+  const sf=section("Fechamento","❧");
+  sf.appendChild(node(`<div class="fecho"><p>${d.fecho.t}</p><span class="fonte">Fonte: ${linkManualRef(d.fecho.f)}</span></div>`));
   wrap.appendChild(sf);
 
   el.view.appendChild(wrap);
@@ -3692,7 +3854,13 @@ function card(ico, titulo, sub, cor, onClick, plainIco){
   b.onclick=onClick; return b;
 }
 function listWrap(cards){ const d=document.createElement("div"); d.className="list"; cards.forEach(c=>d.appendChild(c)); return d; }
-function section(titulo){ const s=document.createElement("div"); s.className="sec"; const h=document.createElement("h3"); h.textContent=titulo; s.appendChild(h); return s; }
+function section(titulo, icon, cls){
+  const s=document.createElement("div"); s.className="sec"+(cls?" "+cls:"");
+  const h=document.createElement("h3");
+  h.innerHTML=(icon?`<span class="ic">${icon}</span>`:"")+`<span class="lbl"></span>`;
+  h.querySelector(".lbl").textContent=titulo;
+  s.appendChild(h); return s;
+}
 function hint(txt){ const p=document.createElement("p"); p.className="hint"; p.textContent=txt; return p; }
 function node(html){ const d=document.createElement("div"); d.innerHTML=html.trim(); return d.firstElementChild; }
 
