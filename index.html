@@ -286,6 +286,66 @@
   footer{ position:relative; }
   footer::before{ content:""; position:absolute; top:-1px; left:50%; transform:translateX(-50%);
     width:60px; height:2px; background:linear-gradient(90deg,transparent,var(--accent-soft),transparent); }
+
+  /* ---- Favoritos na Home ---- */
+  .fav-toggle .ico{ color:var(--accent) !important; }
+
+  /* ---- Barra de ações no detalhe (Favoritar / Compartilhar / Imprimir) ---- */
+  .actbar{ display:flex; gap:8px; margin:14px 0 4px; }
+  .actbar button{
+    flex:1; min-height:42px; padding:0 10px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    border:1px solid var(--line-strong); background:var(--panel-2); color:var(--ink);
+    border-radius:10px; font-family:inherit; font-size:14px; font-weight:700;
+  }
+  .actbar button:active{ background:var(--line); }
+  .actbar button .ai{ font-size:16px; line-height:1; }
+  .actbar button.on{ background:color-mix(in srgb, var(--accent) 14%, var(--panel));
+    border-color:var(--accent-soft); color:var(--accent); }
+
+  /* ---- Destaque do termo buscado ---- */
+  mark{ background:color-mix(in srgb, var(--accent) 26%, transparent); color:inherit;
+    border-radius:3px; padding:0 1px; }
+
+  /* ---- Toast ---- */
+  .toast{
+    position:fixed; left:50%; bottom:calc(20px + env(safe-area-inset-bottom,0));
+    transform:translate(-50%,20px); z-index:60; max-width:88%;
+    background:var(--ink); color:var(--bg); padding:11px 16px; border-radius:10px;
+    font-size:14px; box-shadow:0 6px 24px rgba(0,0,0,.28);
+    opacity:0; pointer-events:none; transition:opacity .2s, transform .2s;
+  }
+  .toast.show{ opacity:1; transform:translate(-50%,0); }
+
+  /* ---- Banner "Atualizar" ---- */
+  .updbar{
+    position:fixed; left:12px; right:12px; bottom:calc(14px + env(safe-area-inset-bottom,0));
+    max-width:var(--maxw); margin:0 auto; z-index:60;
+    display:flex; align-items:center; gap:12px; justify-content:space-between;
+    background:var(--accent); color:#fff; padding:11px 12px 11px 16px; border-radius:12px;
+    box-shadow:0 8px 30px rgba(60,45,15,.35);
+    transform:translateY(140%); transition:transform .28s ease;
+  }
+  .updbar.show{ transform:translateY(0); }
+  .updbar span{ font-size:14px; }
+  .updbar button{
+    flex:0 0 auto; cursor:pointer; border:1px solid rgba(255,255,255,.55);
+    background:rgba(255,255,255,.14); color:#fff; font-family:inherit; font-weight:700;
+    font-size:14px; padding:8px 14px; border-radius:9px;
+  }
+  .updbar button:active{ background:rgba(255,255,255,.28); }
+
+  /* ---- Impressão ---- */
+  @media print{
+    :root{ --page:#fff; --bg:#fff; --panel:#fff; --panel-2:#fff; --ink:#000; --ink-soft:#333;
+      --line:#ccc; --line-strong:#bbb; }
+    header, footer, .actbar, .search, .btn-back, .h-tools{ display:none !important; }
+    .app{ max-width:none; border:none !important; box-shadow:none !important; }
+    main{ padding:0; }
+    .area{ break-inside:avoid; }
+    .sec{ break-inside:avoid; }
+    a.ext{ color:#000; text-decoration:none; }
+  }
 </style>
 </head>
 <body>
@@ -319,8 +379,8 @@
    Conteúdo fundamentado no Manual Geral (PT-BR). Nunca nominal (só o cargo).
    ========================================================================== */
 
-const VERSAO = "1.7.0";
-const DATA_STR = "20/07/2026";
+const VERSAO = "1.8.0";
+const DATA_STR = "22/07/2026";
 
 const slug = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
   .replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");
@@ -4384,24 +4444,67 @@ const findChamado = id => INDEX.find(c=>c.id===id);
    PREFERÊNCIAS (localStorage com try/catch — só tema e tamanho de fonte)
    ========================================================================== */
 const ZOOMS = [0.9, 1.0, 1.12, 1.28];
-let prefs = { tema:"claro", zoomIdx:1 };
+// Tema padrão = preferência do sistema (só no 1º acesso, sem nada salvo).
+const temaSistema = (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches)
+  ? "escuro" : "claro";
+let prefs = { tema:temaSistema, zoomIdx:1, favs:[] };
 try{
   const raw = localStorage.getItem("mag_prefs");
-  if(raw){ const p=JSON.parse(raw); if(p.tema) prefs.tema=p.tema; if(Number.isInteger(p.zoomIdx)) prefs.zoomIdx=p.zoomIdx; }
+  if(raw){ const p=JSON.parse(raw);
+    if(p.tema) prefs.tema=p.tema;
+    if(Number.isInteger(p.zoomIdx)) prefs.zoomIdx=p.zoomIdx;
+    if(Array.isArray(p.favs)) prefs.favs=p.favs;
+  }
 }catch(e){}
 function savePrefs(){ try{ localStorage.setItem("mag_prefs", JSON.stringify(prefs)); }catch(e){} }
+// Alguns navegadores antigos (iOS < 16.4) ignoram CSS `zoom`; usamos transform como reserva.
+const ZOOM_OK = (()=>{ const d=document.createElement("div"); d.style.zoom="2"; return !!d.style.zoom; })();
 function applyPrefs(){
   document.documentElement.setAttribute("data-theme", prefs.tema);
-  document.body.style.zoom = ZOOMS[prefs.zoomIdx];
+  const s = ZOOMS[prefs.zoomIdx];
+  if(ZOOM_OK){ document.body.style.zoom = s; }
+  else{
+    const app = document.querySelector(".app");
+    if(app){ app.style.transformOrigin="top center"; app.style.transform = s===1 ? "" : "scale("+s+")"; }
+  }
   document.getElementById("themeBtn").textContent = prefs.tema==="escuro" ? "☀" : "☾";
   document.querySelector('meta[name=theme-color]').setAttribute("content",
     prefs.tema==="escuro" ? "#201C15" : "#8B6B3D");
 }
 
+/* Favoritos --------------------------------------------------------------- */
+const isFav = id => prefs.favs.includes(id);
+function toggleFav(id){
+  const i = prefs.favs.indexOf(id);
+  if(i>=0) prefs.favs.splice(i,1); else prefs.favs.unshift(id);
+  savePrefs();
+}
+
 /* ==========================================================================
    NAVEGAÇÃO (estado em memória — sem reload)
    ========================================================================== */
-let state = { view:"home", orgId:null, chamadoId:null, cameFromSearch:false };
+let state = { view:"home", orgId:null, chamadoId:null, q:"" };
+
+/* ---- Roteamento por hash (deep links + botão voltar do navegador/celular) ----
+   #/                → Home
+   #/o/<orgId>       → Organização
+   #/c/<chamadoId>   → Detalhe (compartilhável)
+   #/b/<termo>       → Busca                                                   */
+function stateToHash(s){
+  if(s.view==="org")      return "#/o/"+s.orgId;
+  if(s.view==="detalhe")  return "#/c/"+s.chamadoId;
+  if(s.view==="busca")    return "#/b/"+encodeURIComponent(s.q||"");
+  return "#/";
+}
+function hashToState(){
+  const h = location.hash.replace(/^#\/?/,"");
+  const seg = h.split("/")[0];
+  const arg = h.slice(seg.length+1);
+  if(seg==="o" && findOrg(arg))        return { view:"org", orgId:arg };
+  if(seg==="c" && findChamado(arg))    return { view:"detalhe", chamadoId:arg };
+  if(seg==="b")                        return { view:"busca", q:decodeURIComponent(arg||"") };
+  return { view:"home" };
+}
 /* ==========================================================================
    LINKS PARA O SITE OFICIAL (Manual Geral e escrituras) — churchofjesuschrist.org
    URLs validadas (retornam 200). Numeração de seções liga ao capítulo.
@@ -4471,17 +4574,34 @@ const el = {
   search: document.getElementById("search"),
   footer: document.getElementById("footer"),
 };
-function go(next){ state = { ...state, ...next }; render(); window.scrollTo(0,0); }
+function go(next, replace){
+  state = { ...state, ...next };
+  const hash = stateToHash(state);
+  if(replace) history.replaceState(null,"",hash);
+  else        history.pushState(null,"",hash);
+  render();
+  if(!replace) window.scrollTo(0,0);
+}
+window.addEventListener("popstate", ()=>{
+  state = { ...state, ...hashToState() };
+  render(); window.scrollTo(0,0);
+});
 function setHeader(t2, s2){ el.hT.textContent=t2; el.hS.textContent=s2||""; }
 function setOrgColor(cor){ document.documentElement.style.setProperty("--org", cor || "var(--accent)"); }
 
 function render(){
   el.footer.textContent = `v${VERSAO} · ${DATA_STR} · © 2026 Léo Lucas · Todos os direitos reservados`;
-  const q = el.search.value.trim();
-  if(q){ el.back.style.display="none"; setOrgColor(null); return renderBusca(q); }
-  if(state.view==="home") return renderHome();
+  // Mantém o campo de busca em sincronia com o estado (importante ao voltar/deep-link).
+  const focado = document.activeElement===el.search;
+  if(state.view==="busca"){
+    if(!focado && el.search.value.trim()!==state.q) el.search.value = state.q;
+    el.back.style.display="none"; setOrgColor(null);
+    return renderBusca(state.q);
+  }
+  if(!focado && el.search.value) el.search.value="";
   if(state.view==="org") return renderOrg();
   if(state.view==="detalhe") return renderDetalhe();
+  return renderHome();
 }
 
 /* NÍVEL 1 — HOME */
@@ -4495,6 +4615,21 @@ function renderHome(){
       <div class="sub">Guia dos chamados da Ala, fundamentado no Manual Geral</div>
       <div class="orn"><span class="d">✦</span></div>
     </div>`));
+
+  // Favoritos fixados no topo (ignora ids que não existem mais).
+  const favs = prefs.favs.map(findChamado).filter(Boolean);
+  if(favs.length){
+    const h=document.createElement("div"); h.className="subhead"; h.textContent="★ Meus favoritos";
+    el.view.appendChild(h);
+    el.view.appendChild(listWrap(favs.map(c=>{
+      const org=findOrg(c.orgId);
+      const sub=c.orgNome+(c.grupo? " · "+c.grupo : "");
+      return card(c.orgIcone, c.titulo, sub, org.cor, ()=>go({view:"detalhe",orgId:c.orgId,chamadoId:c.id}));
+    })));
+    const h2=document.createElement("div"); h2.className="subhead"; h2.textContent="Organizações";
+    el.view.appendChild(h2);
+  }
+
   const list=document.createElement("div"); list.className="list";
   ORGS.forEach((org,i)=>{
     const n = org.chamados ? org.chamados.length : org.grupos.reduce((a,g)=>a+g.chamados.length,0);
@@ -4514,11 +4649,11 @@ function renderHome(){
 function renderOrg(){
   const org = findOrg(state.orgId);
   setOrgColor(org.cor);
-  el.back.style.display="flex"; el.back.onclick=()=>go({view:"home",orgId:null});
+  el.back.style.display="flex"; el.back.onclick=()=>history.back();
   setHeader(org.nome,"Escolha um chamado");
   el.view.innerHTML="";
   const mk = c => card("›", c.titulo, c.c? null : "conteúdo em preparação", org.cor,
-    ()=>go({view:"detalhe",orgId:org.id,chamadoId:c.id,cameFromSearch:false}), true);
+    ()=>go({view:"detalhe",orgId:org.id,chamadoId:c.id}), true);
   if(org.chamados){
     el.view.appendChild(listWrap(org.chamados.map(mk)));
   } else {
@@ -4536,9 +4671,7 @@ function renderDetalhe(){
   const org = findOrg(c.orgId);
   setOrgColor(org.cor);
   el.back.style.display="flex";
-  el.back.onclick = state.cameFromSearch
-    ? ()=>{ el.search.value=""; go({view:"home",orgId:null,chamadoId:null}); }
-    : ()=>go({view:"org",orgId:c.orgId,chamadoId:null});
+  el.back.onclick = ()=>history.back();
   setHeader(c.titulo, org.nome + (c.grupo? " · "+c.grupo : ""));
   el.view.innerHTML="";
 
@@ -4559,6 +4692,7 @@ function renderDetalhe(){
       <h2>${c.titulo}</h2>${escrHtml}`;
   }
   wrap.appendChild(cover);
+  wrap.appendChild(buildActbar(c));
 
   if(!c.c){
     wrap.appendChild(node(`<div class="prep"><b>Conteúdo em preparação.</b><br>
@@ -4604,31 +4738,95 @@ function renderDetalhe(){
 
 /* BUSCA — leva direto ao Nível 3 */
 function renderBusca(q){
-  setHeader("Resultados da busca","“"+q+"”");
-  const nq = slug(q);
-  const res = INDEX.filter(c=>slug(c.titulo).includes(nq) || slug(c.orgNome).includes(nq));
+  q = (q||"").trim();
+  setHeader("Resultados da busca", q ? "“"+q+"”" : "");
   el.view.innerHTML="";
-  if(!res.length){ el.view.appendChild(node(`<div class="empty">Nenhum chamado encontrado para “${q}”.</div>`)); return; }
+  const nq = slug(q);
+  if(!nq){ el.view.appendChild(hint("Digite para buscar em todas as organizações.")); return; }
+  const res = INDEX.filter(c=>slug(c.titulo).includes(nq) || slug(c.orgNome).includes(nq));
+  if(!res.length){
+    // textContent evita injeção de HTML pelo termo digitado.
+    const d=document.createElement("div"); d.className="empty";
+    d.textContent="Nenhum chamado encontrado para “"+q+"”.";
+    el.view.appendChild(d); return;
+  }
   el.view.appendChild(hint(`${res.length} resultado${res.length!==1?"s":""}.`));
   el.view.appendChild(listWrap(res.map(c=>{
     const org=findOrg(c.orgId);
     const sub=c.orgNome+(c.grupo? " · "+c.grupo : "");
-    return card(c.orgIcone, c.titulo, sub, org.cor, ()=>{ el.search.value="";
-      go({view:"detalhe",orgId:c.orgId,chamadoId:c.id,cameFromSearch:true}); });
+    return card(c.orgIcone, c.titulo, sub, org.cor,
+      ()=>go({view:"detalhe",orgId:c.orgId,chamadoId:c.id}), false, q);
   })));
 }
 
 /* ---- Helpers de UI ---- */
-function card(ico, titulo, sub, cor, onClick, plainIco){
+function card(ico, titulo, sub, cor, onClick, plainIco, hlQuery){
   const b=document.createElement("button"); b.className="card";
   if(cor) b.style.setProperty("--org", cor);
   b.innerHTML=`<span class="ico">${ico}</span>
     <span class="txt"><span class="t"></span>${sub?'<span class="s"></span>':''}</span>
     <span class="chev">›</span>`;
-  b.querySelector(".t").textContent=titulo;
+  const tEl=b.querySelector(".t");
+  if(hlQuery) highlightInto(tEl, titulo, hlQuery); else tEl.textContent=titulo;
   if(sub) b.querySelector(".s").textContent=sub;
   if(plainIco){ const ic=b.querySelector(".ico"); ic.style.background="transparent"; ic.style.border="none"; ic.style.color="var(--accent-soft)"; }
   b.onclick=onClick; return b;
+}
+// Destaca o termo no texto (sem acento/caixa), montando nós de texto + <mark> com segurança.
+function foldArr(s){ return Array.from(s).map(c=>(c.normalize("NFD")[0]||c).toLowerCase()); }
+function highlightInto(elm, text, q){
+  elm.textContent="";
+  const raw=Array.from(text), hay=foldArr(text).join(""), needle=foldArr((q||"").trim()).join("");
+  if(!needle){ elm.textContent=text; return; }
+  let from=0, idx;
+  while((idx=hay.indexOf(needle, from))!==-1){
+    if(idx>from) elm.appendChild(document.createTextNode(raw.slice(from,idx).join("")));
+    const m=document.createElement("mark"); m.textContent=raw.slice(idx, idx+needle.length).join("");
+    elm.appendChild(m);
+    from=idx+needle.length;
+  }
+  if(from<raw.length) elm.appendChild(document.createTextNode(raw.slice(from).join("")));
+}
+
+/* ---- Barra de ações do detalhe: Favoritar / Compartilhar / Imprimir ---- */
+function buildActbar(c){
+  const bar=document.createElement("div"); bar.className="actbar";
+  const favBtn=document.createElement("button");
+  const paintFav=()=>{
+    const on=isFav(c.id);
+    favBtn.className = on ? "on" : "";
+    favBtn.innerHTML = `<span class="ai">${on?"★":"☆"}</span><span>${on?"Favorito":"Favoritar"}</span>`;
+  };
+  paintFav();
+  favBtn.onclick=()=>{ toggleFav(c.id); paintFav(); toast(isFav(c.id)?"Adicionado aos favoritos.":"Removido dos favoritos."); };
+
+  const shBtn=document.createElement("button");
+  shBtn.innerHTML=`<span class="ai">↗</span><span>Compartilhar</span>`;
+  shBtn.onclick=()=>shareChamado(c);
+
+  const prBtn=document.createElement("button");
+  prBtn.innerHTML=`<span class="ai">🖨</span><span>Imprimir</span>`;
+  prBtn.onclick=()=>window.print();
+
+  bar.append(favBtn, shBtn, prBtn);
+  return bar;
+}
+function chamadoUrl(c){ return location.origin+location.pathname+"#/c/"+c.id; }
+function shareChamado(c){
+  const url=chamadoUrl(c);
+  const data={ title:"Magnifique seu Chamado — "+c.titulo, text:c.titulo+" · "+c.orgNome, url };
+  if(navigator.share){ navigator.share(data).catch(()=>{}); return; }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(()=>toast("Link copiado!"), ()=>toast(url));
+  } else { toast(url); }
+}
+let toastTimer;
+function toast(msg){
+  let t=document.getElementById("toast");
+  if(!t){ t=document.createElement("div"); t.id="toast"; t.className="toast"; document.body.appendChild(t); }
+  t.textContent=msg;
+  requestAnimationFrame(()=>t.classList.add("show"));
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove("show"), 2600);
 }
 function listWrap(cards){ const d=document.createElement("div"); d.className="list"; cards.forEach(c=>d.appendChild(c)); return d; }
 function section(titulo, icon, cls){
@@ -4642,15 +4840,55 @@ function hint(txt){ const p=document.createElement("p"); p.className="hint"; p.t
 function node(html){ const d=document.createElement("div"); d.innerHTML=html.trim(); return d.firstElementChild; }
 
 /* ---- Eventos ---- */
-el.search.addEventListener("input", render);
+el.search.addEventListener("input", ()=>{
+  const q=el.search.value.trim();
+  // Empurra 1 entrada no histórico ao iniciar a busca; digitar depois só substitui.
+  if(q) go({view:"busca", q}, state.view==="busca");
+  else if(state.view==="busca") go({view:"home"}, true);
+});
 document.getElementById("themeBtn").onclick=()=>{ prefs.tema = prefs.tema==="escuro"?"claro":"escuro"; applyPrefs(); savePrefs(); };
 document.getElementById("fPlus").onclick=()=>{ if(prefs.zoomIdx<ZOOMS.length-1){ prefs.zoomIdx++; applyPrefs(); savePrefs(); } };
 document.getElementById("fMinus").onclick=()=>{ if(prefs.zoomIdx>0){ prefs.zoomIdx--; applyPrefs(); savePrefs(); } };
 
+/* ---- Banner "Atualizar" quando há nova versão ---- */
+function showUpdateBanner(reg){
+  if(document.getElementById("updBanner")) return;
+  const b=document.createElement("div"); b.id="updBanner"; b.className="updbar";
+  b.innerHTML=`<span>Nova versão disponível.</span><button type="button">Atualizar</button>`;
+  b.querySelector("button").onclick=()=>{
+    if(reg.waiting) reg.waiting.postMessage({type:"SKIP_WAITING"});
+  };
+  document.body.appendChild(b);
+  requestAnimationFrame(()=>b.classList.add("show"));
+}
+
 /* ---- Service Worker ---- */
 if("serviceWorker" in navigator){
-  window.addEventListener("load", ()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+  window.addEventListener("load", ()=>{
+    navigator.serviceWorker.register("sw.js").then(reg=>{
+      if(reg.waiting) showUpdateBanner(reg);
+      reg.addEventListener("updatefound", ()=>{
+        const nw=reg.installing; if(!nw) return;
+        nw.addEventListener("statechange", ()=>{
+          if(nw.state==="installed" && navigator.serviceWorker.controller) showUpdateBanner(reg);
+        });
+      });
+    }).catch(()=>{});
+    let recarregando=false;
+    navigator.serviceWorker.addEventListener("controllerchange", ()=>{
+      if(recarregando) return; recarregando=true; location.reload();
+    });
+  });
 }
+
+/* ---- Inicialização do roteador (semeia a Home como base p/ deep links) ---- */
+(function initRouter(){
+  const inicial = hashToState();
+  history.replaceState(null,"","#/");
+  if(inicial.view!=="home") history.pushState(null,"", stateToHash(inicial));
+  state = { ...state, ...inicial };
+  if(inicial.view==="busca") el.search.value = inicial.q;
+})();
 
 applyPrefs();
 render();

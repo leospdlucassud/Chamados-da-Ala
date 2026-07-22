@@ -9,8 +9,13 @@ seu chamado, com base no **Manual Geral** e em fontes oficiais da Igreja.
 - **Single-file** (`index.html`) — HTML, CSS e JS embutidos, sem build nem dependências externas.
 - **PWA instalável** e com funcionamento offline (`manifest.webmanifest` + `sw.js`).
 - **Mobile-first** e responsivo (coluna de leitura emoldurada em telas grandes).
-- **Modo claro/escuro** e **tamanho de fonte ajustável** (preferências salvas localmente).
-- Navegação em 3 níveis: **Organizações → Chamados → Detalhe**, com **busca global**.
+- **Modo claro/escuro** (segue o tema do sistema no 1º acesso) e **tamanho de fonte ajustável**
+  (preferências salvas localmente).
+- Navegação em 3 níveis: **Organizações → Chamados → Detalhe**, com **busca global**
+  (termo destacado nos resultados).
+- **Deep links** por hash (`#/c/<chamado>`) e suporte ao **botão voltar** do navegador/celular.
+- **Favoritos** fixados no topo da Home, **compartilhar** (Web Share/copiar link) e **imprimir** o chamado.
+- **Aviso de nova versão** ("Atualizar") quando o Service Worker detecta uma atualização.
 - Design "estilo Liahona": fundo off-white quente, tipografia serifada, acento dourado.
 - **Citações clicáveis**: cada referência ao Manual Geral e cada escritura abre a
   página oficial correspondente em churchofjesuschrist.org (PT-BR).
