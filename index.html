@@ -379,8 +379,8 @@
    Conteúdo fundamentado no Manual Geral (PT-BR). Nunca nominal (só o cargo).
    ========================================================================== */
 
-const VERSAO = "1.8.0";
-const DATA_STR = "22/07/2026";
+const VERSAO = "1.8.1";
+const DATA_STR = "25/07/2026";
 
 const slug = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
   .replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");
@@ -1056,7 +1056,7 @@ const QUORUM_ELDERES = [
 
   full("Professor do Quórum de Élderes", {
     escritura:{ t:"Ensinai-vos uns aos outros palavras de sabedoria… buscai aprendizado, sim, pelo estudo e também pela fé.", r:"Doutrina e Convênios 88:118" },
-    proposito:"Ensina nas reuniões dominicais do quórum, conforme a necessidade determinada pelo bispo e pela presidência, ajudando os irmãos a aprenderem e a viverem o evangelho de Jesus Cristo.",
+    proposito:"Ensina nas reuniões dominicais do quórum — que, a partir de setembro de 2026, passam a ocorrer todos os domingos, em 25 minutos —, conforme a necessidade determinada pelo bispo e pela presidência, ajudando os irmãos a aprenderem e a viverem o evangelho de Jesus Cristo.",
     ref:"Manual Geral, 8.3.5 (ver cap. 17)",
     resp:[
       "Preparar e ministrar as aulas a partir dos materiais aprovados (mensagens da conferência geral e recursos indicados).",
@@ -1663,7 +1663,7 @@ const SOCIEDADE_SOCORRO = [
 
   full("Professora da Sociedade de Socorro", {
     escritura:{ t:"Buscai aprendizado, sim, pelo estudo e também pela fé.", r:"Doutrina e Convênios 88:118" },
-    proposito:"Ensina nas Reuniões de Domingo da Sociedade de Socorro, conforme o plano da presidência, ajudando as irmãs a aprenderem e a viverem o evangelho de Jesus Cristo. As reuniões de ensino ocorrem no segundo e no quarto domingos, geralmente com base nas mensagens da conferência geral mais recente.",
+    proposito:"Ensina nas Reuniões de Domingo da Sociedade de Socorro, conforme o plano da presidência, ajudando as irmãs a aprenderem e a viverem o evangelho de Jesus Cristo. A partir de setembro de 2026, as reuniões de ensino passam a ocorrer todos os domingos, em 25 minutos, geralmente com base nas mensagens da conferência geral mais recente.",
     ref:"Manual Geral, 9.3.4 (ver cap. 17)",
     resp:[
       "Preparar e ministrar as aulas a partir dos materiais aprovados (mensagens da conferência geral e recursos indicados).",
@@ -2321,7 +2321,7 @@ const SA_SACERDOTES = [
     ref:"Manual Geral, 10.5",
     resp:[
       "Apoiar e orientar a presidência do quórum sem tomar o lugar dos rapazes.",
-      "Ensinar as aulas do quórum quando designado.",
+      "Ensinar as aulas do quórum quando designado, com o guia “Para a Força dos Jovens” (novo currículo dos jovens a partir de setembro de 2026).",
       "Participar das reuniões e atividades e ministrar aos rapazes.",
       "Cumprir rigorosamente a norma dos dois adultos responsáveis e as diretrizes de Proteção da Criança e do Jovem.",
       "Ajudar os rapazes a se prepararem para o templo, a missão e o Sacerdócio de Melquisedeque.",
@@ -2600,7 +2600,7 @@ const SA_MESTRES = [
     ref:"Manual Geral, 10.5",
     resp:[
       "Apoiar e orientar a presidência do quórum sem tomar o lugar dos rapazes.",
-      "Ensinar as aulas do quórum quando designado.",
+      "Ensinar as aulas do quórum quando designado, com o guia “Para a Força dos Jovens” (novo currículo dos jovens a partir de setembro de 2026).",
       "Participar das reuniões e atividades e ministrar aos rapazes.",
       "Cumprir a norma dos dois adultos responsáveis e as diretrizes de Proteção da Criança e do Jovem.",
       "Ajudar os rapazes a se prepararem para receber o Sacerdócio de Melquisedeque no futuro.",
@@ -2649,7 +2649,7 @@ const SA_MESTRES = [
       "Ajudar a ministrar aos rapazes.",
       "Assegurar a presença de dois adultos responsáveis.",
       "Substituir o consultor quando necessário.",
-      "Ajudar a ensinar as aulas do quórum quando pedido.",
+      "Ajudar a ensinar as aulas do quórum quando pedido, com o guia “Para a Força dos Jovens” (novo currículo dos jovens a partir de setembro de 2026).",
       "Ministrar aos rapazes e apoiar suas famílias.",
     ],
     areas:[
@@ -2879,7 +2879,7 @@ const SA_DIACONOS = [
     ref:"Manual Geral, 10.5",
     resp:[
       "Apoiar e orientar a presidência do quórum sem tomar o lugar dos rapazes.",
-      "Ensinar as aulas do quórum quando designado.",
+      "Ensinar as aulas do quórum quando designado, com o guia “Para a Força dos Jovens” (novo currículo dos jovens a partir de setembro de 2026).",
       "Participar das reuniões e atividades e ministrar aos rapazes.",
       "Cumprir a norma dos dois adultos responsáveis e as diretrizes de Proteção da Criança e do Jovem.",
       "Ajudar os rapazes a se prepararem para avançar no Sacerdócio Aarônico.",
@@ -3383,7 +3383,7 @@ function classeMocas(faixa, idade){
       ref:"Manual Geral, 11.3.5",
       resp:[
         "Apoiar e orientar a presidência de classe sem tomar o lugar das jovens.",
-        "Ensinar as reuniões dominicais da classe quando designada.",
+        "Ensinar as reuniões dominicais da classe quando designada, com o guia “Para a Força dos Jovens” (novo currículo dos jovens a partir de setembro de 2026).",
         "Participar das reuniões e atividades e ministrar às moças.",
         "Cumprir a norma dos dois adultos responsáveis e as diretrizes de Proteção da Criança e do Jovem (11.6.1).",
         "Ajudar as jovens a se prepararem para as ordenanças do templo e para o futuro.",
@@ -3491,6 +3491,7 @@ const ESCOLA_DOMINICAL = [
       "Manter os registros de frequência.",
       "Ajudar a chamar e a apoiar novos professores, com aprovação do bispado.",
       "Promover a melhoria do ensino em todas as organizações.",
+      "Quando o conselho da ala decidir oferecê-la, organizar a classe opcional “Alicerces do Evangelho” para novos membros e amigos, e ajudar a chamar e a apoiar seu professor.",
     ],
     areas:[
       { t:"Apoiar os professores", i:[
@@ -3500,9 +3501,9 @@ const ESCOLA_DOMINICAL = [
         "Reconheça e agradeça o esforço de cada professor.",
       ]},
       { t:"Dirigir o conselho de professores", i:[
-        "Reúna os professores de todas as organizações periodicamente.",
+        "Reúna os professores das organizações uma vez por mês.",
         "Concentre-se em princípios de ensino, não só em logística.",
-        "Programe as reuniões trimestrais do conselho.",
+        "Programe as reuniões mensais do conselho, durante um dos blocos de aula de 25 minutos (a partir de setembro de 2026).",
         "Trabalhe uma prática de ensino por vez.",
       ]},
       { t:"Organizar as classes", i:[
@@ -3567,7 +3568,7 @@ const ESCOLA_DOMINICAL = [
   }),
   full("Professor(a) da Escola Dominical", {
     escritura:{ t:"E dar-vos-ei pastores segundo o meu coração, que vos apascentarão com ciência e com inteligência.", r:"Jeremias 3:15" },
-    proposito:"Ensina as classes da Escola Dominical usando “Vem, e Segue-Me”, ajudando os membros a aprenderem e a viverem o evangelho de Jesus Cristo. Ensina à maneira do Salvador: por amor, pelo Espírito e convidando à ação.",
+    proposito:"Ensina as classes da Escola Dominical usando “Vem, e Segue-Me”, ajudando os membros a aprenderem e a viverem o evangelho de Jesus Cristo. Ensina à maneira do Salvador: por amor, pelo Espírito e convidando à ação. A partir de setembro de 2026, as aulas passam a ser semanais, de 25 minutos, com ênfase em debates significativos ligados ao estudo feito no lar — sem a preocupação de cobrir todo o material.",
     ref:"Manual Geral, 13.2.3 (ver cap. 17)",
     resp:[
       "Preparar-se com as escrituras e o material “Vem, e Segue-Me”.",
@@ -3585,6 +3586,52 @@ const ESCOLA_DOMINICAL = [
       { t:"Convidar à ação", i:["Ajude os alunos a aplicarem o que aprendem.","Incentive-os a guardar seus convênios.","Proponha uma aplicação concreta para a semana.","Retome na aula seguinte o que foi aplicado."]},
     ],
     fecho:{ t:"Ensinar o evangelho é apascentar as ovelhas do Senhor. Ao ensinar por amor e pelo Espírito, você aproxima cada aluno de Cristo.", f:"Manual Geral, cap. 13 e 17" },
+  }),
+  full("Professor(a) de Alicerces do Evangelho", {
+    escritura:{ t:"E depois de terem sido recebidos ao batismo… eram lembrados e nutridos pela boa palavra de Deus, para os manter no caminho certo.", r:"Morôni 6:4" },
+    proposito:"Ensina a classe opcional “Alicerces do Evangelho” da Escola Dominical — destinada a novos membros adultos, a amigos que aprendem sobre a Igreja e a membros que retornam à atividade. Ajuda cada pessoa a sentir-se bem-vinda, valorizada e necessária, e a aprender as verdades básicas do evangelho restaurado de Jesus Cristo, preparando-a para o discipulado ao longo da vida. A pessoa frequenta a classe por dois a quatro meses e, então, integra-se à classe regular de “Vem, e Segue-Me”. A classe é opcional e oferecida conforme a decisão do conselho da ala.",
+    ref:"Manual Geral, 13.2.3",
+    resp:[
+      "Preparar e ministrar as 13 lições de “Alicerces do Evangelho”, sobre as verdades básicas do evangelho (a Expiação de Jesus Cristo, oração, escrituras, revelação pessoal, o dia do Senhor, o sacramento, obediência, castidade, dízimo, convênios, o templo e a história da família, a Igreja restaurada e servir e compartilhar o evangelho).",
+      "Acolher cada participante, ajudando-o a sentir-se bem-vindo, confortável, valorizado e necessário na ala.",
+      "Ensinar à maneira do Salvador: por amor, pelo Espírito e convidando à ação.",
+      "Ajudar cada pessoa a preparar-se para os convênios, as ordenanças e o discipulado ao longo da vida.",
+      "Acompanhar, com carinho, a transição para a classe regular de “Vem, e Segue-Me” após dois a quatro meses.",
+      "Coordenar com a presidência da Escola Dominical, o conselho da ala e os missionários o cuidado dos novos membros e amigos.",
+    ],
+    areas:[
+      { t:"Acolher com amor", i:[
+        "Aprenda e use o nome de cada participante.",
+        "Receba cada pessoa com calor e sem pressa.",
+        "Ajude-a a fazer amizades e a sentir-se em casa na ala.",
+        "Cuide para que ninguém se sinta um estranho.",
+      ]},
+      { t:"Ensinar as verdades básicas", i:[
+        "Ensine princípios simples e claros, um de cada vez.",
+        "Ligue cada lição a Jesus Cristo e à Sua Expiação.",
+        "Use as escrituras e experiências pessoais sinceras.",
+        "Evite assuntos avançados, especulativos ou não oficiais.",
+      ]},
+      { t:"Ensinar à maneira do Salvador", i:[
+        "Ame e conheça cada aluno.",
+        "Faça boas perguntas e ouça com atenção.",
+        "Testifique com sinceridade e simplicidade.",
+        "Deixe o Espírito guiar a aula.",
+      ]},
+      { t:"Convidar à ação", i:[
+        "Ajude cada um a aplicar o que aprende.",
+        "Incentive a oração, o estudo diário e a frequência.",
+        "Prepare cada pessoa para os próximos convênios e ordenanças.",
+        "Retome na aula seguinte o que foi aplicado.",
+      ]},
+      { t:"Cuidar da transição", i:[
+        "Acompanhe a frequência com atenção e carinho.",
+        "Após dois a quatro meses, ajude na integração à classe regular.",
+        "Coordene com a presidência da Escola Dominical e os missionários.",
+        "Continue ministrando e ficando por perto após a transição.",
+      ]},
+    ],
+    fecho:{ t:"Acolher e nutrir os novos discípulos é obra do próprio Salvador. Ao ensinar com amor as verdades básicas, você ajuda cada pessoa a assentar seus alicerces sobre a rocha de Cristo.", f:"Manual Geral, cap. 13" },
   }),
   full("Especialista do Centro de Recursos (Biblioteca)", {
     proposito:"Organiza os recursos da biblioteca da capela e ajuda líderes e membros a localizarem e usarem os materiais de ensino, apoiando o bom funcionamento das aulas.",

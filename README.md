@@ -29,10 +29,15 @@ seu chamado, com base no **Manual Geral** e em fontes oficiais da Igreja.
 
 ## Conteúdo
 
-O app cobre **todos os chamados possíveis de uma Ala** (134 no total), organizados por
+O app cobre **todos os chamados possíveis de uma Ala** (135 no total), organizados por
 organização. O conteúdo doutrinário é preenchido organização por organização.
 
-Status atual do conteúdo: **conteúdo completo das 11 organizações (134 chamados).**
+Status atual do conteúdo: **conteúdo completo das 11 organizações (135 chamados).**
+
+Conteúdo atualizado para a **nova programação das reuniões de domingo (a partir de setembro de 2026)**:
+aulas semanais de 25 minutos, conselho de professores mensal, currículo *Para a Força dos Jovens*
+para os jovens, e a nova classe opcional da Escola Dominical **"Alicerces do Evangelho"** (novos
+membros e amigos), fundamentado nas fontes oficiais da Igreja.
 
 - [x] Bispado
 - [x] Quórum de Élderes
