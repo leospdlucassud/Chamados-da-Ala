@@ -379,11 +379,14 @@
    Conteúdo fundamentado no Manual Geral (PT-BR). Nunca nominal (só o cargo).
    ========================================================================== */
 
+"use strict";
+
 const VERSAO = "1.8.2";
 const DATA_STR = "10/10/2026";
 
-const slug = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
-  .replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");
+// Remove acentos (NFD + faixa de marcas combinantes U+0300–U+036F) — base p/ slug e busca.
+const semAcento = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "");
+const slug = s => semAcento(s.toLowerCase()).replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 /* Helpers de construção -------------------------------------------------- */
 // chamado só com título (estrutura pronta p/ receber conteúdo depois)
@@ -4486,6 +4489,8 @@ ORGS.forEach(org=>{
 });
 const findOrg = id => ORGS.find(o=>o.id===id);
 const findChamado = id => INDEX.find(c=>c.id===id);
+// Rótulo de contexto do chamado: "Organização" ou "Organização · Subgrupo".
+const subChamado = c => c.orgNome + (c.grupo ? " · " + c.grupo : "");
 
 /* ==========================================================================
    PREFERÊNCIAS (localStorage com try/catch — só tema e tamanho de fonte)
@@ -4514,7 +4519,7 @@ function applyPrefs(){
     const app = document.querySelector(".app");
     if(app){ app.style.transformOrigin="top center"; app.style.transform = s===1 ? "" : "scale("+s+")"; }
   }
-  document.getElementById("themeBtn").textContent = prefs.tema==="escuro" ? "☀" : "☾";
+  el.themeBtn.textContent = prefs.tema==="escuro" ? "☀" : "☾";
   document.querySelector('meta[name=theme-color]').setAttribute("content",
     prefs.tema==="escuro" ? "#201C15" : "#8B6B3D");
 }
@@ -4556,7 +4561,7 @@ function hashToState(){
    LINKS PARA O SITE OFICIAL (Manual Geral e escrituras) — churchofjesuschrist.org
    URLs validadas (retornam 200). Numeração de seções liga ao capítulo.
    ========================================================================== */
-const norm = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+const norm = s => semAcento(s.toLowerCase());
 
 const MANUAL_CH = {
   7:"7", 8:"8-elders-quorum", 9:"9-relief-society", 10:"10-aaronic-priesthood",
@@ -4620,6 +4625,9 @@ const el = {
   hS: document.querySelector("#hTitle .s"),
   search: document.getElementById("search"),
   footer: document.getElementById("footer"),
+  themeBtn: document.getElementById("themeBtn"),
+  fPlus: document.getElementById("fPlus"),
+  fMinus: document.getElementById("fMinus"),
 };
 function go(next, replace){
   state = { ...state, ...next };
@@ -4668,11 +4676,7 @@ function renderHome(){
   if(favs.length){
     const h=document.createElement("div"); h.className="subhead"; h.textContent="★ Meus favoritos";
     el.view.appendChild(h);
-    el.view.appendChild(listWrap(favs.map(c=>{
-      const org=findOrg(c.orgId);
-      const sub=c.orgNome+(c.grupo? " · "+c.grupo : "");
-      return card(c.orgIcone, c.titulo, sub, org.cor, ()=>go({view:"detalhe",orgId:c.orgId,chamadoId:c.id}));
-    })));
+    el.view.appendChild(listWrap(favs.map(c=>cardChamado(c))));
     const h2=document.createElement("div"); h2.className="subhead"; h2.textContent="Organizações";
     el.view.appendChild(h2);
   }
@@ -4680,7 +4684,7 @@ function renderHome(){
   const list=document.createElement("div"); list.className="list";
   ORGS.forEach((org,i)=>{
     const n = org.chamados ? org.chamados.length : org.grupos.reduce((a,g)=>a+g.chamados.length,0);
-    const b=document.createElement("button"); b.className="card"; b.style.setProperty("--org",org.cor);
+    const b=document.createElement("button"); b.type="button"; b.className="card"; b.style.setProperty("--org",org.cor);
     b.innerHTML=`<span class="ico">${org.icone}</span>
       <span class="txt"><span class="t"></span>
         <span class="s2"><span class="count">${n} chamado${n!==1?"s":""}</span></span></span>
@@ -4719,14 +4723,14 @@ function renderDetalhe(){
   setOrgColor(org.cor);
   el.back.style.display="flex";
   el.back.onclick = ()=>history.back();
-  setHeader(c.titulo, org.nome + (c.grupo? " · "+c.grupo : ""));
+  setHeader(c.titulo, subChamado(c));
   el.view.innerHTML="";
 
   const wrap=document.createElement("div"); wrap.className="detail";
 
   // Capa (tipográfica ou foto)
   const cover=document.createElement("div"); cover.className="cover";
-  const kicker = org.nome + (c.grupo? " · "+c.grupo : "");
+  const kicker = subChamado(c);
   const escrHtml = c.c && c.c.escritura
     ? `<div class="escr"><span class="qm">“</span>${c.c.escritura.t}”<span class="ref">— ${linkEscrituraRef(c.c.escritura.r)}</span></div>` : "";
   if(c.foto){
@@ -4798,17 +4802,12 @@ function renderBusca(q){
     el.view.appendChild(d); return;
   }
   el.view.appendChild(hint(`${res.length} resultado${res.length!==1?"s":""}.`));
-  el.view.appendChild(listWrap(res.map(c=>{
-    const org=findOrg(c.orgId);
-    const sub=c.orgNome+(c.grupo? " · "+c.grupo : "");
-    return card(c.orgIcone, c.titulo, sub, org.cor,
-      ()=>go({view:"detalhe",orgId:c.orgId,chamadoId:c.id}), false, q);
-  })));
+  el.view.appendChild(listWrap(res.map(c=>cardChamado(c, q))));
 }
 
 /* ---- Helpers de UI ---- */
 function card(ico, titulo, sub, cor, onClick, plainIco, hlQuery){
-  const b=document.createElement("button"); b.className="card";
+  const b=document.createElement("button"); b.type="button"; b.className="card";
   if(cor) b.style.setProperty("--org", cor);
   b.innerHTML=`<span class="ico">${ico}</span>
     <span class="txt"><span class="t"></span>${sub?'<span class="s"></span>':''}</span>
@@ -4818,6 +4817,12 @@ function card(ico, titulo, sub, cor, onClick, plainIco, hlQuery){
   if(sub) b.querySelector(".s").textContent=sub;
   if(plainIco){ const ic=b.querySelector(".ico"); ic.style.background="transparent"; ic.style.border="none"; ic.style.color="var(--accent-soft)"; }
   b.onclick=onClick; return b;
+}
+// Card de um chamado — usado nos favoritos (Home) e nos resultados de busca.
+function cardChamado(c, hlQuery){
+  const org = findOrg(c.orgId);
+  return card(c.orgIcone, c.titulo, subChamado(c), org.cor,
+    ()=>go({view:"detalhe", orgId:c.orgId, chamadoId:c.id}), false, hlQuery);
 }
 // Destaca o termo no texto (sem acento/caixa), montando nós de texto + <mark> com segurança.
 function foldArr(s){ return Array.from(s).map(c=>(c.normalize("NFD")[0]||c).toLowerCase()); }
@@ -4838,7 +4843,7 @@ function highlightInto(elm, text, q){
 /* ---- Barra de ações do detalhe: Favoritar / Compartilhar / Imprimir ---- */
 function buildActbar(c){
   const bar=document.createElement("div"); bar.className="actbar";
-  const favBtn=document.createElement("button");
+  const favBtn=document.createElement("button"); favBtn.type="button";
   const paintFav=()=>{
     const on=isFav(c.id);
     favBtn.className = on ? "on" : "";
@@ -4847,11 +4852,11 @@ function buildActbar(c){
   paintFav();
   favBtn.onclick=()=>{ toggleFav(c.id); paintFav(); toast(isFav(c.id)?"Adicionado aos favoritos.":"Removido dos favoritos."); };
 
-  const shBtn=document.createElement("button");
+  const shBtn=document.createElement("button"); shBtn.type="button";
   shBtn.innerHTML=`<span class="ai">↗</span><span>Compartilhar</span>`;
   shBtn.onclick=()=>shareChamado(c);
 
-  const prBtn=document.createElement("button");
+  const prBtn=document.createElement("button"); prBtn.type="button";
   prBtn.innerHTML=`<span class="ai">🖨</span><span>Imprimir</span>`;
   prBtn.onclick=()=>window.print();
 
@@ -4861,7 +4866,7 @@ function buildActbar(c){
 function chamadoUrl(c){ return location.origin+location.pathname+"#/c/"+c.id; }
 // Mensagem comemorativa para enviar ao membro junto com o chamado (ex.: no WhatsApp).
 function mensagemChamado(c){
-  const ctx = c.orgNome + (c.grupo ? " · " + c.grupo : "");
+  const ctx = subChamado(c);
   return [
     "🎉 Parabéns pelo seu chamado como *" + c.titulo + "*!",
     "_" + ctx + "_",
@@ -4910,9 +4915,9 @@ el.search.addEventListener("input", ()=>{
   if(q) go({view:"busca", q}, state.view==="busca");
   else if(state.view==="busca") go({view:"home"}, true);
 });
-document.getElementById("themeBtn").onclick=()=>{ prefs.tema = prefs.tema==="escuro"?"claro":"escuro"; applyPrefs(); savePrefs(); };
-document.getElementById("fPlus").onclick=()=>{ if(prefs.zoomIdx<ZOOMS.length-1){ prefs.zoomIdx++; applyPrefs(); savePrefs(); } };
-document.getElementById("fMinus").onclick=()=>{ if(prefs.zoomIdx>0){ prefs.zoomIdx--; applyPrefs(); savePrefs(); } };
+el.themeBtn.onclick=()=>{ prefs.tema = prefs.tema==="escuro"?"claro":"escuro"; applyPrefs(); savePrefs(); };
+el.fPlus.onclick=()=>{ if(prefs.zoomIdx<ZOOMS.length-1){ prefs.zoomIdx++; applyPrefs(); savePrefs(); } };
+el.fMinus.onclick=()=>{ if(prefs.zoomIdx>0){ prefs.zoomIdx--; applyPrefs(); savePrefs(); } };
 
 /* ---- Banner "Atualizar" quando há nova versão ---- */
 function showUpdateBanner(reg){
