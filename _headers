@@ -4,3 +4,7 @@
   Cache-Control: no-cache
 /manifest.webmanifest
   Cache-Control: no-cache
+/css/*
+  Cache-Control: no-cache
+/js/*
+  Cache-Control: no-cache

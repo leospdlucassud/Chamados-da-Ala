@@ -1,8 +1,25 @@
 /* Service Worker — Magnifique seu Chamado
    Estratégia network-first p/ o app shell, com fallback ao cache offline.
    Bump o CACHE a cada release (mesma lógica da versão do app). */
-const CACHE = "chamado-v1.8.2";
-const ASSETS = ["./", "./index.html", "./manifest.webmanifest"];
+const CACHE = "chamado-v1.9.0";
+const ASSETS = [
+  "./", "./index.html", "./manifest.webmanifest",
+  "./css/estilos.css",
+  "./js/app.js",
+  "./js/dados/_builders.js",
+  "./js/dados/bispado.js",
+  "./js/dados/quorum-elderes.js",
+  "./js/dados/sociedade-socorro.js",
+  "./js/dados/sacerdocio-aaronico.js",
+  "./js/dados/mocas.js",
+  "./js/dados/escola-dominical.js",
+  "./js/dados/primaria.js",
+  "./js/dados/missionarios.js",
+  "./js/dados/templo-historia.js",
+  "./js/dados/jas.js",
+  "./js/dados/outros.js",
+  "./js/dados/_registro.js",
+];
 
 self.addEventListener("install", e=>{
   // Não chama skipWaiting() aqui: a nova versão fica "waiting" até o

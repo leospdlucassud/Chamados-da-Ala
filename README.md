@@ -1,12 +1,12 @@
 # Magnifique seu Chamado
 
-PWA (aplicativo web progressivo) de arquivo único que ajuda qualquer membro de uma
+PWA (aplicativo web progressivo) que ajuda qualquer membro de uma
 Ala d'A Igreja de Jesus Cristo dos Santos dos Últimos Dias a entender e magnificar
 seu chamado, com base no **Manual Geral** e em fontes oficiais da Igreja.
 
 ## Características
 
-- **Single-file** (`index.html`) — HTML, CSS e JS embutidos, sem build nem dependências externas.
+- **Sem build nem dependências externas** — HTML/CSS/JS puros, servidos como arquivos estáticos.
 - **PWA instalável** e com funcionamento offline (`manifest.webmanifest` + `sw.js`).
 - **Mobile-first** e responsivo (coluna de leitura emoldurada em telas grandes).
 - **Modo claro/escuro** (segue o tema do sistema no 1º acesso) e **tamanho de fonte ajustável**
@@ -51,17 +51,34 @@ membros e amigos), fundamentado nas fontes oficiais da Igreja.
 - [x] Jovens Adultos Solteiros
 - [x] Outros Chamados
 
+## Estrutura dos arquivos
+
+```
+index.html              → shell (cabeçalho, busca, áreas; referencia css/ e js/)
+css/estilos.css         → estilos ("estilo Liahona", claro/escuro, impressão)
+js/app.js               → lógica (navegação por hash, render, preferências, busca, SW)
+js/dados/
+  _builders.js          → helpers t() e full()
+  <organização>.js      → conteúdo de cada organização (um arquivo por organização)
+  _registro.js          → monta o array ORGS a partir dos dados
+sw.js  manifest.webmanifest  _headers
+```
+
+Os arquivos de `js/` são `<script>` clássicos carregados em ordem (sem módulos, sem bundler):
+`_builders` → organizações → `_registro` → `app.js`. Cada um declara suas constantes globais.
+
 ## Como usar / desenvolver
 
-Basta abrir o `index.html` num navegador. Para testar o Service Worker e o PWA,
-sirva a pasta por HTTP (ex.: `python -m http.server`).
+Sirva a pasta por HTTP (ex.: `python -m http.server`) e abra no navegador — necessário
+para o Service Worker, o PWA e o carregamento dos scripts.
 
 ## Deploy (Netlify)
 
-Faça um ZIP **flat** (arquivos na raiz, sem subpasta) contendo
-`index.html`, `manifest.webmanifest`, `sw.js` e `_headers`, e arraste-o no Netlify.
+Faça um ZIP com `index.html`, `manifest.webmanifest`, `sw.js`, `_headers` e as pastas
+`css/` e `js/` (na raiz, sem uma subpasta envolvendo tudo), e arraste-o no Netlify.
 
-O arquivo `_headers` define `Cache-Control: no-cache` para `index.html` e `sw.js`.
+O arquivo `_headers` define `Cache-Control: no-cache` para o shell e para `css/` e `js/`.
+A cada release, suba a versão em `js/app.js` (`VERSAO`) e em `sw.js` (`CACHE`).
 
 ---
 
