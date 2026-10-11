@@ -379,8 +379,8 @@
    Conteúdo fundamentado no Manual Geral (PT-BR). Nunca nominal (só o cargo).
    ========================================================================== */
 
-const VERSAO = "1.8.1";
-const DATA_STR = "25/07/2026";
+const VERSAO = "1.8.2";
+const DATA_STR = "10/10/2026";
 
 const slug = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
   .replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");
@@ -4859,12 +4859,29 @@ function buildActbar(c){
   return bar;
 }
 function chamadoUrl(c){ return location.origin+location.pathname+"#/c/"+c.id; }
+// Mensagem comemorativa para enviar ao membro junto com o chamado (ex.: no WhatsApp).
+function mensagemChamado(c){
+  const ctx = c.orgNome + (c.grupo ? " · " + c.grupo : "");
+  return [
+    "🎉 Parabéns pelo seu chamado como *" + c.titulo + "*!",
+    "_" + ctx + "_",
+    "",
+    "Que o Senhor te abençoe e magnifique nesse serviço a Ele e aos filhos Dele. 🙏",
+    "",
+    "Preparei este guia para te ajudar a entender e magnificar seu chamado. Ele é um apoio: use junto com o estudo do *Manual Geral* e das fontes oficiais da Igreja, não no lugar deles.",
+    "",
+    "Dê uma olhada 👇",
+  ].join("\n");
+}
 function shareChamado(c){
-  const url=chamadoUrl(c);
-  const data={ title:"Magnifique seu Chamado — "+c.titulo, text:c.titulo+" · "+c.orgNome, url };
+  const url = chamadoUrl(c);
+  const text = mensagemChamado(c);
+  const data = { title:"Magnifique seu Chamado — "+c.titulo, text, url };
   if(navigator.share){ navigator.share(data).catch(()=>{}); return; }
+  // Sem Web Share (ex.: desktop): copia a mensagem completa + link.
+  const completo = text + "\n\n" + url;
   if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(url).then(()=>toast("Link copiado!"), ()=>toast(url));
+    navigator.clipboard.writeText(completo).then(()=>toast("Mensagem copiada!"), ()=>toast(url));
   } else { toast(url); }
 }
 let toastTimer;
